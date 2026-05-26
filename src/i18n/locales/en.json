@@ -1,0 +1,256 @@
+{
+  "app": {
+    "name": "Buvard",
+    "tagline": "Share your favorite drinks with your friends"
+  },
+  "nav": {
+    "feed": "Feed",
+    "discover": "Discover",
+    "add": "Add",
+    "profile": "Profile"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "signOut": "Sign out",
+    "loading": "Loading..."
+  },
+  "home": {
+    "title": "What your friends are drinking.",
+    "subtitle": "Keep track of what you try, see what others recommend, share your favorites.",
+    "cta": "Open feed"
+  },
+  "feed": {
+    "title": "Feed",
+    "subtitle": "Your friends' latest tastings",
+    "empty": "No posts yet.",
+    "emptyHint": "Add your first tasting to start the feed."
+  },
+  "add": {
+    "title": "New tasting",
+    "subtitle": "What you just tried",
+    "fields": {
+      "name": "Bottle name",
+      "namePlaceholder": "e.g. Talisker 10 yo",
+      "type": "Type",
+      "rating": "Rating out of 10",
+      "place": "Where?",
+      "placePlaceholder": "Bar, restaurant, a friend's place...",
+      "notes": "Notes",
+      "notesPlaceholder": "Your impressions..."
+    },
+    "submit": "Publish",
+    "cancel": "Cancel"
+  },
+  "types": {
+    "wine": "Wine",
+    "beer": "Beer",
+    "spirit": "Spirit",
+    "cocktail": "Cocktail",
+    "other": "Other"
+  },
+  "profile": {
+    "title": "Profile",
+    "tasted": "Tasted",
+    "friends": "Friends",
+    "followers": "Followers",
+    "following": "Following",
+    "favorites": "Favorites",
+    "joined": "Member since",
+    "verified": "Verified account",
+    "empty": "No tasting yet.",
+    "level": "Level {{level}}",
+    "xp": "{{xp}} XP",
+    "streak_one": "{{count}} day",
+    "streak_other": "{{count}} days",
+    "joinedOn": "Member since {{date}}",
+    "tabs": {
+      "all": "All",
+      "favorites": "Favorites",
+      "categories": "Categories"
+    }
+  },
+  "public": {
+    "notFound": "This profile doesn't exist or is private.",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "block": "Block",
+    "unblock": "Unblock",
+    "blocked": "User blocked",
+    "unblocked": "User unblocked",
+    "followForbidden": "You can't follow this user.",
+    "selfAction": "Can't do this on your own account."
+  },
+  "relations": {
+    "empty": "Nobody here yet."
+  },
+  "blocked": {
+    "title": "Blocked accounts",
+    "subtitle": "Blocked people can't follow you.",
+    "empty": "You haven't blocked anyone.",
+    "unblock": "Unblock"
+  },
+  "pagination": {
+    "prev": "Previous",
+    "next": "Next",
+    "pageOf": "Page {{page}} of {{total}}"
+  },
+  "restricted": {
+    "bannedTitle": "Account banned",
+    "bannedText": "Your account has been banned from Buvard for breaking the rules.",
+    "suspendedTitle": "Account suspended",
+    "suspendedText": "Your account is temporarily suspended.",
+    "suspendedTextUntil": "Your account is suspended until {{until}}."
+  },
+  "onboarding": {
+    "title": "Pick your handle",
+    "subtitle": "This is how your friends will find you on Buvard.",
+    "legalTitle": "One last thing",
+    "legalSubtitle": "Before you start, accept our terms.",
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "leo.k",
+    "usernameHint": "3 to 32 chars, lowercase letters, digits, . _ -",
+    "displayNameLabel": "Display name (optional)",
+    "displayNamePlaceholder": "Leo",
+    "acceptTerms": "I accept the terms of service.",
+    "acceptPrivacy": "I accept the privacy policy.",
+    "next": "Continue",
+    "submit": "Finish",
+    "errors": {
+      "taken": "This username is already taken.",
+      "invalid": "Invalid username format.",
+      "acceptBoth": "You must accept both to continue.",
+      "generic": "Couldn't finish setting up your account."
+    }
+  },
+  "upload": {
+    "avatar": "Profile photo",
+    "cover": "Cover photo",
+    "add": "Add",
+    "replace": "Replace",
+    "remove": "Remove",
+    "avatarUpdated": "Profile photo updated",
+    "avatarRemoved": "Profile photo removed",
+    "coverUpdated": "Cover updated",
+    "coverRemoved": "Cover removed",
+    "failed": "Upload failed",
+    "errors": {
+      "mime": "Unsupported format (jpg, png, webp, heic only)",
+      "size": "Image too large (max {{mb}} MB)"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Customize your experience",
+    "back": "Back",
+    "saved": "Saved",
+    "saveError": "Couldn't save",
+    "groups": {
+      "app": "App",
+      "social": "Social",
+      "account": "Account"
+    },
+    "profile": {
+      "title": "Profile",
+      "subtitle": "What others see",
+      "shortHint": "Username, bio, location",
+      "username": "Username",
+      "displayName": "Display name",
+      "bio": "Bio",
+      "bioPlaceholder": "A few words about you...",
+      "country": "Country",
+      "countryPlaceholder": "FR",
+      "city": "City",
+      "cityPlaceholder": "Paris",
+      "birthYear": "Birth year",
+      "favoriteCategories": "Favorite categories",
+      "save": "Save",
+      "usernameTaken": "This username is already taken"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "theme": "Theme",
+      "themes": {
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+      }
+    },
+    "language": {
+      "title": "Language",
+      "current": "Interface language",
+      "noteCo": "Corsican stays local — backend stores FR for this session."
+    },
+    "regional": {
+      "title": "Regional",
+      "units": "Units",
+      "currency": "Currency",
+      "metric": "Metric",
+      "imperial": "Imperial"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "eventsTitle": "Events",
+      "push": "Push notifications",
+      "email": "Email notifications",
+      "friendActivity": "Friend activity",
+      "newFollower": "New follower",
+      "tastingLiked": "Likes on your tastings",
+      "tastingCommented": "Comments on your tastings"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "profilePublic": "Public profile",
+      "profilePublicHint": "Visible to everyone, even without an account",
+      "searchable": "Show up in search",
+      "searchableHint": "If off, your profile doesn't appear in user search",
+      "showRatings": "Show my ratings",
+      "showRatingsHint": "If off, only the bottles show, not the score",
+      "showLocation": "Show my location",
+      "showLocationHint": "Country / city visible on your public profile"
+    },
+    "moderation": {
+      "title": "Moderation",
+      "blocked": "Blocked accounts"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms of service",
+      "privacy": "Privacy policy",
+      "accept": "Accept",
+      "acceptedOn": "Accepted on {{date}}",
+      "notAccepted": "Not accepted yet"
+    },
+    "account": {
+      "title": "Account",
+      "subtitle": "Email, password, security",
+      "shortHint": "Email, password, security",
+      "identity": "Identity",
+      "session": "Session",
+      "dangerZone": "Danger zone",
+      "email": "Email",
+      "password": "Password",
+      "passwordHint": "Change your password",
+      "security": "Security",
+      "securityHint": "2FA, active sessions",
+      "manage": "Manage account",
+      "manageHint": "Email, password, security",
+      "signOut": "Sign out",
+      "delete": "Delete my account",
+      "deleteHint": "Permanent after confirmation",
+      "deleteConfirm": "Delete your account?",
+      "deleteConfirmText": "This is permanent. Your tastings will be lost.",
+      "deleteCancel": "Cancel",
+      "deleteOk": "Delete"
+    },
+    "about": {
+      "title": "About",
+      "version": "Version"
+    }
+  },
+  "lang": {
+    "fr": "French",
+    "en": "English",
+    "co": "Corsican"
+  }
+}

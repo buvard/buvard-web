@@ -1,0 +1,256 @@
+{
+  "app": {
+    "name": "Buvard",
+    "tagline": "Sparte i to alcoli preferiti cù i to cumpagni"
+  },
+  "nav": {
+    "feed": "Filu",
+    "discover": "Scopre",
+    "add": "Aghjunghje",
+    "profile": "Prufilu"
+  },
+  "auth": {
+    "signIn": "Cunnettati",
+    "signUp": "Crea un contu",
+    "signOut": "Scunnetta",
+    "loading": "Caricamentu..."
+  },
+  "home": {
+    "title": "Ciò chì i to cumpagni bevenu.",
+    "subtitle": "Tene una traccia di ciò chì pruvi, vede ciò chì l'altri raccomandanu, sparte i to preferiti.",
+    "cta": "Apre u filu"
+  },
+  "feed": {
+    "title": "Filu",
+    "subtitle": "L'ultime degustazioni di i to cumpagni",
+    "empty": "Nisuna publicazione.",
+    "emptyHint": "Aghjunghji a to prima degustazione per principià u filu."
+  },
+  "add": {
+    "title": "Nova degustazione",
+    "subtitle": "Ciò chì ai appena pruvatu",
+    "fields": {
+      "name": "Nome di a buttiglia",
+      "namePlaceholder": "P.e. Talisker 10 anni",
+      "type": "Tipu",
+      "rating": "Nota nantu à 10",
+      "place": "Induve ?",
+      "placePlaceholder": "Bar, restaurante, ind'è un cumpagnu...",
+      "notes": "Note",
+      "notesPlaceholder": "I to impressioni..."
+    },
+    "submit": "Publicà",
+    "cancel": "Annullà"
+  },
+  "types": {
+    "wine": "Vinu",
+    "beer": "Biera",
+    "spirit": "Spiritu",
+    "cocktail": "Cocktail",
+    "other": "Altru"
+  },
+  "profile": {
+    "title": "Prufilu",
+    "tasted": "Degustate",
+    "friends": "Cumpagni",
+    "followers": "Abbunati",
+    "following": "Abbunamenti",
+    "favorites": "Favuriti",
+    "joined": "Membru dapoi",
+    "verified": "Contu verificatu",
+    "empty": "Nisuna degustazione per avà.",
+    "level": "Livellu {{level}}",
+    "xp": "{{xp}} XP",
+    "streak_one": "{{count}} ghjornu",
+    "streak_other": "{{count}} ghjorni",
+    "joinedOn": "Membru dapoi {{date}}",
+    "tabs": {
+      "all": "Tutte",
+      "favorites": "Favuriti",
+      "categories": "Categurie"
+    }
+  },
+  "public": {
+    "notFound": "Stu prufilu ùn esiste micca o hè privatu.",
+    "follow": "Seguità",
+    "unfollow": "Ùn più seguità",
+    "block": "Bluccà",
+    "unblock": "Sbluccà",
+    "blocked": "Utilizatore bluccatu",
+    "unblocked": "Utilizatore sbluccatu",
+    "followForbidden": "Ùn pò seguità st'utilizatore.",
+    "selfAction": "Azzione impussibile nantu à u to contu."
+  },
+  "relations": {
+    "empty": "Nimu quì per avà."
+  },
+  "blocked": {
+    "title": "Conti bluccati",
+    "subtitle": "I conti bluccati ùn ti ponu seguità.",
+    "empty": "Ùn ai bluccatu nimu.",
+    "unblock": "Sbluccà"
+  },
+  "pagination": {
+    "prev": "Precedente",
+    "next": "Seguente",
+    "pageOf": "Pagina {{page}} di {{total}}"
+  },
+  "restricted": {
+    "bannedTitle": "Contu banditu",
+    "bannedText": "U to contu hè statu banditu da Buvard per ùn avè rispettatu e regule.",
+    "suspendedTitle": "Contu suspesu",
+    "suspendedText": "U to contu hè temporaneamente suspesu.",
+    "suspendedTextUntil": "U to contu hè suspesu finu à u {{until}}."
+  },
+  "onboarding": {
+    "title": "Sceglie u to pseudonimu",
+    "subtitle": "Cusì i to cumpagni ti truveranu nantu à Buvard.",
+    "legalTitle": "Una ultima cosa",
+    "legalSubtitle": "Prima di principià, accetta e nostre cundizioni.",
+    "usernameLabel": "Pseudonimu",
+    "usernamePlaceholder": "leo.k",
+    "usernameHint": "3 à 32 caratteri, minuscule, cifre, . _ -",
+    "displayNameLabel": "Nome affissatu (opzionale)",
+    "displayNamePlaceholder": "Leo",
+    "acceptTerms": "Accettu e cundizioni d'usu.",
+    "acceptPrivacy": "Accettu a pulitica di privatezza.",
+    "next": "Cuntinuà",
+    "submit": "Finisce",
+    "errors": {
+      "taken": "Stu pseudonimu hè dighjà pigliatu.",
+      "invalid": "Formatu di pseudonimu invalidu.",
+      "acceptBoth": "Devi accettà i dui per cuntinuà.",
+      "generic": "Impussibile di finalizà u to contu."
+    }
+  },
+  "upload": {
+    "avatar": "Foto di prufilu",
+    "cover": "Foto di cupertura",
+    "add": "Aghjunghje",
+    "replace": "Rimpiazzà",
+    "remove": "Sguassà",
+    "avatarUpdated": "Foto di prufilu aghjurnata",
+    "avatarRemoved": "Foto di prufilu sguassata",
+    "coverUpdated": "Cupertura aghjurnata",
+    "coverRemoved": "Cupertura sguassata",
+    "failed": "Upload fallitu",
+    "errors": {
+      "mime": "Formatu micca supportatu (jpg, png, webp, heic solu)",
+      "size": "Immagine troppu pesante (max {{mb}} Mo)"
+    }
+  },
+  "settings": {
+    "title": "Regule",
+    "subtitle": "Persunalizeghja a to sperienza",
+    "back": "Torna",
+    "saved": "Salvatu",
+    "saveError": "Impussibile di salvà",
+    "groups": {
+      "app": "Applicazione",
+      "social": "Suciale",
+      "account": "Contu"
+    },
+    "profile": {
+      "title": "Prufilu",
+      "subtitle": "Ciò chì l'altri vedenu",
+      "shortHint": "Pseudonimu, bio, lucalisazione",
+      "username": "Pseudonimu",
+      "displayName": "Nome affissatu",
+      "bio": "Bio",
+      "bioPlaceholder": "Qualchì parolla nantu à tè...",
+      "country": "Paese",
+      "countryPlaceholder": "FR",
+      "city": "Cità",
+      "cityPlaceholder": "Aiacciu",
+      "birthYear": "Annu di nascita",
+      "favoriteCategories": "Categurie preferite",
+      "save": "Salvà",
+      "usernameTaken": "Stu pseudonimu hè dighjà pigliatu"
+    },
+    "appearance": {
+      "title": "Aspettu",
+      "theme": "Tema",
+      "themes": {
+        "light": "Chjaru",
+        "dark": "Bughju",
+        "system": "Sistema"
+      }
+    },
+    "language": {
+      "title": "Lingua",
+      "current": "Lingua di l'interfaccia",
+      "noteCo": "U corsu resta lucale — u backend tene FR per sta sessione."
+    },
+    "regional": {
+      "title": "Regiunale",
+      "units": "Unità",
+      "currency": "Munita",
+      "metric": "Metrica",
+      "imperial": "Imperiale"
+    },
+    "notifications": {
+      "title": "Notifiche",
+      "eventsTitle": "Eventi",
+      "push": "Notifiche push",
+      "email": "Notifiche per email",
+      "friendActivity": "Attività di i to cumpagni",
+      "newFollower": "Novu abbunatu",
+      "tastingLiked": "Like nantu à e to degustazioni",
+      "tastingCommented": "Cumenti nantu à e to degustazioni"
+    },
+    "privacy": {
+      "title": "Privatezza",
+      "profilePublic": "Prufilu publicu",
+      "profilePublicHint": "Visibile da tutti, ancu senza contu",
+      "searchable": "Appare in a ricerca",
+      "searchableHint": "S'ellu hè disattivatu, u to prufilu ùn appare micca in a ricerca",
+      "showRatings": "Affissà e mo note",
+      "showRatingsHint": "S'ellu hè disattivatu, solu e buttiglie appariscenu",
+      "showLocation": "Affissà a mo lucalisazione",
+      "showLocationHint": "Paese / cità visibile nantu à u to prufilu publicu"
+    },
+    "moderation": {
+      "title": "Muderazione",
+      "blocked": "Conti bluccati"
+    },
+    "legal": {
+      "title": "Legale",
+      "terms": "Cundizioni d'usu",
+      "privacy": "Pulitica di privatezza",
+      "accept": "Accettà",
+      "acceptedOn": "Accettatu u {{date}}",
+      "notAccepted": "Ùn accettatu ancora"
+    },
+    "account": {
+      "title": "Contu",
+      "subtitle": "Email, parolla d'ordine, sicurezza",
+      "shortHint": "Email, parolla d'ordine, sicurezza",
+      "identity": "Identità",
+      "session": "Sessione",
+      "dangerZone": "Zona sensibile",
+      "email": "Email",
+      "password": "Parolla d'ordine",
+      "passwordHint": "Cambià a to parolla d'ordine",
+      "security": "Sicurezza",
+      "securityHint": "2FA, sessioni attive",
+      "manage": "Gestisce u contu",
+      "manageHint": "Email, parolla d'ordine, sicurezza",
+      "signOut": "Scunnetta",
+      "delete": "Sguassà u mo contu",
+      "deleteHint": "Azzione definitiva dopu cunferma",
+      "deleteConfirm": "Sguassà u to contu?",
+      "deleteConfirmText": "St'azzione hè definitiva. E to degustazioni saranu perse.",
+      "deleteCancel": "Annullà",
+      "deleteOk": "Sguassà"
+    },
+    "about": {
+      "title": "À prupositu",
+      "version": "Versione"
+    }
+  },
+  "lang": {
+    "fr": "Francese",
+    "en": "Inglese",
+    "co": "Corsu"
+  }
+}

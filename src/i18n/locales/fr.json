@@ -1,0 +1,256 @@
+{
+  "app": {
+    "name": "Buvard",
+    "tagline": "Partage tes alcools préférés avec tes potes"
+  },
+  "nav": {
+    "feed": "Fil",
+    "discover": "Découvrir",
+    "add": "Ajouter",
+    "profile": "Profil"
+  },
+  "auth": {
+    "signIn": "Se connecter",
+    "signUp": "Créer un compte",
+    "signOut": "Se déconnecter",
+    "loading": "Chargement..."
+  },
+  "home": {
+    "title": "Ce que tes potes boivent.",
+    "subtitle": "Garde une trace de ce que tu testes, vois ce que les autres recommandent, partage tes coups de cœur.",
+    "cta": "Voir le fil"
+  },
+  "feed": {
+    "title": "Fil",
+    "subtitle": "Les dernières dégustations de tes potes",
+    "empty": "Pas encore de publication.",
+    "emptyHint": "Ajoute ta première dégustation pour lancer le fil."
+  },
+  "add": {
+    "title": "Nouvelle dégustation",
+    "subtitle": "Ce que tu viens de tester",
+    "fields": {
+      "name": "Nom de la bouteille",
+      "namePlaceholder": "Ex. Talisker 10 ans",
+      "type": "Type",
+      "rating": "Note sur 10",
+      "place": "Où ?",
+      "placePlaceholder": "Bar, restaurant, chez un pote...",
+      "notes": "Notes",
+      "notesPlaceholder": "Tes impressions..."
+    },
+    "submit": "Publier",
+    "cancel": "Annuler"
+  },
+  "types": {
+    "wine": "Vin",
+    "beer": "Bière",
+    "spirit": "Spiritueux",
+    "cocktail": "Cocktail",
+    "other": "Autre"
+  },
+  "profile": {
+    "title": "Profil",
+    "tasted": "Dégustées",
+    "friends": "Amis",
+    "followers": "Abonnés",
+    "following": "Abonnements",
+    "favorites": "Favoris",
+    "joined": "Membre depuis",
+    "verified": "Compte vérifié",
+    "empty": "Aucune dégustation pour le moment.",
+    "level": "Niveau {{level}}",
+    "xp": "{{xp}} XP",
+    "streak_one": "{{count}} jour",
+    "streak_other": "{{count}} jours",
+    "joinedOn": "Membre depuis {{date}}",
+    "tabs": {
+      "all": "Toutes",
+      "favorites": "Favoris",
+      "categories": "Catégories"
+    }
+  },
+  "public": {
+    "notFound": "Ce profil n'existe pas ou est privé.",
+    "follow": "Suivre",
+    "unfollow": "Ne plus suivre",
+    "block": "Bloquer",
+    "unblock": "Débloquer",
+    "blocked": "Utilisateur bloqué",
+    "unblocked": "Utilisateur débloqué",
+    "followForbidden": "Tu ne peux pas suivre cet utilisateur.",
+    "selfAction": "Action impossible sur ton propre compte."
+  },
+  "relations": {
+    "empty": "Personne ici pour le moment."
+  },
+  "blocked": {
+    "title": "Comptes bloqués",
+    "subtitle": "Les gens que tu as bloqués ne peuvent pas te suivre.",
+    "empty": "Tu n'as bloqué personne.",
+    "unblock": "Débloquer"
+  },
+  "pagination": {
+    "prev": "Précédent",
+    "next": "Suivant",
+    "pageOf": "Page {{page}} sur {{total}}"
+  },
+  "restricted": {
+    "bannedTitle": "Compte banni",
+    "bannedText": "Ton compte a été banni de Buvard pour non-respect des règles.",
+    "suspendedTitle": "Compte suspendu",
+    "suspendedText": "Ton compte est temporairement suspendu.",
+    "suspendedTextUntil": "Ton compte est suspendu jusqu'au {{until}}."
+  },
+  "onboarding": {
+    "title": "Choisis ton pseudo",
+    "subtitle": "C'est comme ça que tes potes te trouveront sur Buvard.",
+    "legalTitle": "Une dernière chose",
+    "legalSubtitle": "Avant de commencer, accepte nos conditions d'utilisation.",
+    "usernameLabel": "Pseudo",
+    "usernamePlaceholder": "leo.k",
+    "usernameHint": "3 à 32 caractères, lettres minuscules, chiffres, . _ -",
+    "displayNameLabel": "Nom affiché (optionnel)",
+    "displayNamePlaceholder": "Léo",
+    "acceptTerms": "J'accepte les conditions d'utilisation.",
+    "acceptPrivacy": "J'accepte la politique de confidentialité.",
+    "next": "Continuer",
+    "submit": "Terminer",
+    "errors": {
+      "taken": "Ce pseudo est déjà pris.",
+      "invalid": "Format de pseudo invalide.",
+      "acceptBoth": "Tu dois accepter les deux pour continuer.",
+      "generic": "Impossible de finaliser ton compte."
+    }
+  },
+  "upload": {
+    "avatar": "Photo de profil",
+    "cover": "Photo de couverture",
+    "add": "Ajouter",
+    "replace": "Remplacer",
+    "remove": "Supprimer",
+    "avatarUpdated": "Photo de profil mise à jour",
+    "avatarRemoved": "Photo de profil supprimée",
+    "coverUpdated": "Couverture mise à jour",
+    "coverRemoved": "Couverture supprimée",
+    "failed": "Échec de l'upload",
+    "errors": {
+      "mime": "Format non supporté (jpg, png, webp, heic uniquement)",
+      "size": "Image trop lourde (max {{mb}} Mo)"
+    }
+  },
+  "settings": {
+    "title": "Réglages",
+    "subtitle": "Personnalise ton expérience",
+    "back": "Retour",
+    "saved": "Enregistré",
+    "saveError": "Impossible d'enregistrer",
+    "groups": {
+      "app": "Application",
+      "social": "Social",
+      "account": "Compte"
+    },
+    "profile": {
+      "title": "Profil",
+      "subtitle": "Ce que les autres voient",
+      "shortHint": "Pseudo, bio, localisation",
+      "username": "Pseudo",
+      "displayName": "Nom affiché",
+      "bio": "Bio",
+      "bioPlaceholder": "Quelques mots sur toi...",
+      "country": "Pays",
+      "countryPlaceholder": "FR",
+      "city": "Ville",
+      "cityPlaceholder": "Paris",
+      "birthYear": "Année de naissance",
+      "favoriteCategories": "Catégories préférées",
+      "save": "Enregistrer",
+      "usernameTaken": "Ce pseudo est déjà pris"
+    },
+    "appearance": {
+      "title": "Apparence",
+      "theme": "Thème",
+      "themes": {
+        "light": "Clair",
+        "dark": "Sombre",
+        "system": "Système"
+      }
+    },
+    "language": {
+      "title": "Langue",
+      "current": "Langue de l'interface",
+      "noteCo": "Le corsu reste local — le backend stocke FR pour cette session."
+    },
+    "regional": {
+      "title": "Régional",
+      "units": "Unités",
+      "currency": "Devise",
+      "metric": "Métrique",
+      "imperial": "Impérial"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "eventsTitle": "Événements",
+      "push": "Notifications push",
+      "email": "Notifications par email",
+      "friendActivity": "Activité de tes potes",
+      "newFollower": "Nouveau follower",
+      "tastingLiked": "Tes dégustations likées",
+      "tastingCommented": "Tes dégustations commentées"
+    },
+    "privacy": {
+      "title": "Confidentialité",
+      "profilePublic": "Profil public",
+      "profilePublicHint": "Visible par tous, même sans compte",
+      "searchable": "Apparaître dans la recherche",
+      "searchableHint": "Si désactivé, ton profil ne remonte pas dans la recherche d'utilisateurs",
+      "showRatings": "Afficher mes notes",
+      "showRatingsHint": "Si désactivé, seules les bouteilles apparaissent",
+      "showLocation": "Afficher ma localisation",
+      "showLocationHint": "Pays / ville visibles sur ton profil public"
+    },
+    "moderation": {
+      "title": "Modération",
+      "blocked": "Comptes bloqués"
+    },
+    "legal": {
+      "title": "Légal",
+      "terms": "Conditions d'utilisation",
+      "privacy": "Politique de confidentialité",
+      "accept": "Accepter",
+      "acceptedOn": "Accepté le {{date}}",
+      "notAccepted": "Pas encore accepté"
+    },
+    "account": {
+      "title": "Compte",
+      "subtitle": "Email, mot de passe, sécurité",
+      "shortHint": "Email, mot de passe, sécurité",
+      "identity": "Identité",
+      "session": "Session",
+      "dangerZone": "Zone sensible",
+      "email": "Email",
+      "password": "Mot de passe",
+      "passwordHint": "Modifier ton mot de passe",
+      "security": "Sécurité",
+      "securityHint": "2FA, sessions actives",
+      "manage": "Gérer le compte",
+      "manageHint": "Email, mot de passe, sécurité",
+      "signOut": "Se déconnecter",
+      "delete": "Supprimer mon compte",
+      "deleteHint": "Action définitive après confirmation",
+      "deleteConfirm": "Supprimer ton compte ?",
+      "deleteConfirmText": "Cette action est définitive. Tes dégustations seront perdues.",
+      "deleteCancel": "Annuler",
+      "deleteOk": "Supprimer"
+    },
+    "about": {
+      "title": "À propos",
+      "version": "Version"
+    }
+  },
+  "lang": {
+    "fr": "Français",
+    "en": "Anglais",
+    "co": "Corsu"
+  }
+}
