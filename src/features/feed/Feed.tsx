@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
 import { TastingCard } from '@/components/TastingCard'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
-import type { Tasting } from '@/lib/types'
+import type { Tasting } from '@/types'
 
 export function FeedPage() {
   const { t } = useTranslation()

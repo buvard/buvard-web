@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { SettingsPageShell } from '@/components/SettingsPageShell'
+import { SettingsPageShell } from '@/features/settings/components/SettingsPageShell'
 import { ProfileCover } from '@/components/ProfileCover'
 import {
   ImagePicker,
@@ -21,7 +21,7 @@ import {
   useUploadCover,
 } from '@/lib/api/user'
 import { ApiError } from '@/lib/api/client'
-import { TASTING_TYPES, type TastingType } from '@/lib/api/types'
+import { TASTING_TYPES, type TastingType } from '@/types'
 import { cn } from '@/lib/utils'
 import { Camera, Loader2, Trash2 } from 'lucide-react'
 

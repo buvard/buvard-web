@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { MentionText } from '@/components/MentionText'
 import { MapPin } from 'lucide-react'
-import type { Tasting } from '@/lib/types'
+import type { Tasting } from '@/types'
 
 const dateFormatters = new Map<string, Intl.RelativeTimeFormat>()
 function getFormatter(locale: string) {
@@ -86,7 +87,7 @@ export function TastingCard({ tasting }: Props) {
 
       {tasting.notes && (
         <p className="mt-4 text-sm leading-relaxed text-foreground/75">
-          {tasting.notes}
+          <MentionText text={tasting.notes} />
         </p>
       )}
     </article>

@@ -3,6 +3,15 @@
     "name": "Buvard",
     "tagline": "Share your favorite drinks with your friends"
   },
+  "common": {
+    "back": "Back",
+    "clear": "Clear"
+  },
+  "search": {
+    "placeholder": "Search",
+    "searching": "Searching…",
+    "empty": "No results"
+  },
   "nav": {
     "feed": "Feed",
     "discover": "Discover",
@@ -52,12 +61,18 @@
   "profile": {
     "title": "Profile",
     "tasted": "Tasted",
+    "tastings_one": "{{count}} tasting",
+    "tastings_other": "{{count}} tastings",
     "friends": "Friends",
     "followers": "Followers",
     "following": "Following",
     "favorites": "Favorites",
     "joined": "Member since",
     "verified": "Verified account",
+    "role": {
+      "moderator": "Moderator",
+      "admin": "Admin"
+    },
     "empty": "No tasting yet.",
     "level": "Level {{level}}",
     "xp": "{{xp}} XP",

@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { UserLink } from '@/components/UserLink'
 import { usePublicFollowers, usePublicFollowing } from '@/lib/api/user'
-import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 
 const PAGE_SIZE = 20
 
@@ -17,7 +17,6 @@ interface Props {
 export function RelationsPage({ mode }: Props) {
   const { username } = useParams<{ username: string }>()
   const { t } = useTranslation()
-  const localizedPath = useLocalizedPath()
   const [page, setPage] = useState(1)
 
   const followers = usePublicFollowers(
@@ -33,12 +32,12 @@ export function RelationsPage({ mode }: Props) {
   return (
     <section className="space-y-6">
       <header>
-        <Link
-          to={localizedPath(`/u/${username}`)}
+        <UserLink
+          username={username ?? ''}
           className="text-xs font-medium uppercase tracking-wider text-muted-foreground hover:text-foreground"
         >
           @{username}
-        </Link>
+        </UserLink>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground">
           {t(`profile.${mode}`)}
         </h1>
@@ -64,9 +63,9 @@ export function RelationsPage({ mode }: Props) {
               .slice(0, 2)
               .toUpperCase()
             return (
-              <Link
+              <UserLink
                 key={u.id}
-                to={localizedPath(`/u/${u.username}`)}
+                username={u.username}
                 className="flex items-center gap-3 rounded-md border border-border bg-card/30 px-4 py-3 transition-colors hover:bg-card/60"
               >
                 <Avatar className="h-10 w-10">
@@ -81,7 +80,7 @@ export function RelationsPage({ mode }: Props) {
                     @{u.username}
                   </p>
                 </div>
-              </Link>
+              </UserLink>
             )
           })}
         </div>

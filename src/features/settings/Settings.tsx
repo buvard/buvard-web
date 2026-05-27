@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useClerk } from '@clerk/clerk-react'
-import { SettingsGroup, SettingsRow } from '@/components/SettingsRow'
+import { SettingsGroup, SettingsRow } from '@/features/settings/components/SettingsRow'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import {
   User,

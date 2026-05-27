@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { SettingsPageShell } from '@/components/SettingsPageShell'
+import { SettingsPageShell } from '@/features/settings/components/SettingsPageShell'
 import { Button } from '@/components/ui/button'
 import { useAcceptPrivacy, useAcceptTerms, useMe } from '@/lib/api/user'
 

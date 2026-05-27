@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useLocation, useParams } from 'react-router-dom'
-import { SettingsPageShell } from '@/components/SettingsPageShell'
+import { SettingsPageShell } from '@/features/settings/components/SettingsPageShell'
 import {
   DEFAULT_LOCALE,
   isLocale,

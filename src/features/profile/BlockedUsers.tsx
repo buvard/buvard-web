@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { UserLink } from '@/components/UserLink'
 import { useBlocks, useUnblock } from '@/lib/api/user'
-import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 
 const PAGE_SIZE = 20
 
@@ -14,7 +13,6 @@ export function BlockedUsersPage() {
   const [page, setPage] = useState(1)
   const blocks = useBlocks({ page, limit: PAGE_SIZE })
   const unblock = useUnblock()
-  const localizedPath = useLocalizedPath()
 
   return (
     <section className="space-y-6">
@@ -55,17 +53,14 @@ export function BlockedUsersPage() {
                   {u.avatarUrl && <AvatarImage src={u.avatarUrl} alt="" />}
                   <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
-                <Link
-                  to={localizedPath(`/u/${u.username}`)}
-                  className="min-w-0 flex-1"
-                >
+                <UserLink username={u.username} className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium text-foreground">
                     {u.displayName ?? u.username}
                   </p>
                   <p className="truncate text-xs text-muted-foreground">
                     @{u.username}
                   </p>
-                </Link>
+                </UserLink>
                 <Button
                   variant="outline"
                   size="sm"

@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useClerk, useUser } from '@clerk/clerk-react'
 import { toast } from 'sonner'
-import { SettingsPageShell } from '@/components/SettingsPageShell'
-import { SettingsGroup, SettingsRow } from '@/components/SettingsRow'
+import { SettingsPageShell } from '@/features/settings/components/SettingsPageShell'
+import { SettingsGroup, SettingsRow } from '@/features/settings/components/SettingsRow'
 import {
   AlertDialog,
   AlertDialogAction,

@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { TASTING_TYPES, type TastingType } from '@/lib/api/types'
+import { TASTING_TYPES, type TastingType } from '@/types'
 
 // Répartition des dégustations par catégorie, en barres horizontales.
 // Le max sert d'échelle pour les pourcentages visuels.

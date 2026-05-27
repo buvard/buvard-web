@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import { SettingsPageShell } from '@/components/SettingsPageShell'
+import { SettingsPageShell } from '@/features/settings/components/SettingsPageShell'
 import { Label } from '@/components/ui/label'
 import { usePrefs, useUpdatePrefs } from '@/lib/api/user'
-import type { Currency, Units } from '@/lib/api/types'
+import type { Currency, Units } from '@/types'
 import { cn } from '@/lib/utils'
 
 export function SettingsRegionalPage() {

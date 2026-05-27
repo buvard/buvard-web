@@ -3,6 +3,15 @@
     "name": "Buvard",
     "tagline": "Partage tes alcools préférés avec tes potes"
   },
+  "common": {
+    "back": "Retour",
+    "clear": "Effacer"
+  },
+  "search": {
+    "placeholder": "Rechercher",
+    "searching": "Recherche…",
+    "empty": "Aucun résultat"
+  },
   "nav": {
     "feed": "Fil",
     "discover": "Découvrir",
@@ -52,12 +61,18 @@
   "profile": {
     "title": "Profil",
     "tasted": "Dégustées",
+    "tastings_one": "{{count}} dégustation",
+    "tastings_other": "{{count}} dégustations",
     "friends": "Amis",
     "followers": "Abonnés",
     "following": "Abonnements",
     "favorites": "Favoris",
     "joined": "Membre depuis",
     "verified": "Compte vérifié",
+    "role": {
+      "moderator": "Modérateur",
+      "admin": "Admin"
+    },
     "empty": "Aucune dégustation pour le moment.",
     "level": "Niveau {{level}}",
     "xp": "{{xp}} XP",

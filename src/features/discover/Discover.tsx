@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { TastingCard } from '@/components/TastingCard'
-import type { Tasting } from '@/lib/types'
+import type { Tasting } from '@/types'
 
 export function DiscoverPage() {
   const { t } = useTranslation()

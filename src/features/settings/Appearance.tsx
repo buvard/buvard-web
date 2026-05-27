@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { SettingsPageShell } from '@/components/SettingsPageShell'
+import { SettingsPageShell } from '@/features/settings/components/SettingsPageShell'
 import { useTheme, type Theme } from '@/lib/theme'
 import { useUpdatePrefs } from '@/lib/api/user'
 import { cn } from '@/lib/utils'

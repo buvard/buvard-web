@@ -11,12 +11,13 @@ import type {
   MeStats,
   Paginated,
   PublicUser,
+  SearchUser,
   UpdateMePayload,
   UpdatePrefsPayload,
   User,
   UserMini,
   UserPrefs,
-} from './types'
+} from '@/types'
 
 // ============================================================
 // Query keys
@@ -32,6 +33,7 @@ export const userKeys = {
     ['user', 'public', username, 'followers', params ?? {}] as const,
   following: (username: string, params?: ListQueryParams) =>
     ['user', 'public', username, 'following', params ?? {}] as const,
+  search: (q: string) => ['user', 'search', q] as const,
 }
 
 function qs(params?: object) {
@@ -404,7 +406,6 @@ export function usePublicUser(username: string | undefined) {
     queryFn: async () => {
       const { user } = await api<{ user: PublicUser }>(
         `/api/v1/users/${username}`,
-        { skipAuth: true },
       )
       return user
     },
@@ -452,6 +453,27 @@ export function usePublicFollowing(
       )
     },
     enabled: !!username,
+    retry: false,
+  })
+}
+
+// ============================================================
+// GET /users/search?q=
+// ============================================================
+export function useSearchUsers(query: string) {
+  const api = useApi()
+  const q = query.trim()
+  return useQuery({
+    queryKey: userKeys.search(q),
+    queryFn: async () => {
+      const res = await api<{ data: SearchUser[] }>(
+        `/api/v1/users/search${qs({ q })}`,
+      )
+      return res.data
+    },
+    // On ne lance la recherche qu'à partir de 2 caractères
+    enabled: q.length >= 2,
+    staleTime: 30_000,
     retry: false,
   })
 }

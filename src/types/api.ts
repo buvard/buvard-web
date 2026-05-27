@@ -105,6 +105,7 @@ export interface PublicUser {
   location?: UserLocation
   favoriteCategories: TastingType[]
   verified: boolean
+  role: UserRole
   stats: {
     tastingsCount: number
     followersCount: number
@@ -115,6 +116,9 @@ export interface PublicUser {
     xp: number
   }
   joinDate: string
+  // Relation du viewer connecté (présents seulement si authentifié & pas soi-même)
+  isFollowing?: boolean
+  isBlocked?: boolean
 }
 
 export interface UserMini {
@@ -123,6 +127,15 @@ export interface UserMini {
   displayName?: string | null
   avatarUrl?: string | null
   bio?: string | null
+}
+
+// Résultat de GET /users/search
+export interface SearchUser {
+  id: string
+  username: string
+  displayName?: string | null
+  avatarUrl?: string | null
+  verified: boolean
 }
 
 // ---- Pagination ----

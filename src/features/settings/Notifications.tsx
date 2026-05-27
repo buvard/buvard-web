@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { SettingsPageShell } from '@/components/SettingsPageShell'
+import { SettingsPageShell } from '@/features/settings/components/SettingsPageShell'
 import { Switch } from '@/components/ui/switch'
 import { usePrefs, useUpdatePrefs } from '@/lib/api/user'
 

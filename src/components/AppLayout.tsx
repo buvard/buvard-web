@@ -3,17 +3,16 @@ import { useTranslation } from 'react-i18next'
 import { SignedIn, SignedOut } from '@clerk/clerk-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import { UserSearch } from '@/components/UserSearch'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import { useSyncPrefs } from '@/lib/api/useSyncPrefs'
 import { useMe } from '@/lib/api/user'
 import { cn } from '@/lib/utils'
-import { House, Compass, Plus, User } from 'lucide-react'
+import { House, Compass, Plus, User, Settings } from 'lucide-react'
 
-// Layout :
-//   - Mobile (<lg)  : pas de top-bar. Contenu centré. Bottom-nav fixée.
-//   - Desktop (>=lg): sidebar verticale gauche avec logo + nav. Pas de bottom-nav.
-// Le bouton "Ajouter" est intégré à la nav comme dans Insta/Twitter,
-// pas en FAB flottant (qui sature visuellement).
+// Layout web façon X (3 colonnes) :
+//   - Desktop (>=lg) : rail de nav gauche + contenu central bordé + (>=xl) sidebar droite (search)
+//   - Mobile (<lg)   : bottom-nav (à adapter séparément)
 
 interface NavItem {
   to: string
@@ -27,11 +26,7 @@ function useNavItems(): NavItem[] {
   const localizedPath = useLocalizedPath()
   return [
     { to: localizedPath('/feed'), label: t('nav.feed'), icon: House },
-    {
-      to: localizedPath('/discover'),
-      label: t('nav.discover'),
-      icon: Compass,
-    },
+    { to: localizedPath('/discover'), label: t('nav.discover'), icon: Compass },
     { to: localizedPath('/add'), label: t('nav.add'), icon: Plus },
     {
       to: localizedPath('/profile'),
@@ -42,7 +37,7 @@ function useNavItems(): NavItem[] {
   ]
 }
 
-// Avatar utilisateur — utilisé dans la nav à la place de l'icône Profile.
+// Avatar utilisateur — utilisé dans la bottom-nav mobile à la place de l'icône Profile.
 function UserAvatar({ active }: { active: boolean }) {
   const me = useMe()
   const fallback = (
@@ -62,62 +57,114 @@ function UserAvatar({ active }: { active: boolean }) {
 }
 
 // ============================================================
-// Sidebar desktop (>=lg)
+// Rail de nav gauche desktop (>=lg) — style X
 // ============================================================
 function DesktopSidebar() {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
-  const items = useNavItems()
+  const me = useMe()
+
+  const items: { to: string; label: string; icon: typeof House; end: boolean }[] =
+    [
+      { to: localizedPath('/feed'), label: t('nav.feed'), icon: House, end: true },
+      {
+        to: localizedPath('/discover'),
+        label: t('nav.discover'),
+        icon: Compass,
+        end: true,
+      },
+      {
+        to: localizedPath('/profile'),
+        label: t('nav.profile'),
+        icon: User,
+        end: true,
+      },
+      {
+        to: localizedPath('/settings'),
+        label: t('settings.title'),
+        icon: Settings,
+        end: false,
+      },
+    ]
 
   return (
-    <aside className="sticky top-0 hidden h-screen w-60 shrink-0 border-r border-border bg-background/60 backdrop-blur-xl lg:flex lg:flex-col">
+    <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col px-2 py-4 lg:flex">
+      {/* Logo */}
       <Link
         to={localizedPath('/')}
-        className="flex items-center gap-2 px-5 py-5"
+        className="mb-2 flex items-center gap-2 px-4 py-2"
       >
-        <span className="text-xl font-semibold tracking-tight text-foreground">
+        <span className="text-xl font-bold tracking-tight text-foreground">
           {t('app.name')}
         </span>
-        <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_2px_rgba(139,38,53,0.6)]" />
+        <span className="h-1.5 w-1.5 rounded-lg bg-primary shadow-[0_0_8px_2px_rgba(139,38,53,0.6)]" />
       </Link>
 
-      <nav className="flex flex-1 flex-col gap-1 px-3">
-        {items.map(({ to, label, icon: Icon, avatar }) => (
+      {/* Nav */}
+      <nav className="flex flex-col gap-1">
+        {items.map(({ to, label, icon: Icon, end }) => (
           <NavLink
             key={to}
             to={to}
-            end
+            end={end}
             className={({ isActive }) =>
               cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors',
-                isActive
-                  ? 'bg-card text-foreground'
-                  : 'text-muted-foreground hover:bg-card/50 hover:text-foreground',
+                'flex items-center gap-4 rounded-lg px-4 py-3 text-lg transition-colors hover:bg-card',
+                isActive ? 'font-bold text-foreground' : 'text-foreground/90',
               )
             }
           >
-            {({ isActive }) =>
-              avatar ? (
-                <>
-                  <UserAvatar active={isActive} />
-                  <span>{label}</span>
-                </>
-              ) : (
-                <>
-                  <Icon
-                    className={cn(
-                      'h-5 w-5',
-                      isActive ? 'text-foreground' : 'text-muted-foreground',
-                    )}
-                    strokeWidth={1.8}
-                  />
-                  <span>{label}</span>
-                </>
-              )
-            }
+            {({ isActive }) => (
+              <>
+                <Icon className="h-6 w-6" strokeWidth={isActive ? 2.4 : 1.8} />
+                <span>{label}</span>
+              </>
+            )}
           </NavLink>
         ))}
       </nav>
+
+      {/* Bouton Post (Ajouter) proéminent */}
+      <Button
+        asChild
+        className="mt-4 h-12 rounded-lg text-base font-bold glow-primary"
+      >
+        <Link to={localizedPath('/add')}>{t('nav.add')}</Link>
+      </Button>
+
+      {/* Chip compte en bas */}
+      <Link
+        to={localizedPath('/profile')}
+        className="mt-auto flex items-center gap-3 rounded-lg px-3 py-2 transition-colors hover:bg-card"
+      >
+        <Avatar className="h-10 w-10">
+          {me.data?.avatarUrl && <AvatarImage src={me.data.avatarUrl} alt="" />}
+          <AvatarFallback>
+            {(me.data?.displayName ?? me.data?.username ?? '?')[0]?.toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
+        <div className="min-w-0">
+          <p className="truncate text-sm font-bold text-foreground">
+            {me.data?.displayName ?? me.data?.username ?? '—'}
+          </p>
+          {me.data?.username && (
+            <p className="truncate text-xs text-muted-foreground">
+              @{me.data.username}
+            </p>
+          )}
+        </div>
+      </Link>
+    </aside>
+  )
+}
+
+// ============================================================
+// Sidebar droite desktop (>=xl) — recherche
+// ============================================================
+function RightSidebar() {
+  return (
+    <aside className="sticky top-0 hidden h-screen w-80 shrink-0 px-4 py-4 xl:block">
+      <UserSearch />
     </aside>
   )
 }
@@ -172,7 +219,7 @@ function GuestLayout({ children }: { children: React.ReactNode }) {
             <span className="text-lg font-semibold tracking-tight text-foreground">
               {t('app.name')}
             </span>
-            <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_2px_rgba(139,38,53,0.6)]" />
+            <span className="h-1.5 w-1.5 rounded-lg bg-primary shadow-[0_0_8px_2px_rgba(139,38,53,0.6)]" />
           </Link>
           <Button asChild size="sm" className="glow-primary">
             <Link to={localizedPath('/sign-in')}>{t('auth.signIn')}</Link>
@@ -196,16 +243,15 @@ export function AppLayout() {
   return (
     <>
       <SignedIn>
-        <div className="flex min-h-full">
+        <div className="mx-auto flex min-h-full w-full max-w-6xl">
           <DesktopSidebar />
-          <div className="flex min-w-0 flex-1 flex-col">
-            <main className="flex-1">
-              <div className="mx-auto w-full max-w-2xl px-4 pb-6 pt-4 sm:px-5">
-                <Outlet />
-              </div>
-            </main>
+          <main className="flex min-w-0 flex-1 flex-col lg:border-x lg:border-border">
+            <div className="flex-1 px-4 pb-6 pt-4 sm:px-5">
+              <Outlet />
+            </div>
             <MobileBottomNav />
-          </div>
+          </main>
+          <RightSidebar />
         </div>
       </SignedIn>
       <SignedOut>

@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
-import type { DrinkType } from '@/lib/types'
+import type { DrinkType } from '@/types'
 
 const TYPES: DrinkType[] = ['wine', 'beer', 'spirit', 'cocktail', 'other']
 
