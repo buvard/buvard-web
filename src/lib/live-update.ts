@@ -43,7 +43,9 @@ export async function notifyAppReady() {
   }
 }
 
-export async function checkForUpdate() {
+export async function checkForUpdate(
+  onReady?: (info: { id: string; version: string; notes?: string }) => void,
+) {
   if (!Capacitor.isNativePlatform()) return
   if (!API_URL) return
   if (alreadyChecked) return
@@ -79,6 +81,9 @@ export async function checkForUpdate() {
     // démarrage de l'app.
     await CapacitorUpdater.next({ id: bundle.id })
 
+    // Prévient l'UI qu'un bundle est prêt → permet de proposer un redémarrage immédiat
+    onReady?.({ id: bundle.id, version: data.version, notes: data.notes })
+
     // eslint-disable-next-line no-console
     console.info(
       `[live-update] new version ${data.version} ready, will apply on next launch`,
@@ -86,5 +91,16 @@ export async function checkForUpdate() {
   } catch (err) {
     // eslint-disable-next-line no-console
     console.warn('[live-update] check failed', err)
+  }
+}
+
+// Applique immédiatement un bundle déjà téléchargé : recharge la webview dessus.
+export async function applyUpdateNow(id: string) {
+  if (!Capacitor.isNativePlatform()) return
+  try {
+    await CapacitorUpdater.set({ id })
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn('[live-update] set failed', err)
   }
 }

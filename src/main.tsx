@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import { checkForUpdate, notifyAppReady } from '@/lib/live-update'
+import { notifyAppReady } from '@/lib/live-update'
 
 // Buvard démarre en dark par défaut — c'est le mood de l'app.
 // L'utilisateur peut basculer via les Réglages (clair / sombre / système).
@@ -28,6 +28,5 @@ createRoot(document.getElementById('root')!).render(
 
 // Live updates — uniquement actif sur les plateformes natives (iOS/Android).
 // notifyAppReady() doit être appelé tôt sinon Capgo rollback automatiquement.
-// checkForUpdate() fait son travail en arrière-plan, sans bloquer le rendu.
+// La vérification de maj (checkForUpdate) est gérée par <UpdatePrompt /> dans App.
 void notifyAppReady()
-void checkForUpdate()

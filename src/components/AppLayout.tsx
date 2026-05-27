@@ -175,7 +175,7 @@ function RightSidebar() {
 function MobileBottomNav() {
   const items = useNavItems()
   return (
-    <nav className="sticky bottom-0 z-20 border-t border-border bg-background/80 backdrop-blur-xl lg:hidden">
+    <nav className="sticky bottom-0 z-20 border-t border-border bg-background/80 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden">
       <div className="grid grid-cols-4">
         {items.map(({ to, label, icon: Icon, avatar }) => (
           <NavLink
@@ -227,7 +227,9 @@ function GuestLayout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
       <main className="flex-1">
-        <div className="mx-auto w-full max-w-2xl px-5 py-6">{children}</div>
+        <div className="mx-auto w-full max-w-2xl px-5 pt-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
+          {children}
+        </div>
       </main>
     </div>
   )

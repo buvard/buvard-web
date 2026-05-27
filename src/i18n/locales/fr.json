@@ -12,6 +12,11 @@
     "searching": "Recherche…",
     "empty": "Aucun résultat"
   },
+  "update": {
+    "available": "Nouvelle version disponible",
+    "availableDesc": "Redémarre l'app pour l'appliquer.",
+    "restart": "Redémarrer"
+  },
   "nav": {
     "feed": "Fil",
     "discover": "Découvrir",

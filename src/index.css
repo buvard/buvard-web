@@ -136,9 +136,10 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-    /* Sécurité Capacitor — padding safe-area iOS */
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-      env(safe-area-inset-bottom) env(safe-area-inset-left);
+    /* Safe-area : haut/gauche/droite seulement. Le bas est géré par la bottom-nav
+       elle-même (sinon un écart apparaît sous la nav, au-dessus de la barre de geste). */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) 0
+      env(safe-area-inset-left);
   }
 
   /* ============================================================

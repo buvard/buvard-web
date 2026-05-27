@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { router } from '@/router'
 import { Toaster } from '@/components/ui/sonner'
+import { UpdatePrompt } from '@/components/UpdatePrompt'
 import '@/i18n/config'
 
 // Clé publique Clerk — exposée côté client, c'est attendu.
@@ -34,6 +35,7 @@ export function App() {
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <Toaster />
+        <UpdatePrompt />
       </QueryClientProvider>
     </ClerkProvider>
   )
