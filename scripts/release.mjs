@@ -20,7 +20,7 @@ import { unlink } from 'node:fs/promises'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import process from 'node:process'
-import archiver from 'archiver'
+import { ZipArchive } from 'archiver'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '..')
@@ -83,7 +83,7 @@ async function zipDist(outputPath) {
   }
   await new Promise((resolve, reject) => {
     const output = createWriteStream(outputPath)
-    const archive = archiver('zip', { zlib: { level: 9 } })
+    const archive = new ZipArchive({ zlib: { level: 9 } })
     output.on('close', resolve)
     archive.on('error', reject)
     archive.pipe(output)
