@@ -38,7 +38,6 @@ export async function notifyAppReady() {
   try {
     await CapacitorUpdater.notifyAppReady()
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.warn('[live-update] notifyAppReady failed', err)
   }
 }
@@ -84,12 +83,10 @@ export async function checkForUpdate(
     // Prévient l'UI qu'un bundle est prêt → permet de proposer un redémarrage immédiat
     onReady?.({ id: bundle.id, version: data.version, notes: data.notes })
 
-    // eslint-disable-next-line no-console
     console.info(
       `[live-update] new version ${data.version} ready, will apply on next launch`,
     )
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.warn('[live-update] check failed', err)
   }
 }
@@ -100,7 +97,6 @@ export async function applyUpdateNow(id: string) {
   try {
     await CapacitorUpdater.set({ id })
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.warn('[live-update] set failed', err)
   }
 }

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="title_activity_main">Buvard</string>
+    <!-- app_name est defini par flavor dans build.gradle (Buvard / Buvard Staging) -->
     <string name="package_name">app.buvard</string>
     <string name="custom_url_scheme">app.buvard</string>
 </resources>

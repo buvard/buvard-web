@@ -120,10 +120,21 @@ export function AppUrlListener() {
         console.error('[OAuth] echec refetch session apres deep link', err)
       }
 
-      // Full reload pour relancer le routing avec la session active. Le router
-      // verra session != null et laissera RequireAuth passer vers le feed.
-      console.log('[OAuth] reload vers /')
-      window.location.replace('/')
+      // Reconstruit le path du deep link pour conserver la destination voulue
+      // par le `callbackURL`. Ex: `app.buvard.staging://fr/feed?cookie=...`
+      // -> host = 'fr', pathname = '/feed' -> target = '/fr/feed'
+      // Sans ca, on retombait toujours sur '/' (home) au lieu du feed.
+      let targetPath = '/'
+      try {
+        const u = new URL(url)
+        const host = u.host
+        const pathname = u.pathname || '/'
+        targetPath = host ? `/${host}${pathname === '/' ? '' : pathname}` : pathname
+      } catch {
+        // fallback sur '/' si l'URL est malformee
+      }
+      console.log('[OAuth] reload vers', targetPath)
+      window.location.replace(targetPath)
     }
 
     // Cold-start : app lancee a froid par le deep link, l'event a deja ete emis

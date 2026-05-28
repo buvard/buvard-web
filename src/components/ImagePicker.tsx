@@ -18,6 +18,7 @@ export interface ImagePickerValidation {
   reason?: 'mime' | 'size'
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- helper co-localisé avec le composant qui l'utilise
 export function validateImageFile(file: File): ImagePickerValidation {
   const mimeOk =
     ACCEPTED_MIMES.includes(file.type) ||
@@ -65,6 +66,7 @@ export function ImagePicker({ onPick, onRejected, disabled, children }: Props) {
         // Sur iOS Capacitor permet de choisir entre photothèque et appareil
         // photo natif (selon le wrapper). Sur web standard ça reste un dialog.
       />
+      {/* eslint-disable-next-line react-hooks/refs -- callback declenche par event handler user (clic), pas pendant le render */}
       {children(() => {
         setOpen((n) => n + 1)
         inputRef.current?.click()

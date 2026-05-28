@@ -180,8 +180,11 @@ export function SettingsProfilePage() {
   const [birthYear, setBirthYear] = useState('')
   const [favs, setFavs] = useState<TastingType[]>([])
 
+  // Sync du form local avec les donnees fetched. Pattern accepte pour
+  // hydrater un form editable a partir d'une API async (useMe).
   useEffect(() => {
     if (!me.data) return
+    /* eslint-disable react-hooks/set-state-in-effect -- hydratation initiale du form depuis la data fetchee */
     setUsername(me.data.username ?? '')
     setDisplayName(me.data.displayName ?? '')
     setBio(me.data.bio ?? '')
@@ -189,6 +192,7 @@ export function SettingsProfilePage() {
     setCity(me.data.location?.city ?? '')
     setBirthYear(me.data.birthYear ? String(me.data.birthYear) : '')
     setFavs(me.data.favoriteCategories ?? [])
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [me.data])
 
   function toggleFav(type: TastingType) {

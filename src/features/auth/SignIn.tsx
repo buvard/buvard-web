@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Capacitor } from '@capacitor/core'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -16,7 +17,13 @@ export function SignInPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE
-  const callbackPath = `/${locale}/feed`
+  // En natif, le plugin capacitorClient transforme un callbackURL relatif en
+  // deep link (`app.buvard.staging://fr/feed`). En web, Better Auth resout les
+  // relatifs contre son baseURL API → on l'enverrait sur `api-staging.buvard.app/fr/feed`
+  // qui est 404. Du coup en web on passe l'URL absolue front (origin courant).
+  const callbackPath = Capacitor.isNativePlatform()
+    ? `/${locale}/feed`
+    : `${window.location.origin}/${locale}/feed`
 
   // Destination apres login : prend l'origine si on a ete redirige par RequireAuth.
   const from = (location.state as { from?: string } | null)?.from ?? callbackPath

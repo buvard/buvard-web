@@ -46,7 +46,6 @@ function parseArgs() {
 }
 
 function printHelp() {
-  // eslint-disable-next-line no-console
   console.log(`
 Buvard OTA release
 
@@ -144,7 +143,6 @@ async function main() {
   const args = parseArgs()
   const target = args.target ?? 'prod'
 
-  /* eslint-disable no-console */
   if (!['prod', 'staging'].includes(target)) {
     console.error(`Erreur: --target doit être "prod" ou "staging"`)
     process.exit(1)
@@ -213,11 +211,9 @@ async function main() {
   } finally {
     await unlink(zipPath).catch(() => {})
   }
-  /* eslint-enable no-console */
 }
 
 main().catch((err) => {
-  // eslint-disable-next-line no-console
   console.error(`✗ ${err.message ?? err}`)
   process.exit(1)
 })

@@ -45,4 +45,5 @@ function Badge({
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- pattern shadcn standard (variants cva exportes a cote du composant)
 export { Badge, badgeVariants }

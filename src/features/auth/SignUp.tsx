@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Capacitor } from '@capacitor/core'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -14,7 +15,10 @@ export function SignUpPage() {
   const { lang } = useParams<{ lang: string }>()
   const navigate = useNavigate()
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE
-  const callbackPath = `/${locale}/feed`
+  // Voir le commentaire equivalent dans SignIn.tsx.
+  const callbackPath = Capacitor.isNativePlatform()
+    ? `/${locale}/feed`
+    : `${window.location.origin}/${locale}/feed`
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
