@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main, development]
+  pull_request:
+    branches: [main, development]
+
+# Annule les jobs en cours d'une meme PR/branche quand un nouveau push arrive
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Lint + Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        # `npm ci` execute le hook postinstall (patch-package applique le patch
+        # better-auth-capacitor automatiquement). Pas besoin de --legacy-peer-deps
+        # depuis qu'on est sur zod 4.
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build (mode production)
+        # `npm run build` fait `tsc -b && vite build` -> couvre aussi le typecheck.
+        run: npm run build
+        env:
+          # Vars factices pour que `tsc -b` + `vite build` ne plantent pas sur
+          # les `import.meta.env.X` non definis. La vraie config vient des
+          # Project Settings Vercel.
+          VITE_API_URL: 'https://api.example.com'
+          VITE_APP_SCHEME: 'app.example'
