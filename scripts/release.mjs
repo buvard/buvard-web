@@ -34,6 +34,7 @@ function parseArgs() {
     const k = argv[i]
     if (k === '--version') args.version = argv[++i]
     else if (k === '--platform') args.platform = argv[++i]
+    else if (k === '--target') args.target = argv[++i]
     else if (k === '--notes') args.notes = argv[++i]
     else if (k === '--inactive') args.active = false
     else if (k === '--help' || k === '-h') {
@@ -49,18 +50,24 @@ function printHelp() {
   console.log(`
 Buvard OTA release
 
-Usage:
-  node scripts/release.mjs --version 1.2.4 --platform ios [--notes "..."] [--inactive]
+Le plus simple :
+  npm run release:prod    -- --version 1.2.4 --notes "..."
+  npm run release:staging -- --version 1.2.4
 
-Env requis:
-  API_URL    URL de l'API (ex: https://api.buvard.app)
+Direct :
+  node scripts/release.mjs --version 1.2.4 [--target prod|staging] [--platform ios|android|all] [--notes "..."] [--inactive]
+  (--target défaut: prod · --platform défaut: les deux)
+
+Env requis — .env.release (prod) / .env.release.staging (staging) :
+  API_URL    URL de l'API
   ADMIN_JWT  JWT d'un user role=admin
 `)
 }
 
-// ---- Charge .env.release si présent (pratique pour stocker ADMIN_JWT en local) ----
-function loadDotenv() {
-  const envFile = resolve(ROOT, '.env.release')
+// ---- Charge les creds de release : .env.release (prod) ou .env.release.staging ----
+function loadDotenv(target) {
+  const file = target === 'staging' ? '.env.release.staging' : '.env.release'
+  const envFile = resolve(ROOT, file)
   if (!existsSync(envFile)) return
   const content = readFileSync(envFile, 'utf-8')
   for (const line of content.split('\n')) {
@@ -134,80 +141,79 @@ async function uploadRelease({ apiUrl, jwt, zipPath, version, platform, notes, a
 
 // ---- Main ----
 async function main() {
-  loadDotenv()
   const args = parseArgs()
+  const target = args.target ?? 'prod'
 
-  if (!args.version || !args.platform) {
-    // eslint-disable-next-line no-console
-    console.error('Erreur: --version et --platform sont requis')
-    printHelp()
+  /* eslint-disable no-console */
+  if (!['prod', 'staging'].includes(target)) {
+    console.error(`Erreur: --target doit être "prod" ou "staging"`)
     process.exit(1)
   }
 
-  if (!['ios', 'android'].includes(args.platform)) {
-    // eslint-disable-next-line no-console
-    console.error(`Erreur: --platform doit être "ios" ou "android"`)
+  // Charge les creds (.env.release ou .env.release.staging) selon la cible
+  loadDotenv(target)
+
+  // Plateformes : par défaut les deux (ios + android), ou une seule via --platform
+  const platforms =
+    !args.platform || args.platform === 'all'
+      ? ['ios', 'android']
+      : [args.platform]
+  if (!platforms.every((p) => ['ios', 'android'].includes(p))) {
+    console.error(`Erreur: --platform doit être "ios", "android" ou "all"`)
     process.exit(1)
   }
 
-  if (!/^\d+\.\d+\.\d+$/.test(args.version)) {
-    // eslint-disable-next-line no-console
-    console.error(`Erreur: --version doit suivre le format SemVer X.Y.Z`)
+  if (!args.version || !/^\d+\.\d+\.\d+$/.test(args.version)) {
+    console.error(`Erreur: --version requis au format SemVer X.Y.Z`)
     process.exit(1)
   }
 
+  const credsFile = target === 'staging' ? '.env.release.staging' : '.env.release'
   const apiUrl = process.env.API_URL?.replace(/\/$/, '')
   const jwt = process.env.ADMIN_JWT
   if (!apiUrl) {
-    // eslint-disable-next-line no-console
-    console.error('Erreur: API_URL manquant (env ou .env.release)')
+    console.error(`Erreur: API_URL manquant (${credsFile})`)
     process.exit(1)
   }
   if (!jwt) {
-    // eslint-disable-next-line no-console
-    console.error('Erreur: ADMIN_JWT manquant (env ou .env.release)')
+    console.error(`Erreur: ADMIN_JWT manquant (${credsFile})`)
     process.exit(1)
   }
 
-  const zipPath = resolve(ROOT, `bundle-${args.version}-${args.platform}.zip`)
-
-  // eslint-disable-next-line no-console
-  console.log(`→ Zip de dist/ vers ${zipPath}`)
+  // Le bundle web est identique pour les 2 plateformes → on zippe une seule fois
+  const zipPath = resolve(ROOT, `bundle-${args.version}.zip`)
+  console.log(`→ [${target}] Zip de dist/ vers ${zipPath}`)
   await zipDist(zipPath)
   const size = statSync(zipPath).size
-  // eslint-disable-next-line no-console
   console.log(`  ${(size / 1024 / 1024).toFixed(2)} MB`)
-
   if (size > 50 * 1024 * 1024) {
-    // eslint-disable-next-line no-console
     console.error(`Erreur: bundle > 50 MB (limite backend)`)
     process.exit(1)
   }
 
-  // eslint-disable-next-line no-console
-  console.log(
-    `→ Upload vers ${apiUrl}/api/v1/admin/releases (platform=${args.platform}, version=${args.version}, active=${args.active})`,
-  )
   try {
-    const result = await uploadRelease({
-      apiUrl,
-      jwt,
-      zipPath,
-      version: args.version,
-      platform: args.platform,
-      notes: args.notes,
-      active: args.active,
-    })
-    // eslint-disable-next-line no-console
-    console.log(`✓ Release ${args.version} (${args.platform}) publiée`)
-    if (result?.release?.checksum) {
-      // eslint-disable-next-line no-console
-      console.log(`  checksum: ${result.release.checksum}`)
+    for (const platform of platforms) {
+      console.log(
+        `→ Upload ${apiUrl}/api/v1/admin/releases (platform=${platform}, version=${args.version}, active=${args.active})`,
+      )
+      const result = await uploadRelease({
+        apiUrl,
+        jwt,
+        zipPath,
+        version: args.version,
+        platform,
+        notes: args.notes,
+        active: args.active,
+      })
+      console.log(`✓ Release ${args.version} (${platform}) publiée sur ${target}`)
+      if (result?.release?.checksum) {
+        console.log(`  checksum: ${result.release.checksum}`)
+      }
     }
   } finally {
-    // Cleanup local
     await unlink(zipPath).catch(() => {})
   }
+  /* eslint-enable no-console */
 }
 
 main().catch((err) => {

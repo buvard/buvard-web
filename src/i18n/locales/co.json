@@ -13,7 +13,22 @@
     "signIn": "Cunnettati",
     "signUp": "Crea un contu",
     "signOut": "Scunnetta",
-    "loading": "Caricamentu..."
+    "loading": "Caricamentu...",
+    "email": "Email",
+    "emailPlaceholder": "to@email.com",
+    "password": "Parolla d'ordine",
+    "passwordPlaceholder": "Almenu 8 caratteri",
+    "name": "Nome",
+    "namePlaceholder": "U to nome",
+    "submitSignIn": "Cunnettati",
+    "submitSignUp": "Crea u me contu",
+    "submittingSignIn": "Cunnessione...",
+    "submittingSignUp": "Creazione...",
+    "google": "Cuntinueghja cù Google",
+    "orDivider": "o",
+    "noAccount": "Ancu nisun contu?",
+    "haveAccount": "Digià registratu?",
+    "errorGeneric": "Hè accadutu un errore, riprova."
   },
   "home": {
     "title": "Ciò chì i to cumpagni bevenu.",

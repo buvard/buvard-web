@@ -4,7 +4,7 @@ import {
   useQueryClient,
   type UseQueryOptions,
 } from '@tanstack/react-query'
-import { useAuth } from '@clerk/clerk-react'
+import { useSession } from '@/lib/auth-client'
 import { useApi } from './useApi'
 import type {
   ListQueryParams,
@@ -54,7 +54,9 @@ export function useMe(
   options?: Omit<UseQueryOptions<User>, 'queryKey' | 'queryFn'>,
 ) {
   const api = useApi()
-  const { isSignedIn, isLoaded } = useAuth()
+  const { data: session, isPending } = useSession()
+  const isSignedIn = !!session
+  const isLoaded = !isPending
   return useQuery({
     queryKey: userKeys.me,
     queryFn: async () => {
@@ -109,7 +111,9 @@ export function useDeleteMe() {
 // ============================================================
 export function usePrefs() {
   const api = useApi()
-  const { isSignedIn, isLoaded } = useAuth()
+  const { data: session, isPending } = useSession()
+  const isSignedIn = !!session
+  const isLoaded = !isPending
   return useQuery({
     queryKey: userKeys.prefs,
     queryFn: async () => {
@@ -149,7 +153,9 @@ export function useUpdatePrefs() {
 // ============================================================
 export function useStats() {
   const api = useApi()
-  const { isSignedIn, isLoaded } = useAuth()
+  const { data: session, isPending } = useSession()
+  const isSignedIn = !!session
+  const isLoaded = !isPending
   return useQuery({
     queryKey: userKeys.stats,
     queryFn: async () => {
@@ -309,7 +315,9 @@ export function useAcceptPrivacy() {
 // ============================================================
 export function useBlocks(params: ListQueryParams = {}) {
   const api = useApi()
-  const { isSignedIn, isLoaded } = useAuth()
+  const { data: session, isPending } = useSession()
+  const isSignedIn = !!session
+  const isLoaded = !isPending
   return useQuery({
     queryKey: userKeys.blocks(params),
     queryFn: async () => {

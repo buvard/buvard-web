@@ -1,5 +1,8 @@
 // Client HTTP minimal pour l'API Buvard.
-// Auth : Bearer JWT obtenu via Clerk getToken() (passé en argument par les hooks).
+// Auth :
+//   - Web    : cookies session Better Auth (credentials: 'include').
+//   - Natif  : Authorization Bearer fourni par le plugin Capacitor Better Auth
+//              (token recupere via getNativeAuthToken() et passe par le hook useApi).
 
 const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(
   /\/$/,
@@ -47,7 +50,7 @@ export async function apiRequest<T>(
   if (token) headers.Authorization = `Bearer ${token}`
 
   // FormData : pas de stringify et pas de Content-Type (le navigateur ajoute
-  // le boundary multipart automatiquement). Sinon JSON par défaut.
+  // le boundary multipart automatiquement). Sinon JSON par defaut.
   const isMultipart = body instanceof FormData
   if (body !== undefined && !isMultipart) {
     headers['Content-Type'] = 'application/json'
@@ -56,6 +59,9 @@ export async function apiRequest<T>(
   const res = await fetch(`${API_URL}${path}`, {
     method,
     headers,
+    // En web on s'appuie sur les cookies Better Auth (cross-origin si l'API
+    // est sur un autre domaine — le back doit donc autoriser CORS credentials).
+    credentials: 'include',
     body:
       body === undefined
         ? undefined

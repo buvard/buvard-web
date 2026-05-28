@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { SignedIn, SignedOut } from '@clerk/clerk-react'
 import { Button } from '@/components/ui/button'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
+import { useSession } from '@/lib/auth-client'
 
 export function HomePage() {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
+  const { data: session } = useSession()
+  const isSignedIn = !!session
 
   return (
     <section className="flex flex-col gap-10 pt-12 pb-8">
@@ -30,28 +32,22 @@ export function HomePage() {
         </p>
       </div>
 
-      <SignedOut>
+      {isSignedIn ? (
+        <div>
+          <Button asChild size="lg" className="glow-primary">
+            <Link to={localizedPath('/feed')}>{t('home.cta')}</Link>
+          </Button>
+        </div>
+      ) : (
         <div className="flex flex-col gap-2 sm:flex-row">
-          <Button
-            asChild
-            size="lg"
-            className="glow-primary sm:w-auto"
-          >
+          <Button asChild size="lg" className="glow-primary sm:w-auto">
             <Link to={localizedPath('/sign-up')}>{t('auth.signUp')}</Link>
           </Button>
           <Button asChild size="lg" variant="ghost" className="sm:w-auto">
             <Link to={localizedPath('/sign-in')}>{t('auth.signIn')}</Link>
           </Button>
         </div>
-      </SignedOut>
-
-      <SignedIn>
-        <div>
-          <Button asChild size="lg" className="glow-primary">
-            <Link to={localizedPath('/feed')}>{t('home.cta')}</Link>
-          </Button>
-        </div>
-      </SignedIn>
+      )}
     </section>
   )
 }

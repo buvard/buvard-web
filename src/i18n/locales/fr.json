@@ -27,7 +27,22 @@
     "signIn": "Se connecter",
     "signUp": "Créer un compte",
     "signOut": "Se déconnecter",
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "email": "Email",
+    "emailPlaceholder": "ton@email.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Au moins 8 caractères",
+    "name": "Nom",
+    "namePlaceholder": "Ton nom",
+    "submitSignIn": "Se connecter",
+    "submitSignUp": "Créer mon compte",
+    "submittingSignIn": "Connexion...",
+    "submittingSignUp": "Création...",
+    "google": "Continuer avec Google",
+    "orDivider": "ou",
+    "noAccount": "Pas encore de compte ?",
+    "haveAccount": "Déjà inscrit ?",
+    "errorGeneric": "Une erreur est survenue, réessaie."
   },
   "home": {
     "title": "Ce que tes potes boivent.",

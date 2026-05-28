@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { useClerk } from '@clerk/clerk-react'
 import { SettingsGroup, SettingsRow } from '@/features/settings/components/SettingsRow'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
+import { authClient } from '@/lib/auth-client'
+import { APP_VERSION } from '@/lib/version'
 import {
   User,
   Palette,
@@ -22,10 +23,10 @@ export function SettingsPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const p = useLocalizedPath()
-  const { signOut } = useClerk()
 
-  function handleSignOut() {
-    void signOut(() => navigate(p('/'), { replace: true }))
+  async function handleSignOut() {
+    await authClient.signOut()
+    navigate(p('/'), { replace: true })
   }
 
   return (
@@ -100,12 +101,14 @@ export function SettingsPage() {
         <SettingsRow
           icon={LogOut}
           label={t('settings.account.signOut')}
-          onClick={handleSignOut}
+          onClick={() => void handleSignOut()}
         />
       </SettingsGroup>
 
       <p className="px-1 text-center text-xs text-muted-foreground">
-        {t('app.name')} · v0.0.0
+        {/* Le mode `development` (npm run dev) est aliasé en `staging` — même flow simplifié. */}
+        {t('app.name')} ·{' '}
+        {import.meta.env.MODE === 'production' ? 'production' : 'staging'} {APP_VERSION}
       </p>
     </section>
   )

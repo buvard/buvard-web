@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useAuth } from '@clerk/clerk-react'
 import { toast } from 'sonner'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
@@ -22,6 +21,7 @@ import {
   useUnfollow,
 } from '@/lib/api/user'
 import { ApiError } from '@/lib/api/client'
+import { useSession } from '@/lib/auth-client'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import { MoreHorizontal, Ban } from 'lucide-react'
 
@@ -30,7 +30,8 @@ export function PublicProfilePage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const localizedPath = useLocalizedPath()
-  const { isSignedIn } = useAuth()
+  const { data: session } = useSession()
+  const isSignedIn = !!session
   const me = useMe()
   const { data: user, isPending, isError, error } = usePublicUser(username)
   const follow = useFollow()

@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useClerk, useUser } from '@clerk/clerk-react'
 import { toast } from 'sonner'
 import { SettingsPageShell } from '@/features/settings/components/SettingsPageShell'
 import { SettingsGroup, SettingsRow } from '@/features/settings/components/SettingsRow'
@@ -15,30 +14,34 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
+import { authClient, useSession } from '@/lib/auth-client'
 import { useDeleteMe } from '@/lib/api/user'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
-import {
-  AtSign,
-  KeyRound,
-  ShieldCheck,
-  LogOut,
-  Trash2,
-} from 'lucide-react'
+import { AtSign, LogOut, Trash2 } from 'lucide-react'
 
-// Page Compte — gestion Clerk (identité, sécurité) + actions destructives.
-// Pas de duplication avec /settings/profile (qui édite le profil app Buvard).
+// Page Compte — Better Auth est headless, donc plus d'ecran "gerer mon compte"
+// pre-build comme Clerk. On affiche l'identite (email) en lecture seule et on
+// expose la deconnexion + suppression. Mot de passe / 2FA viendront sur des
+// ecrans custom dedies si le besoin se confirme.
 export function SettingsAccountPage() {
   const { t } = useTranslation()
-  const { openUserProfile, signOut } = useClerk()
-  const { user } = useUser()
+  const { data: session } = useSession()
   const navigate = useNavigate()
   const localizedPath = useLocalizedPath()
   const deleteMe = useDeleteMe()
 
+  // Better Auth est la source de verite pour l'email.
+  const email = session?.user?.email ?? '—'
+
+  async function handleSignOut() {
+    await authClient.signOut()
+    navigate(localizedPath('/'), { replace: true })
+  }
+
   async function handleDelete() {
     try {
       await deleteMe.mutateAsync()
-      await signOut(() => navigate(localizedPath('/'), { replace: true }))
+      await handleSignOut()
     } catch {
       toast.error(t('settings.saveError'))
     }
@@ -50,33 +53,14 @@ export function SettingsAccountPage() {
       subtitle={t('settings.account.subtitle')}
     >
       <SettingsGroup title={t('settings.account.identity')}>
-        <SettingsRow
-          icon={AtSign}
-          label={t('settings.account.email')}
-          value={user?.primaryEmailAddress?.emailAddress ?? '—'}
-          onClick={() => openUserProfile()}
-        />
-        <SettingsRow
-          icon={KeyRound}
-          label={t('settings.account.password')}
-          hint={t('settings.account.passwordHint')}
-          onClick={() => openUserProfile()}
-        />
-        <SettingsRow
-          icon={ShieldCheck}
-          label={t('settings.account.security')}
-          hint={t('settings.account.securityHint')}
-          onClick={() => openUserProfile()}
-        />
+        <SettingsRow icon={AtSign} label={t('settings.account.email')} value={email} />
       </SettingsGroup>
 
       <SettingsGroup title={t('settings.account.session')}>
         <SettingsRow
           icon={LogOut}
           label={t('settings.account.signOut')}
-          onClick={() =>
-            void signOut(() => navigate(localizedPath('/'), { replace: true }))
-          }
+          onClick={() => void handleSignOut()}
         />
       </SettingsGroup>
 

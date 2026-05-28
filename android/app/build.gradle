@@ -7,8 +7,8 @@ android {
         applicationId "app.buvard"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -19,7 +19,22 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    // Deux environnements coexistant sur l'appareil :
+    //   prod    -> app.buvard         ("Buvard")
+    //   staging -> app.buvard.staging ("Buvard Staging")
+    flavorDimensions "env"
+    productFlavors {
+        prod {
+            dimension "env"
+            resValue "string", "app_name", "Buvard"
+        }
+        staging {
+            dimension "env"
+            applicationIdSuffix ".staging"
+            resValue "string", "app_name", "Buvard Staging"
         }
     }
 }

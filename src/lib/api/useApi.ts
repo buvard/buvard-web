@@ -1,11 +1,14 @@
-import { useAuth } from '@clerk/clerk-react'
 import { useCallback } from 'react'
+import { getNativeAuthToken, useSession } from '@/lib/auth-client'
 import { apiRequest } from './client'
 
-// Wrapper qui injecte automatiquement le JWT Clerk dans chaque requête.
+// Wrapper qui injecte automatiquement l'auth dans chaque requete.
+//   - Web    : cookies Better Auth (envoyes via credentials: 'include' dans apiRequest)
+//   - Natif  : Authorization Bearer recupere via le plugin Capacitor Better Auth
 // Usage : const api = useApi(); await api<User>('/api/v1/users/me')
 export function useApi() {
-  const { getToken, isSignedIn } = useAuth()
+  const { data: session } = useSession()
+  const isSignedIn = !!session
 
   return useCallback(
     async <T>(
@@ -18,15 +21,11 @@ export function useApi() {
       } = {},
     ): Promise<T> => {
       const { skipAuth, ...rest } = options
-      const token = skipAuth || !isSignedIn ? null : await getToken()
-      if (!skipAuth && isSignedIn && !token && import.meta.env.DEV) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          '[useApi] Clerk getToken() returned null while signed in — backend will reject the call.',
-        )
-      }
+      // En web le token est null (les cookies prennent le relais via apiRequest).
+      // En natif on recupere le bearer depuis @capacitor/preferences.
+      const token = skipAuth || !isSignedIn ? null : await getNativeAuthToken()
       return apiRequest<T>(path, { ...rest, token })
     },
-    [getToken, isSignedIn],
+    [isSignedIn],
   )
 }

@@ -1,17 +1,17 @@
 import { Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
-import { useAuth } from '@clerk/clerk-react'
 import { useTranslation } from 'react-i18next'
 import { DEFAULT_LOCALE, isLocale } from '@/i18n/config'
+import { useSession } from '@/lib/auth-client'
 
-// Garde les routes privées : redirige vers /:lang/sign-in si non connecté.
+// Garde les routes privees : redirige vers /:lang/sign-in si non connecte.
 export function RequireAuth() {
-  const { isLoaded, isSignedIn } = useAuth()
+  const { data: session, isPending } = useSession()
   const { lang } = useParams<{ lang: string }>()
   const location = useLocation()
   const { t } = useTranslation()
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE
 
-  if (!isLoaded) {
+  if (isPending) {
     return (
       <div className="flex h-full items-center justify-center text-muted-foreground">
         {t('auth.loading')}
@@ -19,7 +19,7 @@ export function RequireAuth() {
     )
   }
 
-  if (!isSignedIn) {
+  if (!session) {
     return (
       <Navigate
         to={`/${locale}/sign-in`}

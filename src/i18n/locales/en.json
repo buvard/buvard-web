@@ -27,7 +27,22 @@
     "signIn": "Sign in",
     "signUp": "Sign up",
     "signOut": "Sign out",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "email": "Email",
+    "emailPlaceholder": "you@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "At least 8 characters",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "submitSignIn": "Sign in",
+    "submitSignUp": "Create account",
+    "submittingSignIn": "Signing in...",
+    "submittingSignUp": "Creating...",
+    "google": "Continue with Google",
+    "orDivider": "or",
+    "noAccount": "No account yet?",
+    "haveAccount": "Already have an account?",
+    "errorGeneric": "Something went wrong, please try again."
   },
   "home": {
     "title": "What your friends are drinking.",

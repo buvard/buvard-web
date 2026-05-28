@@ -1,7 +1,7 @@
-import { useClerk } from '@clerk/clerk-react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
+import { authClient } from '@/lib/auth-client'
 import { useMe } from '@/lib/api/user'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import { ShieldAlert } from 'lucide-react'
@@ -9,9 +9,13 @@ import { ShieldAlert } from 'lucide-react'
 export function AccountRestrictedPage() {
   const { t, i18n } = useTranslation()
   const me = useMe()
-  const { signOut } = useClerk()
   const navigate = useNavigate()
   const localizedPath = useLocalizedPath()
+
+  async function handleSignOut() {
+    await authClient.signOut()
+    navigate(localizedPath('/'), { replace: true })
+  }
 
   const status = me.data?.status
   const suspendedUntil = me.data?.suspendedUntil
@@ -51,12 +55,7 @@ export function AccountRestrictedPage() {
           {description}
         </p>
       </div>
-      <Button
-        variant="outline"
-        onClick={() =>
-          void signOut(() => navigate(localizedPath('/'), { replace: true }))
-        }
-      >
+      <Button variant="outline" onClick={() => void handleSignOut()}>
         {t('auth.signOut')}
       </Button>
     </section>

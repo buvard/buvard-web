@@ -1,10 +1,10 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { SignedIn, SignedOut } from '@clerk/clerk-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { UserSearch } from '@/components/UserSearch'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
+import { useSession } from '@/lib/auth-client'
 import { useSyncPrefs } from '@/lib/api/useSyncPrefs'
 import { useMe } from '@/lib/api/user'
 import { cn } from '@/lib/utils'
@@ -241,26 +241,34 @@ function GuestLayout({ children }: { children: React.ReactNode }) {
 export function AppLayout() {
   // Sync prefs backend → local (best-effort, no-op si pas auth)
   useSyncPrefs()
+  const { data: session, isPending } = useSession()
+
+  // Pendant le chargement initial de la session, on rend rien pour eviter
+  // le flash GuestLayout -> AppLayout au refresh d'une page authentifiee.
+  if (isPending) {
+    return (
+      <div className="flex min-h-full items-center justify-center text-muted-foreground" />
+    )
+  }
+
+  if (!session) {
+    return (
+      <GuestLayout>
+        <Outlet />
+      </GuestLayout>
+    )
+  }
 
   return (
-    <>
-      <SignedIn>
-        <div className="mx-auto flex min-h-full w-full max-w-6xl">
-          <DesktopSidebar />
-          <main className="flex min-w-0 flex-1 flex-col lg:border-x lg:border-border">
-            <div className="flex-1 px-4 pb-6 pt-4 sm:px-5">
-              <Outlet />
-            </div>
-            <MobileBottomNav />
-          </main>
-          <RightSidebar />
-        </div>
-      </SignedIn>
-      <SignedOut>
-        <GuestLayout>
+    <div className="mx-auto flex min-h-full w-full max-w-6xl">
+      <DesktopSidebar />
+      <main className="flex min-w-0 flex-1 flex-col lg:border-x lg:border-border">
+        <div className="flex-1 px-4 pb-6 pt-4 sm:px-5">
           <Outlet />
-        </GuestLayout>
-      </SignedOut>
-    </>
+        </div>
+        <MobileBottomNav />
+      </main>
+      <RightSidebar />
+    </div>
   )
 }

@@ -6,8 +6,8 @@ const config: CapacitorConfig = {
   appId: 'app.buvard',
   appName: 'Buvard',
   webDir: 'dist',
-  // backgroundColor en hex avec alpha (AARRGGBB côté Android). Aligné avec --background du thème.
-  backgroundColor: '#ffffff',
+  // Fond sombre aligné sur --background du thème (#0a0a0a). Évite le flash blanc au lancement.
+  backgroundColor: '#0a0a0a',
   ios: {
     contentInset: 'always',
   },
@@ -17,7 +17,7 @@ const config: CapacitorConfig = {
   plugins: {
     SplashScreen: {
       launchShowDuration: 1500,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#0a0a0a',
       androidScaleType: 'CENTER_CROP',
       splashFullScreen: true,
       splashImmersive: true,
