@@ -8,7 +8,7 @@
     "postinstall": "patch-package",
     "build": "tsc -b && vite build",
     "build:staging": "tsc -b && vite build --mode staging",
-    "lint": "eslint .",
+    "lint": "eslint . --ignore-pattern 'android/**' --ignore-pattern 'ios/**'",
     "preview": "vite preview",
     "cap:sync": "npm run build && cap sync",
     "cap:android": "npm run build && cap sync android && cap open android",

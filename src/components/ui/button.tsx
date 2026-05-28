@@ -61,4 +61,5 @@ function Button({
   )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components -- pattern shadcn standard (variants cva exportes a cote du composant)
 export { Button, buttonVariants }
