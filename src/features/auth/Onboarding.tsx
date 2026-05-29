@@ -17,6 +17,16 @@ import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 
 const USERNAME_REGEX = /^[a-z0-9_.-]+$/
 
+// Calcule l'âge révolu à partir d'une date ISO (YYYY-MM-DD).
+function getAge(dateStr: string): number {
+  const birth = new Date(dateStr)
+  const now = new Date()
+  let age = now.getFullYear() - birth.getFullYear()
+  const m = now.getMonth() - birth.getMonth()
+  if (m < 0 || (m === 0 && now.getDate() < birth.getDate())) age--
+  return age
+}
+
 type Step = 'identity' | 'legal'
 
 export function OnboardingPage() {
@@ -34,9 +44,18 @@ export function OnboardingPage() {
   const [step, setStep] = useState<Step>(initialStep)
   const [username, setUsername] = useState(me.data?.username ?? '')
   const [displayName, setDisplayName] = useState(me.data?.displayName ?? '')
+  const [birthDate, setBirthDate] = useState('')
+  const [certifiedAge, setCertifiedAge] = useState(false)
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const [acceptedPrivacy, setAcceptedPrivacy] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  // Date max autorisée : aujourd'hui - 18 ans (borne l'input HTML).
+  const maxBirthDate = (() => {
+    const d = new Date()
+    d.setFullYear(d.getFullYear() - 18)
+    return d.toISOString().slice(0, 10)
+  })()
 
   const isLoading =
     updateMe.isPending ||
@@ -77,12 +96,24 @@ export function OnboardingPage() {
   async function handleLegalSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError(null)
+    if (!birthDate || getAge(birthDate) < 18) {
+      setError(t('onboarding.errors.underage'))
+      return
+    }
+    if (!certifiedAge) {
+      setError(t('onboarding.errors.certifyAge'))
+      return
+    }
     if (!acceptedTerms || !acceptedPrivacy) {
-      setError(t('onboarding.errors.acceptBoth'))
+      setError(t('onboarding.errors.acceptAll'))
       return
     }
     try {
-      // On envoie en séquence : terms, privacy, complete
+      // On persiste l'année de naissance (seul champ stocké côté backend),
+      // puis en séquence : terms, privacy, complete.
+      await updateMe.mutateAsync({
+        birthYear: new Date(birthDate).getFullYear(),
+      })
       await acceptTerms.mutateAsync()
       await acceptPrivacy.mutateAsync()
       await completeOnboarding.mutateAsync()
@@ -177,6 +208,26 @@ export function OnboardingPage() {
         </form>
       ) : (
         <form onSubmit={handleLegalSubmit} className="space-y-5">
+          <div className="space-y-2">
+            <Label htmlFor="birthDate">{t('onboarding.birthDateLabel')}</Label>
+            <Input
+              id="birthDate"
+              type="date"
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
+              max={maxBirthDate}
+              required
+            />
+            <p className="text-xs text-muted-foreground">
+              {t('onboarding.birthDateHint')}
+            </p>
+          </div>
+
+          <CheckboxRow
+            checked={certifiedAge}
+            onChange={setCertifiedAge}
+            label={t('onboarding.certifyAge')}
+          />
           <CheckboxRow
             checked={acceptedTerms}
             onChange={setAcceptedTerms}
@@ -188,6 +239,10 @@ export function OnboardingPage() {
             label={t('onboarding.acceptPrivacy')}
           />
 
+          <p className="rounded-md border border-border bg-card/30 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+            {t('common.moderation')}
+          </p>
+
           {error && (
             <p className="text-sm text-destructive" role="alert">
               {error}
@@ -198,7 +253,13 @@ export function OnboardingPage() {
             type="submit"
             size="lg"
             className="glow-primary"
-            disabled={isLoading || !acceptedTerms || !acceptedPrivacy}
+            disabled={
+              isLoading ||
+              !birthDate ||
+              !certifiedAge ||
+              !acceptedTerms ||
+              !acceptedPrivacy
+            }
           >
             {t('onboarding.submit')}
           </Button>

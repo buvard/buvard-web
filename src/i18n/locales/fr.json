@@ -5,7 +5,8 @@
   },
   "common": {
     "back": "Retour",
-    "clear": "Effacer"
+    "clear": "Effacer",
+    "moderation": "L'abus d'alcool est dangereux pour la santé. À consommer avec modération."
   },
   "search": {
     "placeholder": "Rechercher",
@@ -62,7 +63,7 @@
       "name": "Nom de la bouteille",
       "namePlaceholder": "Ex. Talisker 10 ans",
       "type": "Type",
-      "rating": "Note sur 10",
+      "rating": "Note sur 5",
       "place": "Où ?",
       "placePlaceholder": "Bar, restaurant, chez un pote...",
       "notes": "Notes",
@@ -72,10 +73,16 @@
     "cancel": "Annuler"
   },
   "types": {
+    "whisky": "Whisky",
     "wine": "Vin",
+    "rum": "Rhum",
     "beer": "Bière",
-    "spirit": "Spiritueux",
-    "cocktail": "Cocktail",
+    "gin": "Gin",
+    "vodka": "Vodka",
+    "tequila": "Tequila",
+    "cognac": "Cognac",
+    "champagne": "Champagne",
+    "mezcal": "Mezcal",
     "other": "Autre"
   },
   "profile": {
@@ -147,14 +154,19 @@
     "usernameHint": "3 à 32 caractères, lettres minuscules, chiffres, . _ -",
     "displayNameLabel": "Nom affiché (optionnel)",
     "displayNamePlaceholder": "Léo",
+    "birthDateLabel": "Date de naissance",
+    "birthDateHint": "Tu dois avoir 18 ans ou plus pour utiliser Buvard.",
+    "certifyAge": "Je certifie avoir 18 ans ou plus.",
     "acceptTerms": "J'accepte les conditions d'utilisation.",
     "acceptPrivacy": "J'accepte la politique de confidentialité.",
     "next": "Continuer",
     "submit": "Terminer",
     "errors": {
+      "underage": "Tu dois avoir 18 ans ou plus pour utiliser Buvard.",
+      "certifyAge": "Tu dois certifier avoir 18 ans ou plus.",
+      "acceptAll": "Tu dois tout accepter pour continuer.",
       "taken": "Ce pseudo est déjà pris.",
       "invalid": "Format de pseudo invalide.",
-      "acceptBoth": "Tu dois accepter les deux pour continuer.",
       "generic": "Impossible de finaliser ton compte."
     }
   },

@@ -7,9 +7,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
-import type { DrinkType } from '@/types'
-
-const TYPES: DrinkType[] = ['wine', 'beer', 'spirit', 'cocktail', 'other']
+import { TASTING_TYPES, type TastingType } from '@/types'
 
 export function AddPage() {
   const { t } = useTranslation()
@@ -17,7 +15,7 @@ export function AddPage() {
   const localizedPath = useLocalizedPath()
 
   // État local — pas de backend pour l'instant, on revient juste au feed.
-  const [type, setType] = useState<DrinkType>('wine')
+  const [type, setType] = useState<TastingType>('whisky')
   const [name, setName] = useState('')
   const [rating, setRating] = useState('')
   const [place, setPlace] = useState('')
@@ -53,7 +51,7 @@ export function AddPage() {
         <div className="space-y-2">
           <Label>{t('add.fields.type')}</Label>
           <div className="flex flex-wrap gap-2">
-            {TYPES.map((value) => (
+            {TASTING_TYPES.map((value) => (
               <button
                 key={value}
                 type="button"
@@ -77,8 +75,8 @@ export function AddPage() {
             <Input
               id="rating"
               type="number"
-              min={0}
-              max={10}
+              min={0.5}
+              max={5}
               step={0.5}
               value={rating}
               onChange={(e) => setRating(e.target.value)}
@@ -106,6 +104,10 @@ export function AddPage() {
             rows={4}
           />
         </div>
+
+        <p className="rounded-md border border-border bg-card/30 px-4 py-3 text-xs leading-relaxed text-muted-foreground">
+          {t('common.moderation')}
+        </p>
 
         <div className="flex items-center gap-2 pt-2">
           <Button type="submit" size="lg">

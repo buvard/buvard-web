@@ -5,7 +5,8 @@
   },
   "common": {
     "back": "Back",
-    "clear": "Clear"
+    "clear": "Clear",
+    "moderation": "Alcohol abuse is dangerous for your health. Please drink responsibly."
   },
   "search": {
     "placeholder": "Search",
@@ -62,7 +63,7 @@
       "name": "Bottle name",
       "namePlaceholder": "e.g. Talisker 10 yo",
       "type": "Type",
-      "rating": "Rating out of 10",
+      "rating": "Rating out of 5",
       "place": "Where?",
       "placePlaceholder": "Bar, restaurant, a friend's place...",
       "notes": "Notes",
@@ -72,10 +73,16 @@
     "cancel": "Cancel"
   },
   "types": {
+    "whisky": "Whisky",
     "wine": "Wine",
+    "rum": "Rum",
     "beer": "Beer",
-    "spirit": "Spirit",
-    "cocktail": "Cocktail",
+    "gin": "Gin",
+    "vodka": "Vodka",
+    "tequila": "Tequila",
+    "cognac": "Cognac",
+    "champagne": "Champagne",
+    "mezcal": "Mezcal",
     "other": "Other"
   },
   "profile": {
@@ -147,14 +154,19 @@
     "usernameHint": "3 to 32 chars, lowercase letters, digits, . _ -",
     "displayNameLabel": "Display name (optional)",
     "displayNamePlaceholder": "Leo",
+    "birthDateLabel": "Date of birth",
+    "birthDateHint": "You must be 18 or older to use Buvard.",
+    "certifyAge": "I certify that I am 18 or older.",
     "acceptTerms": "I accept the terms of service.",
     "acceptPrivacy": "I accept the privacy policy.",
     "next": "Continue",
     "submit": "Finish",
     "errors": {
+      "underage": "You must be 18 or older to use Buvard.",
+      "certifyAge": "You must certify that you are 18 or older.",
+      "acceptAll": "You must accept everything to continue.",
       "taken": "This username is already taken.",
       "invalid": "Invalid username format.",
-      "acceptBoth": "You must accept both to continue.",
       "generic": "Couldn't finish setting up your account."
     }
   },
