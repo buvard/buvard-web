@@ -3,6 +3,9 @@
     "name": "Buvard",
     "tagline": "Sparte i to alcoli preferiti cù i to cumpagni"
   },
+  "common": {
+    "moderation": "L'abusu d'alcolu hè periculosu per a salute. Da cunsumà cù muderazione."
+  },
   "nav": {
     "feed": "Filu",
     "discover": "Scopre",
@@ -48,7 +51,7 @@
       "name": "Nome di a buttiglia",
       "namePlaceholder": "P.e. Talisker 10 anni",
       "type": "Tipu",
-      "rating": "Nota nantu à 10",
+      "rating": "Nota nantu à 5",
       "place": "Induve ?",
       "placePlaceholder": "Bar, restaurante, ind'è un cumpagnu...",
       "notes": "Note",
@@ -58,10 +61,16 @@
     "cancel": "Annullà"
   },
   "types": {
+    "whisky": "Whisky",
     "wine": "Vinu",
+    "rum": "Rum",
     "beer": "Biera",
-    "spirit": "Spiritu",
-    "cocktail": "Cocktail",
+    "gin": "Gin",
+    "vodka": "Vodka",
+    "tequila": "Tequila",
+    "cognac": "Cognac",
+    "champagne": "Sciampagna",
+    "mezcal": "Mezcal",
     "other": "Altru"
   },
   "profile": {
@@ -127,14 +136,19 @@
     "usernameHint": "3 à 32 caratteri, minuscule, cifre, . _ -",
     "displayNameLabel": "Nome affissatu (opzionale)",
     "displayNamePlaceholder": "Leo",
+    "birthDateLabel": "Data di nascita",
+    "birthDateHint": "Devi avè 18 anni o più per aduprà Buvard.",
+    "certifyAge": "Certificheghju d'avè 18 anni o più.",
     "acceptTerms": "Accettu e cundizioni d'usu.",
     "acceptPrivacy": "Accettu a pulitica di privatezza.",
     "next": "Cuntinuà",
     "submit": "Finisce",
     "errors": {
+      "underage": "Devi avè 18 anni o più per aduprà Buvard.",
+      "certifyAge": "Devi certificà d'avè 18 anni o più.",
+      "acceptAll": "Devi accettà tuttu per cuntinuà.",
       "taken": "Stu pseudonimu hè dighjà pigliatu.",
       "invalid": "Formatu di pseudonimu invalidu.",
-      "acceptBoth": "Devi accettà i dui per cuntinuà.",
       "generic": "Impussibile di finalizà u to contu."
     }
   },

@@ -1,10 +1,16 @@
 // Types miroir du backend Buvard — source de vérité : /api/v1/users.
 
 export const TASTING_TYPES = [
+  'whisky',
   'wine',
+  'rum',
   'beer',
-  'spirit',
-  'cocktail',
+  'gin',
+  'vodka',
+  'tequila',
+  'cognac',
+  'champagne',
+  'mezcal',
   'other',
 ] as const
 export type TastingType = (typeof TASTING_TYPES)[number]
@@ -153,8 +159,6 @@ export interface UpdateMePayload {
   username?: string
   displayName?: string
   bio?: string
-  avatarUrl?: string
-  coverUrl?: string
   location?: UserLocation
   birthYear?: number
   favoriteCategories?: TastingType[]
