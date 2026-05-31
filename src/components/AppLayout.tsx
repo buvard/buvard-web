@@ -1,14 +1,17 @@
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Suspense, useState } from 'react'
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { UserSearch } from '@/components/UserSearch'
+import { AddDialog } from '@/features/add/AddDialog'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import { useSession } from '@/lib/auth-client'
 import { useSyncPrefs } from '@/lib/api/useSyncPrefs'
 import { useMe } from '@/lib/api/user'
+import { useDesktop } from '@/lib/useDesktop'
 import { cn } from '@/lib/utils'
-import { House, Compass, Plus, User, Settings } from 'lucide-react'
+import { House, Compass, Map, Plus, User, Settings } from 'lucide-react'
 
 // Layout web façon X (3 colonnes) :
 //   - Desktop (>=lg) : rail de nav gauche + contenu central bordé + (>=xl) sidebar droite (search)
@@ -27,7 +30,9 @@ function useNavItems(): NavItem[] {
   return [
     { to: localizedPath('/feed'), label: t('nav.feed'), icon: House },
     { to: localizedPath('/discover'), label: t('nav.discover'), icon: Compass },
-    { to: localizedPath('/add'), label: t('nav.add'), icon: Plus },
+    // Le bouton + lance la camera plein ecran (UX camera-first).
+    { to: localizedPath('/add/capture'), label: t('nav.add'), icon: Plus },
+    { to: localizedPath('/map'), label: t('nav.map'), icon: Map },
     {
       to: localizedPath('/profile'),
       label: t('nav.profile'),
@@ -59,7 +64,7 @@ function UserAvatar({ active }: { active: boolean }) {
 // ============================================================
 // Rail de nav gauche desktop (>=lg) — style X
 // ============================================================
-function DesktopSidebar() {
+function DesktopSidebar({ onAdd }: { onAdd: () => void }) {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
   const me = useMe()
@@ -72,6 +77,12 @@ function DesktopSidebar() {
         label: t('nav.discover'),
         icon: Compass,
         end: true,
+      },
+      {
+        to: localizedPath('/map'),
+        label: t('nav.map'),
+        icon: Map,
+        end: false,
       },
       {
         to: localizedPath('/profile'),
@@ -124,12 +135,13 @@ function DesktopSidebar() {
         ))}
       </nav>
 
-      {/* Bouton Post (Ajouter) proéminent */}
+      {/* Bouton Post (Ajouter) proéminent — ouvre la popup AddDialog sur
+          desktop (l'utilisateur reste sur sa page, modal centré). */}
       <Button
-        asChild
+        onClick={onAdd}
         className="mt-4 h-12 rounded-lg text-base font-bold glow-primary"
       >
-        <Link to={localizedPath('/add')}>{t('nav.add')}</Link>
+        {t('nav.add')}
       </Button>
 
       {/* Chip compte en bas */}
@@ -174,9 +186,14 @@ function RightSidebar() {
 // ============================================================
 function MobileBottomNav() {
   const items = useNavItems()
+  const location = useLocation()
+  // Sur /add (creation focused), on cache la nav pour liberer la zone du
+  // bouton Publier sticky. L'utilisateur revient via le bouton back du device
+  // ou le bouton Annuler.
+  if (/^\/[a-z]{2}\/add(\/|$)/.test(location.pathname)) return null
   return (
     <nav className="sticky bottom-0 z-20 border-t border-border bg-background/80 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden">
-      <div className="grid grid-cols-4">
+      <div className="grid grid-cols-5">
         {items.map(({ to, label, icon: Icon, avatar }) => (
           <NavLink
             key={to}
@@ -242,6 +259,20 @@ export function AppLayout() {
   // Sync prefs backend → local (best-effort, no-op si pas auth)
   useSyncPrefs()
   const { data: session, isPending } = useSession()
+  const navigate = useNavigate()
+  const localizedPath = useLocalizedPath()
+  const isDesktop = useDesktop()
+  const [addOpen, setAddOpen] = useState(false)
+
+  // Click sur le bouton "Ajouter" depuis le rail desktop :
+  // - desktop : popup modal sur la page courante
+  // - mobile  : route fullscreen vers la camera (geste natif)
+  // En pratique le DesktopSidebar n'est rendu qu'en >= lg, donc on est presque
+  // toujours en desktop ici — mais on garde le fallback pour les cas tordus.
+  function handleOpenAdd() {
+    if (isDesktop) setAddOpen(true)
+    else navigate(localizedPath('/add/capture'))
+  }
 
   // Pendant le chargement initial de la session, on rend rien pour eviter
   // le flash GuestLayout -> AppLayout au refresh d'une page authentifiee.
@@ -254,21 +285,28 @@ export function AppLayout() {
   if (!session) {
     return (
       <GuestLayout>
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </GuestLayout>
     )
   }
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-6xl">
-      <DesktopSidebar />
+      <DesktopSidebar onAdd={handleOpenAdd} />
       <main className="flex min-w-0 flex-1 flex-col lg:border-x lg:border-border">
         <div className="flex-1 px-4 pb-6 pt-4 sm:px-5">
-          <Outlet />
+          {/* Suspense au niveau du layout : couvre tous les chunks lazy-loaded
+              des routes enfants (cf router.tsx). Fallback null = pas de flash. */}
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
         </div>
         <MobileBottomNav />
       </main>
       <RightSidebar />
+      <AddDialog open={addOpen} onOpenChange={setAddOpen} />
     </div>
   )
 }

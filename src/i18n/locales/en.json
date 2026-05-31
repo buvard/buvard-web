@@ -6,6 +6,8 @@
   "common": {
     "back": "Back",
     "clear": "Clear",
+    "loading": "Loading…",
+    "loadMore": "Load more",
     "moderation": "Alcohol abuse is dangerous for your health. Please drink responsibly."
   },
   "search": {
@@ -22,6 +24,7 @@
     "feed": "Feed",
     "discover": "Discover",
     "add": "Add",
+    "map": "Map",
     "profile": "Profile"
   },
   "auth": {
@@ -48,29 +51,188 @@
   "home": {
     "title": "What your friends are drinking.",
     "subtitle": "Keep track of what you try, see what others recommend, share your favorites.",
-    "cta": "Open feed"
+    "cta": "Open feed",
+    "ctaPrimary": "Create an account",
+    "features": {
+      "eyebrow": "How it works",
+      "title": "An app built for people who take their time.",
+      "capture": {
+        "title": "Capture your tastings",
+        "desc": "Photo, rating, taste notes, location. In a few seconds, your tasting is saved forever."
+      },
+      "share": {
+        "title": "Share with your friends",
+        "desc": "Follow your friends, see what they're opening tonight, swap your favorites."
+      },
+      "discover": {
+        "title": "Discover the community",
+        "desc": "Step out of your comfort zone. Other people's go-to bottles, the most cited aromas."
+      }
+    },
+    "ctaBottom": {
+      "eyebrow": "Let's go",
+      "title": "Ready to log your first bottle?",
+      "subtitle": "Create your account in 30 seconds. No credit card required."
+    }
   },
   "feed": {
     "title": "Feed",
     "subtitle": "Your friends' latest tastings",
     "empty": "No posts yet.",
-    "emptyHint": "Add your first tasting to start the feed."
+    "emptyHint": "Add your first tasting to start the feed.",
+    "error": "Could not load the feed."
+  },
+  "discover": {
+    "title": "Discover",
+    "subtitle": "What the community is tasting right now",
+    "empty": "Nothing to discover yet.",
+    "error": "Could not load the discovery."
   },
   "add": {
     "title": "New tasting",
     "subtitle": "What you just tried",
     "fields": {
+      "photo": "Bottle photo",
+      "photos": "Photos",
       "name": "Bottle name",
       "namePlaceholder": "e.g. Talisker 10 yo",
       "type": "Type",
+      "producer": "Producer",
+      "producerPlaceholder": "e.g. Talisker",
+      "year": "Year",
       "rating": "Rating out of 5",
+      "price": "Price",
+      "currency": "Currency",
+      "aromas": "Aromas",
+      "aromasPlaceholder": "Type an aroma and hit Enter",
+      "aromaRemove": "Remove {{value}}",
       "place": "Where?",
       "placePlaceholder": "Bar, restaurant, a friend's place...",
+      "placePrivacy": "This location will be visible publicly with your tasting.",
+      "placeFallback": "Suggestions unavailable, type the name manually.",
+      "placeNoResults": "No place found.",
+      "placePickCta": "Pick a location",
       "notes": "Notes",
-      "notesPlaceholder": "Your impressions..."
+      "notesPlaceholder": "Your impressions...",
+      "visibility": "Visibility"
+    },
+    "visibility": {
+      "public": "Public",
+      "private": "Private",
+      "publicHint": "Visible to everyone on the feed and discover.",
+      "privateHint": "Only visible to you."
+    },
+    "photo": {
+      "take": "Take a photo",
+      "pick": "Pick an image",
+      "add": "Add a photo",
+      "edit": "Edit",
+      "cover": "Cover"
+    },
+    "camera": {
+      "capture": "Capture",
+      "flip": "Switch camera",
+      "flash": "Flash",
+      "permissionDenied": "Camera access denied. Enable it in settings.",
+      "startFailed": "Could not start the camera.",
+      "captureFailed": "Could not capture the photo.",
+      "webFallback": "Full-screen camera is mobile-only. Pick an image from your gallery.",
+      "done": "Done",
+      "atLeastOne": "Take at least one photo.",
+      "maxReached": "Maximum {{max}} photos per tasting."
+    },
+    "retake": "Retake",
+    "moreDetails": "More details",
+    "success": "Tasting published",
+    "errors": {
+      "nameRequired": "Bottle name is required.",
+      "photoRequired": "A photo is required.",
+      "ratingRequired": "Missing rating.",
+      "aromaTooLong": "An aroma is {{max}} chars max.",
+      "aromaMax": "Maximum {{max}} aromas.",
+      "photoUploadAt": "Failed to upload photo {{index}}/{{total}}.",
+      "generic": "Could not publish your tasting."
     },
     "submit": "Publish",
     "cancel": "Cancel"
+  },
+  "locationDialog": {
+    "close": "Close",
+    "openFullMap": "Open full map",
+    "noCoords": "This location has no geographic coordinates."
+  },
+  "likers": {
+    "title": "Likes",
+    "empty": "No one has liked yet.",
+    "error": "Could not load the list."
+  },
+  "placePicker": {
+    "title": "Pick a location",
+    "dragHint": "Drag the marker to refine",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "clear": "Clear"
+  },
+  "map": {
+    "title": "Tastings map",
+    "subtitle_one": "{{count}} geolocated tasting",
+    "subtitle_other": "{{count}} geolocated tastings",
+    "tabs": {
+      "mine": "Mine",
+      "friends": "Friends",
+      "discover": "Discover"
+    },
+    "empty": {
+      "mine": "You have no geolocated tasting yet.",
+      "friends": "None of your friends has posted a geolocated tasting.",
+      "discover": "No geolocated tasting in trending."
+    },
+    "emptyHint": "Pick a location through the autocomplete to see it appear on the map.",
+    "error": "Could not load the map.",
+    "tastingsHere": "tastings at this place",
+    "historyCount_one": "{{count}} tasting",
+    "historyCount_other": "{{count}} tastings"
+  },
+  "tasting": {
+    "private": "Private",
+    "aromas": "Aromas",
+    "carousel": {
+      "prev": "Previous photo",
+      "next": "Next photo"
+    },
+    "actions": {
+      "menu": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "deleted": "Tasting deleted",
+      "deleteFailed": "Could not delete.",
+      "deleteConfirmTitle": "Delete this tasting?",
+      "deleteConfirmText": "This is permanent. Photos will be lost too."
+    },
+    "detail": {
+      "notFound": "Tasting not found.",
+      "notes": "Notes"
+    },
+    "like": {
+      "likeAria": "Like",
+      "unlikeAria": "Unlike",
+      "count_one": "{{count}} like",
+      "count_other": "{{count}} likes"
+    },
+    "edit": {
+      "title": "Edit tasting",
+      "save": "Save",
+      "success": "Tasting updated",
+      "failed": "Could not save.",
+      "notFound": "Tasting not found.",
+      "forbidden": "You can't edit this tasting.",
+      "photoDeleteFailed": "Could not delete photo.",
+      "photoReorderFailed": "Could not reorder photos.",
+      "movePhotoLeft": "Move left",
+      "movePhotoRight": "Move right",
+      "pending": "Pending"
+    }
   },
   "types": {
     "whisky": "Whisky",
@@ -110,7 +272,8 @@
       "all": "All",
       "favorites": "Favorites",
       "categories": "Categories"
-    }
+    },
+    "favoritesComingSoon": "Favorites are coming soon."
   },
   "public": {
     "notFound": "This profile doesn't exist or is private.",

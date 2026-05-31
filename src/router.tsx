@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { LocaleProvider } from '@/i18n/LocaleProvider'
 import { DEFAULT_LOCALE } from '@/i18n/config'
@@ -5,28 +6,95 @@ import { AppLayout } from '@/components/AppLayout'
 import { RequireAuth } from '@/components/RequireAuth'
 import { RequireUsername } from '@/components/RequireUsername'
 import { RequireActive } from '@/components/RequireActive'
-import { HomePage } from '@/features/home/Home'
-import { SignInPage } from '@/features/auth/SignIn'
-import { SignUpPage } from '@/features/auth/SignUp'
-import { OnboardingPage } from '@/features/auth/Onboarding'
-import { AccountRestrictedPage } from '@/features/auth/AccountRestricted'
-import { FeedPage } from '@/features/feed/Feed'
-import { DiscoverPage } from '@/features/discover/Discover'
-import { AddPage } from '@/features/add/Add'
-import { ProfilePage } from '@/features/profile/Profile'
-import { SettingsPage } from '@/features/settings/Settings'
-import { SettingsProfilePage } from '@/features/settings/Profile'
-import { SettingsAppearancePage } from '@/features/settings/Appearance'
-import { SettingsLanguagePage } from '@/features/settings/Language'
-import { SettingsRegionalPage } from '@/features/settings/Regional'
-import { SettingsNotificationsPage } from '@/features/settings/Notifications'
-import { SettingsPrivacyPage } from '@/features/settings/Privacy'
-import { SettingsAccountPage } from '@/features/settings/Account'
-import { SettingsLegalPage } from '@/features/settings/Legal'
-import { BlockedUsersPage } from '@/features/profile/BlockedUsers'
-import { PublicProfilePage } from '@/features/profile/PublicProfile'
-import { RelationsPage } from '@/features/profile/Relations'
-import { NotFoundPage } from '@/features/misc/NotFound'
+
+// Toutes les pages sont lazy-loaded pour reduire le bundle initial. React
+// Router resoud chaque module a la 1ere navigation. Le fallback Suspense est
+// gere au niveau de AppLayout (cf composant) — pour les routes fullscreen sans
+// AppLayout, on wrap explicitement avec <PageSuspense> ci-dessous.
+//
+// On garde une seule fonction utilitaire pour normaliser le `default: ...`
+// attendu par React.lazy (toutes nos pages sont des exports nommes).
+function lazyPage<T extends { [K: string]: React.ComponentType<unknown> }>(
+  loader: () => Promise<T>,
+  exportName: keyof T,
+) {
+  return lazy(async () => {
+    const mod = await loader()
+    return { default: mod[exportName] }
+  })
+}
+
+const HomePage = lazyPage(() => import('@/features/home/Home'), 'HomePage')
+const SignInPage = lazyPage(() => import('@/features/auth/SignIn'), 'SignInPage')
+const SignUpPage = lazyPage(() => import('@/features/auth/SignUp'), 'SignUpPage')
+const OnboardingPage = lazyPage(() => import('@/features/auth/Onboarding'), 'OnboardingPage')
+const AccountRestrictedPage = lazyPage(
+  () => import('@/features/auth/AccountRestricted'),
+  'AccountRestrictedPage',
+)
+const FeedPage = lazyPage(() => import('@/features/feed/Feed'), 'FeedPage')
+const DiscoverPage = lazyPage(() => import('@/features/discover/Discover'), 'DiscoverPage')
+const AddPage = lazyPage(() => import('@/features/add/Add'), 'AddPage')
+const CameraCapturePage = lazyPage(
+  () => import('@/features/add/CameraCapturePage'),
+  'CameraCapturePage',
+)
+const TastingEditPage = lazyPage(
+  () => import('@/features/tasting/TastingEdit'),
+  'TastingEditPage',
+)
+const MapPage = lazyPage(() => import('@/features/map/Map'), 'MapPage')
+const ProfilePage = lazyPage(() => import('@/features/profile/Profile'), 'ProfilePage')
+const SettingsPage = lazyPage(() => import('@/features/settings/Settings'), 'SettingsPage')
+const SettingsProfilePage = lazyPage(
+  () => import('@/features/settings/Profile'),
+  'SettingsProfilePage',
+)
+const SettingsAppearancePage = lazyPage(
+  () => import('@/features/settings/Appearance'),
+  'SettingsAppearancePage',
+)
+const SettingsLanguagePage = lazyPage(
+  () => import('@/features/settings/Language'),
+  'SettingsLanguagePage',
+)
+const SettingsRegionalPage = lazyPage(
+  () => import('@/features/settings/Regional'),
+  'SettingsRegionalPage',
+)
+const SettingsNotificationsPage = lazyPage(
+  () => import('@/features/settings/Notifications'),
+  'SettingsNotificationsPage',
+)
+const SettingsPrivacyPage = lazyPage(
+  () => import('@/features/settings/Privacy'),
+  'SettingsPrivacyPage',
+)
+const SettingsAccountPage = lazyPage(
+  () => import('@/features/settings/Account'),
+  'SettingsAccountPage',
+)
+const SettingsLegalPage = lazyPage(
+  () => import('@/features/settings/Legal'),
+  'SettingsLegalPage',
+)
+const BlockedUsersPage = lazyPage(
+  () => import('@/features/profile/BlockedUsers'),
+  'BlockedUsersPage',
+)
+const PublicProfilePage = lazyPage(
+  () => import('@/features/profile/PublicProfile'),
+  'PublicProfilePage',
+)
+const RelationsPage = lazyPage(() => import('@/features/profile/Relations'), 'RelationsPage')
+const NotFoundPage = lazyPage(() => import('@/features/misc/NotFound'), 'NotFoundPage')
+
+// Fallback minimal pendant le chunk loading — affiche rien (le swap entre
+// pages est generalement instantane avec un network correct). On evite un
+// spinner qui flasherait.
+function PageSuspense({ children }: { children: React.ReactNode }) {
+  return <Suspense fallback={null}>{children}</Suspense>
+}
 
 export const router = createBrowserRouter([
   {
@@ -37,7 +105,35 @@ export const router = createBrowserRouter([
     path: '/:lang',
     element: <LocaleProvider />,
     children: [
+      // Routes fullscreen (sans AppLayout sidebar/bottom-nav) — declarees AVANT
+      // l'AppLayout pour matcher en priorite. On wrap individuellement dans
+      // Suspense car pas d'AppLayout pour heberger un boundary commun.
       {
+        element: <RequireAuth />,
+        children: [
+          {
+            element: <RequireUsername />,
+            children: [
+              {
+                element: <RequireActive />,
+                children: [
+                  {
+                    path: 'add/capture',
+                    element: (
+                      <PageSuspense>
+                        <CameraCapturePage />
+                      </PageSuspense>
+                    ),
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        // AppLayout heberge le Suspense pour toutes ses pages enfants via
+        // <Outlet /> wrappe en interne (cf AppLayout.tsx).
         element: <AppLayout />,
         children: [
           { index: true, element: <HomePage /> },
@@ -69,6 +165,8 @@ export const router = createBrowserRouter([
                       { path: 'feed', element: <FeedPage /> },
                       { path: 'discover', element: <DiscoverPage /> },
                       { path: 'add', element: <AddPage /> },
+                      { path: 'tasting/:id/edit', element: <TastingEditPage /> },
+                      { path: 'map', element: <MapPage /> },
                       { path: 'profile', element: <ProfilePage /> },
                       { path: 'settings', element: <SettingsPage /> },
                       {

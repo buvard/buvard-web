@@ -4,12 +4,15 @@
     "tagline": "Sparte i to alcoli preferiti cù i to cumpagni"
   },
   "common": {
+    "loading": "Caricamentu…",
+    "loadMore": "Carcà di più",
     "moderation": "L'abusu d'alcolu hè periculosu per a salute. Da cunsumà cù muderazione."
   },
   "nav": {
     "feed": "Filu",
     "discover": "Scopre",
     "add": "Aghjunghje",
+    "map": "Carta",
     "profile": "Prufilu"
   },
   "auth": {
@@ -36,29 +39,188 @@
   "home": {
     "title": "Ciò chì i to cumpagni bevenu.",
     "subtitle": "Tene una traccia di ciò chì pruvi, vede ciò chì l'altri raccomandanu, sparte i to preferiti.",
-    "cta": "Apre u filu"
+    "cta": "Apre u filu",
+    "ctaPrimary": "Crea un contu",
+    "features": {
+      "eyebrow": "Cumu funziona",
+      "title": "Un'applicazione fatta per a ghjente chì piglia u so tempu.",
+      "capture": {
+        "title": "Piglia e to degustazioni",
+        "desc": "Foto, nota, note di gustu, locu. In qualchì seconde, a to degustazione hè salvata per sempre."
+      },
+      "share": {
+        "title": "Sparte cù i to cumpagni",
+        "desc": "Seguità i to amichi, vede ciò ch'elli aprenu sta sera, scambiate i vostri preferiti."
+      },
+      "discover": {
+        "title": "Scopre a cumunità",
+        "desc": "Esce da a to zona di cunfortu. E buttiglie preferite di l'altri, l'arumi più citati."
+      }
+    },
+    "ctaBottom": {
+      "eyebrow": "Andemu",
+      "title": "Prontu à registrà a to prima buttiglia ?",
+      "subtitle": "Crea u to contu in 30 seconde. Nisuna carta bancaria dumandata."
+    }
   },
   "feed": {
     "title": "Filu",
     "subtitle": "L'ultime degustazioni di i to cumpagni",
     "empty": "Nisuna publicazione.",
-    "emptyHint": "Aghjunghji a to prima degustazione per principià u filu."
+    "emptyHint": "Aghjunghji a to prima degustazione per principià u filu.",
+    "error": "Impussibile di carcà u filu."
+  },
+  "discover": {
+    "title": "Scopre",
+    "subtitle": "Ciò chì a cumunità prova avà",
+    "empty": "Nunda da scopre per avà.",
+    "error": "Impussibile di carcà a scuperta."
   },
   "add": {
     "title": "Nova degustazione",
     "subtitle": "Ciò chì ai appena pruvatu",
     "fields": {
+      "photo": "Foto di a buttiglia",
+      "photos": "Foti",
       "name": "Nome di a buttiglia",
       "namePlaceholder": "P.e. Talisker 10 anni",
       "type": "Tipu",
+      "producer": "Pruduttore",
+      "producerPlaceholder": "P.e. Talisker",
+      "year": "Annata",
       "rating": "Nota nantu à 5",
+      "price": "Prezzu",
+      "currency": "Munita",
+      "aromas": "Arumi",
+      "aromasPlaceholder": "Scrivi un aroma è strigne Entr",
+      "aromaRemove": "Caccia {{value}}",
       "place": "Induve ?",
       "placePlaceholder": "Bar, restaurante, ind'è un cumpagnu...",
+      "placePrivacy": "Stu locu serà publicamente visibile cù a to degustazione.",
+      "placeFallback": "Suggerimenti micca dispunibili, scrivi u nome à manu.",
+      "placeNoResults": "Nisunu locu trovu.",
+      "placePickCta": "Sceglie un locu",
       "notes": "Note",
-      "notesPlaceholder": "I to impressioni..."
+      "notesPlaceholder": "I to impressioni...",
+      "visibility": "Visibilità"
+    },
+    "visibility": {
+      "public": "Publicu",
+      "private": "Privatu",
+      "publicHint": "Visibile à tutti nantu à u filu è a scuperta.",
+      "privateHint": "Visibile solu à tè."
+    },
+    "photo": {
+      "take": "Piglià una foto",
+      "pick": "Sceglie un'imagine",
+      "add": "Aghjunghje una foto",
+      "edit": "Mudificà",
+      "cover": "Cupertura"
+    },
+    "camera": {
+      "capture": "Piglià",
+      "flip": "Cambià camera",
+      "flash": "Flash",
+      "permissionDenied": "Accessu à a camera refusatu. Attivalu in i regulamenti.",
+      "startFailed": "Impussibile di lancià a camera.",
+      "captureFailed": "Impussibile di piglià a foto.",
+      "webFallback": "A camera schermu sanu hè solu nantu à l'app mobile. Sceglie un'imagine in a to galleria.",
+      "done": "Finisce",
+      "atLeastOne": "Piglia almenu una foto.",
+      "maxReached": "Massimu {{max}} foti per degustazione."
+    },
+    "retake": "Ripiglià",
+    "moreDetails": "Più dettagli",
+    "success": "Degustazione publicata",
+    "errors": {
+      "nameRequired": "U nome di a buttiglia hè ubligatoriu.",
+      "photoRequired": "Una foto hè ubligatoria.",
+      "ratingRequired": "Nota mancante.",
+      "aromaTooLong": "Un aroma face {{max}} caratteri à u massimu.",
+      "aromaMax": "Massimu {{max}} arumi.",
+      "photoUploadAt": "Fallimentu di l'inviu di a foto {{index}}/{{total}}.",
+      "generic": "Impussibile di publicà a to degustazione."
     },
     "submit": "Publicà",
     "cancel": "Annullà"
+  },
+  "locationDialog": {
+    "close": "Chjode",
+    "openFullMap": "Apre a carta",
+    "noCoords": "Stu locu ùn hà micca cuurdinate geografiche."
+  },
+  "likers": {
+    "title": "Mi piace",
+    "empty": "Nimu hà ancu apprezzatu.",
+    "error": "Impussibile di carcà a lista."
+  },
+  "placePicker": {
+    "title": "Sceglie un locu",
+    "dragHint": "Trascina u marker per affinà",
+    "confirm": "Validà",
+    "cancel": "Annullà",
+    "clear": "Sguassà"
+  },
+  "map": {
+    "title": "Carta di e degustazioni",
+    "subtitle_one": "{{count}} degustazione geolocalizata",
+    "subtitle_other": "{{count}} degustazioni geolocalizate",
+    "tabs": {
+      "mine": "E mei",
+      "friends": "Cumpagni",
+      "discover": "Scopre"
+    },
+    "empty": {
+      "mine": "Ùn ai nisuna degustazione geolocalizata.",
+      "friends": "Nisunu di i to amichi hà postu una degustazione geolocalizata.",
+      "discover": "Nisuna degustazione geolocalizata in u trending."
+    },
+    "emptyHint": "Sceglie un locu via l'autocomplete per ch'ellu appaghi nantu à a carta.",
+    "error": "Impussibile di carcà a carta.",
+    "tastingsHere": "degustazioni à stu locu",
+    "historyCount_one": "{{count}} degustazione",
+    "historyCount_other": "{{count}} degustazioni"
+  },
+  "tasting": {
+    "private": "Privatu",
+    "aromas": "Arumi",
+    "carousel": {
+      "prev": "Foto precedente",
+      "next": "Foto seguente"
+    },
+    "actions": {
+      "menu": "Azzioni",
+      "edit": "Mudificà",
+      "delete": "Sguassà",
+      "cancel": "Annullà",
+      "deleted": "Degustazione sguassata",
+      "deleteFailed": "Impussibile di sguassà.",
+      "deleteConfirmTitle": "Sguassà sta degustazione?",
+      "deleteConfirmText": "St'azzione hè definitiva. E foti saranu perse dinù."
+    },
+    "detail": {
+      "notFound": "Degustazione micca trovata.",
+      "notes": "Note"
+    },
+    "like": {
+      "likeAria": "Mi piace",
+      "unlikeAria": "Caccia u mi piace",
+      "count_one": "{{count}} mi piace",
+      "count_other": "{{count}} mi piace"
+    },
+    "edit": {
+      "title": "Mudificà a degustazione",
+      "save": "Salvà",
+      "success": "Degustazione aghjurnata",
+      "failed": "Impussibile di salvà.",
+      "notFound": "Degustazione micca trovata.",
+      "forbidden": "Ùn pò mudificà sta degustazione.",
+      "photoDeleteFailed": "Impussibile di sguassà a foto.",
+      "photoReorderFailed": "Impussibile di riurdinà e foti.",
+      "movePhotoLeft": "Sposta à manca",
+      "movePhotoRight": "Sposta à diritta",
+      "pending": "Da inviare"
+    }
   },
   "types": {
     "whisky": "Whisky",
@@ -92,7 +254,8 @@
       "all": "Tutte",
       "favorites": "Favuriti",
       "categories": "Categurie"
-    }
+    },
+    "favoritesComingSoon": "I favuriti ghjunghjenu prestu."
   },
   "public": {
     "notFound": "Stu prufilu ùn esiste micca o hè privatu.",

@@ -35,9 +35,10 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    // Deux environnements coexistant sur l'appareil :
+    // Trois environnements coexistant sur l'appareil :
     //   prod    -> app.buvard         ("Buvard")
     //   staging -> app.buvard.staging ("Buvard Staging")
+    //   local   -> app.buvard.local   ("Buvard Local")
     flavorDimensions "env"
     productFlavors {
         prod {
@@ -48,6 +49,11 @@ android {
             dimension "env"
             applicationIdSuffix ".staging"
             resValue "string", "app_name", "Buvard Staging"
+        }
+        local {
+            dimension "env"
+            applicationIdSuffix ".local"
+            resValue "string", "app_name", "Buvard Local"
         }
     }
 }

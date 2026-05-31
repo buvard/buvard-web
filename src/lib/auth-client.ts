@@ -12,12 +12,12 @@ import { capacitorClient, getCapacitorAuthToken } from 'better-auth-capacitor/cl
 // - `disableDefaultFetchPlugins` en natif : sinon le redirectPlugin de
 //   better-auth ouvrirait Safari/Chrome sur les redirections OAuth, alors qu'on
 //   veut tout dans l'app via le deep link.
-// - Le scheme est lu depuis VITE_APP_SCHEME (.env.staging / .env.production).
+// - Le scheme est lu depuis VITE_APP_SCHEME (.env.development / .env.staging / .env.production).
 //   On a privilegie une variable d'env plutot que `App.getInfo()` parce que le
 //   client est instancie au module-load, et lire le bundleId est async.
 
 const baseURL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
-if (!baseURL) throw new Error('Missing VITE_API_URL in .env.local')
+if (!baseURL) throw new Error('Missing VITE_API_URL in .env.* (development / staging / production)')
 
 // Scheme deep link (ex: "app.buvard" ou "app.buvard.staging"). Optionnel en web.
 const scheme = import.meta.env.VITE_APP_SCHEME as string | undefined
