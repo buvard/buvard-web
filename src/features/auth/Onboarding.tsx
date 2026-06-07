@@ -85,11 +85,8 @@ export function OnboardingPage() {
       })
       setStep('legal')
     } catch (err) {
-      console.error('[Onboarding] identity step failed', err)
       if (err instanceof ApiError && err.status === 409) {
         setError(t('onboarding.errors.taken'))
-      } else if (err instanceof ApiError) {
-        setError(`${err.message} (${err.status})`)
       } else {
         setError(t('onboarding.errors.generic'))
       }
@@ -111,34 +108,19 @@ export function OnboardingPage() {
       setError(t('onboarding.errors.acceptAll'))
       return
     }
-
-    // On persiste l'annee de naissance (PATCH /me) puis en sequence : terms,
-    // privacy, complete-onboarding. Chaque etape est wrappee pour logger
-    // precisement laquelle echoue et afficher un message d'erreur utile.
-    const steps: Array<{ name: string; run: () => Promise<unknown> }> = [
-      {
-        name: 'PATCH /users/me (birthYear)',
-        run: () => updateMe.mutateAsync({ birthYear: new Date(birthDate).getFullYear() }),
-      },
-      { name: 'POST /users/me/accept-terms', run: () => acceptTerms.mutateAsync() },
-      { name: 'POST /users/me/accept-privacy', run: () => acceptPrivacy.mutateAsync() },
-      { name: 'POST /users/me/complete-onboarding', run: () => completeOnboarding.mutateAsync() },
-    ]
-
-    for (const step of steps) {
-      try {
-        await step.run()
-      } catch (err) {
-        console.error(`[Onboarding] step failed: ${step.name}`, err)
-        if (err instanceof ApiError) {
-          setError(`${step.name} → ${err.message} (${err.status})`)
-        } else {
-          setError(t('onboarding.errors.generic'))
-        }
-        return
-      }
+    try {
+      // On persiste l'année de naissance (seul champ stocké côté backend),
+      // puis en séquence : terms, privacy, complete.
+      await updateMe.mutateAsync({
+        birthYear: new Date(birthDate).getFullYear(),
+      })
+      await acceptTerms.mutateAsync()
+      await acceptPrivacy.mutateAsync()
+      await completeOnboarding.mutateAsync()
+      navigate(localizedPath('/feed'), { replace: true })
+    } catch {
+      setError(t('onboarding.errors.generic'))
     }
-    navigate(localizedPath('/feed'), { replace: true })
   }
 
   return (

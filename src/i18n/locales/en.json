@@ -6,10 +6,7 @@
   "common": {
     "back": "Back",
     "clear": "Clear",
-    "loading": "Loading…",
-    "loadMore": "Load more",
-    "moderation": "Alcohol abuse is dangerous for your health. Please drink responsibly.",
-    "getApp": "Mobile app"
+    "moderation": "Alcohol abuse is dangerous for your health. Please drink responsibly."
   },
   "search": {
     "placeholder": "Search",
@@ -19,28 +16,13 @@
   "update": {
     "available": "New version available",
     "availableDesc": "Restart the app to apply it.",
-    "restart": "Restart",
-    "native": {
-      "title": "Version {{version}} available",
-      "description": "You're on {{current}}. Get the latest from Buvard.app.",
-      "cta": "Download"
-    }
+    "restart": "Restart"
   },
   "nav": {
     "feed": "Feed",
     "discover": "Discover",
     "add": "Add",
-    "map": "Map",
-    "profile": "Profile",
-    "admin": "Admin",
-    "marketing": {
-      "features": "Features",
-      "download": "Download",
-      "about": "About",
-      "legal": "Legal",
-      "openMenu": "Open menu",
-      "closeMenu": "Close menu"
-    }
+    "profile": "Profile"
   },
   "auth": {
     "signIn": "Sign in",
@@ -66,288 +48,29 @@
   "home": {
     "title": "What your friends are drinking.",
     "subtitle": "Keep track of what you try, see what others recommend, share your favorites.",
-    "cta": "Open feed",
-    "ctaPrimary": "Create an account",
-    "features": {
-      "eyebrow": "How it works",
-      "title": "An app built for people who take their time.",
-      "seeAll": "See all",
-      "capture": {
-        "title": "Capture your tastings",
-        "desc": "Photo, rating, taste notes, location. In a few seconds, your tasting is saved forever."
-      },
-      "share": {
-        "title": "Share with your friends",
-        "desc": "Follow your friends, see what they're opening tonight, swap your favorites."
-      },
-      "discover": {
-        "title": "Discover the community",
-        "desc": "Step out of your comfort zone. Other people's go-to bottles, the most cited aromas."
-      }
-    },
-    "ctaBottom": {
-      "eyebrow": "Let's go",
-      "title": "Ready to log your first bottle?",
-      "subtitle": "Create your account in 30 seconds. No credit card required."
-    }
-  },
-  "features": {
-    "eyebrow": "Features",
-    "title": "Everything you need to keep track of your tastings",
-    "subtitle": "A simple app for enthusiasts and beginners alike. No fluff, just the essentials.",
-    "map": {
-      "title": "Map of your tastings",
-      "desc": "Find where you drank what. Bar, cellar, dinner at a friend's — every memory has its place on the map."
-    },
-    "taste": {
-      "title": "Detailed tasting notes",
-      "desc": "Aromas, balance, intensity. Build your vocabulary as you go through bottles."
-    },
-    "responsible": {
-      "title": "Drink in moderation",
-      "desc": "We never push you to drink more: Buvard keeps your memories, not your excesses."
-    }
-  },
-  "download": {
-    "eyebrow": "On mobile",
-    "title": "Buvard in your pocket",
-    "subtitle": "Download the app directly, no store required. Self-hosted distribution.",
-    "android": {
-      "title": "Android",
-      "desc": "Download the APK and install it on your phone. Auto-updates once signed in.",
-      "cta": "Download the APK",
-      "unavailable": "No release available yet",
-      "publishedOn": "Published on {{date}}",
-      "hint": "Compatible with Android 7.0 and later."
-    },
-    "ios": {
-      "title": "iOS",
-      "desc": "No App Store? No problem. Add Buvard to your home screen to use it like a real app.",
-      "step1": "Open this page in Safari (not another app).",
-      "step2": "Tap the Share button at the bottom of the screen.",
-      "step3": "Pick \"Add to Home Screen\" in the list.",
-      "hint": "The Buvard icon will appear like an app — tap it and you're in."
-    },
-    "install": {
-      "title": "How to install the Android APK",
-      "step1": "Download the file on your phone.",
-      "step2": "Allow installation from this source in your settings.",
-      "step3": "Open the file and follow the instructions."
-    }
-  },
-  "about": {
-    "eyebrow": "Our story",
-    "title": "Why Buvard?",
-    "subtitle": "An app born from a simple frustration: everything we tasted ended up forgotten.",
-    "mission": {
-      "title": "Our mission",
-      "body": "Help anyone keep track of what they drink, without judgement and without gamification. Your tastings belong to you — we just help you organize them."
-    },
-    "values": {
-      "title": "Our values",
-      "body": "No ads, no algorithm pushing you to drink more. A sober app that respects your pace and your health."
-    },
-    "team": {
-      "title": "The team",
-      "body": "An independent project run by wine, beer and spirits lovers. We code, we taste, we iterate."
-    }
-  },
-  "legal": {
-    "eyebrow": "Legal notice",
-    "title": "Terms & privacy",
-    "subtitle": "All the legal information about using Buvard.",
-    "updated": "Last updated: {{date}}",
-    "terms": {
-      "title": "Terms of use",
-      "body": "Access to Buvard is reserved for adults of legal drinking age in their country of residence. Users agree to publish respectful content that complies with the law."
-    },
-    "privacy": {
-      "title": "Privacy policy",
-      "body": "Buvard only collects data necessary for the service to work: email, credentials, content you publish. No data is sold to third parties."
-    },
-    "cookies": {
-      "title": "Cookies",
-      "body": "Only strictly necessary cookies (session, preferences) are used. No advertising tracking cookies."
-    },
-    "contact": {
-      "title": "Contact",
-      "body": "For any question about your data or your use of the service: contact@buvard.app"
-    }
+    "cta": "Open feed"
   },
   "feed": {
-    "title": "At the bar",
-    "subtitle": "What the world is sipping right now",
-    "empty": "The bar is empty.",
-    "emptyHint": "Be the first to uncork a bottle.",
-    "emptyAction": "Add a tasting",
-    "error": "Could not load the feed.",
-    "filterAll": "All",
-    "noResultsForFilter": "Nothing in this category yet."
-  },
-  "discover": {
-    "title": "Discover",
-    "subtitle": "What the community is tasting right now",
-    "empty": "Nothing to discover yet.",
-    "error": "Could not load the discovery."
+    "title": "Feed",
+    "subtitle": "Your friends' latest tastings",
+    "empty": "No posts yet.",
+    "emptyHint": "Add your first tasting to start the feed."
   },
   "add": {
     "title": "New tasting",
     "subtitle": "What you just tried",
     "fields": {
-      "photo": "Bottle photo",
-      "photos": "Photos",
       "name": "Bottle name",
       "namePlaceholder": "e.g. Talisker 10 yo",
       "type": "Type",
-      "producer": "Producer",
-      "producerPlaceholder": "e.g. Talisker",
-      "year": "Year",
       "rating": "Rating out of 5",
-      "price": "Price",
-      "currency": "Currency",
-      "aromas": "Aromas",
-      "aromasPlaceholder": "Type an aroma and hit Enter",
-      "aromaRemove": "Remove {{value}}",
       "place": "Where?",
       "placePlaceholder": "Bar, restaurant, a friend's place...",
-      "placePrivacy": "This location will be visible publicly with your tasting.",
-      "placeFallback": "Suggestions unavailable, type the name manually.",
-      "placeNoResults": "No place found.",
-      "placePickCta": "Pick a location",
       "notes": "Notes",
-      "notesPlaceholder": "Your impressions...",
-      "visibility": "Visibility"
-    },
-    "visibility": {
-      "public": "Public",
-      "private": "Private",
-      "publicHint": "Visible to everyone on the feed and discover.",
-      "privateHint": "Only visible to you."
-    },
-    "photo": {
-      "take": "Take a photo",
-      "pick": "Pick an image",
-      "add": "Add a photo",
-      "edit": "Edit",
-      "cover": "Cover"
-    },
-    "camera": {
-      "capture": "Capture",
-      "flip": "Switch camera",
-      "flash": "Flash",
-      "permissionDenied": "Camera access denied. Enable it in settings.",
-      "startFailed": "Could not start the camera.",
-      "captureFailed": "Could not capture the photo.",
-      "webFallback": "Full-screen camera is mobile-only. Pick an image from your gallery.",
-      "done": "Done",
-      "atLeastOne": "Take at least one photo.",
-      "maxReached": "Maximum {{max}} photos per tasting."
-    },
-    "retake": "Retake",
-    "moreDetails": "More details",
-    "success": "Tasting published",
-    "xpGained": "+{{xp}} XP earned",
-    "errors": {
-      "nameRequired": "Bottle name is required.",
-      "photoRequired": "A photo is required.",
-      "ratingRequired": "Missing rating.",
-      "aromaTooLong": "An aroma is {{max}} chars max.",
-      "aromaMax": "Maximum {{max}} aromas.",
-      "photoUploadAt": "Failed to upload photo {{index}}/{{total}}.",
-      "generic": "Could not publish your tasting."
+      "notesPlaceholder": "Your impressions..."
     },
     "submit": "Publish",
     "cancel": "Cancel"
-  },
-  "locationDialog": {
-    "close": "Close",
-    "openFullMap": "Open full map",
-    "noCoords": "This location has no geographic coordinates."
-  },
-  "likers": {
-    "title": "Likes",
-    "empty": "No one has liked yet.",
-    "error": "Could not load the list."
-  },
-  "placePicker": {
-    "title": "Pick a location",
-    "dragHint": "Drag the marker to refine",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "clear": "Clear"
-  },
-  "map": {
-    "title": "Tastings map",
-    "tabs": {
-      "mine": "My spots",
-      "friends": "Friends",
-      "discover": "Discover"
-    },
-    "empty": {
-      "mine": "You have no geolocated tasting yet.",
-      "friends": "None of your friends has posted a geolocated tasting.",
-      "discover": "No geolocated tasting in trending."
-    },
-    "emptyHint": "Pick a location through the autocomplete to see it appear on the map.",
-    "error": "Could not load the map.",
-    "places": {
-      "title": "Your places",
-      "count_one": "{{count}} place",
-      "count_other": "{{count}} places",
-      "tastingsCount_one": "{{count}} tasting",
-      "tastingsCount_other": "{{count}} tastings",
-      "lastVisit": "Last visit on {{date}}",
-      "unnamed": "Unnamed place"
-    },
-    "discover": {
-      "title": "Places to discover",
-      "tastingsCount_one": "{{count}} tasting",
-      "tastingsCount_other": "{{count}} tastings",
-      "lastTasting": "Last tasting on {{date}}"
-    },
-    "historyCount_one": "{{count}} tasting",
-    "historyCount_other": "{{count}} tastings"
-  },
-  "tasting": {
-    "private": "Private",
-    "aromas": "Aromas",
-    "carousel": {
-      "prev": "Previous photo",
-      "next": "Next photo"
-    },
-    "actions": {
-      "menu": "Actions",
-      "edit": "Edit",
-      "delete": "Delete",
-      "cancel": "Cancel",
-      "deleted": "Tasting deleted",
-      "deleteFailed": "Could not delete.",
-      "deleteConfirmTitle": "Delete this tasting?",
-      "deleteConfirmText": "This is permanent. Photos will be lost too."
-    },
-    "detail": {
-      "notFound": "Tasting not found.",
-      "notes": "Notes"
-    },
-    "like": {
-      "likeAria": "Like",
-      "unlikeAria": "Unlike",
-      "count_one": "{{count}} like",
-      "count_other": "{{count}} likes"
-    },
-    "edit": {
-      "title": "Edit tasting",
-      "save": "Save",
-      "success": "Tasting updated",
-      "failed": "Could not save.",
-      "notFound": "Tasting not found.",
-      "forbidden": "You can't edit this tasting.",
-      "photoDeleteFailed": "Could not delete photo.",
-      "photoReorderFailed": "Could not reorder photos.",
-      "movePhotoLeft": "Move left",
-      "movePhotoRight": "Move right",
-      "pending": "Pending"
-    }
   },
   "types": {
     "whisky": "Whisky",
@@ -380,127 +103,13 @@
     "empty": "No tasting yet.",
     "level": "Level {{level}}",
     "xp": "{{xp}} XP",
-    "xpProgressLabel": "Progress",
     "streak_one": "{{count}} day",
     "streak_other": "{{count}} days",
-    "streakLongest_one": "Best streak: {{count}} day",
-    "streakLongest_other": "Best streak: {{count}} days",
     "joinedOn": "Member since {{date}}",
     "tabs": {
       "all": "All",
       "favorites": "Favorites",
       "categories": "Categories"
-    },
-    "favoritesComingSoon": "Favorites are coming soon.",
-    "levelDialog": {
-      "title": "Level & XP",
-      "subtitle": "How to level up and keep your streak alive.",
-      "tiers": "Upcoming tiers",
-      "toNext": "{{xp}} XP left to reach level {{level}}.",
-      "streakHint": "Post at least one tasting per day to keep your streak alive. Miss a day and it resets to 1.",
-      "perUnit": "/ unit",
-      "oneShot": "(one-time)",
-      "section": {
-        "tasting": "Per tasting",
-        "social": "Engagement received",
-        "milestones": "One-time milestones"
-      },
-      "rules": {
-        "tasting": "Post a tasting",
-        "place": "Add a location",
-        "longNotes": "Detailed notes (≥ 50 characters)",
-        "aromas": "At least 3 aromas",
-        "extraPhoto": "Each additional photo",
-        "likeReceived": "Receive a like",
-        "follower": "Gain a new follower",
-        "onboarding": "Complete onboarding",
-        "firstTasting": "First tasting",
-        "firstFollower": "First follower",
-        "profileComplete": "Complete profile (avatar + bio + location)",
-        "streakMilestone": "{{days}}-day streak"
-      }
-    }
-  },
-  "admin": {
-    "title": "Admin panel",
-    "subtitle": "Manage codes and user XP",
-    "shortHint": "Codes, XP",
-    "tabs": {
-      "codes": "Codes",
-      "users": "Users"
-    },
-    "codes": {
-      "subtitle": "Create and manage redemption codes (Pochtron, etc.)",
-      "create": "Create code",
-      "createDesc": "Leave the code field empty for the server to generate a slug automatically.",
-      "createSuccess": "Code created: {{code}}",
-      "createError": "Couldn't create the code",
-      "copy": "Copy",
-      "copied": "Copied to clipboard",
-      "copyError": "Couldn't copy",
-      "delete": "Delete",
-      "deleteConfirmTitle": "Delete this code?",
-      "deleteConfirmDesc": "The code {{code}} won't be usable anymore. Users who already activated it keep their features.",
-      "deleteSuccess": "Code deleted",
-      "deleteError": "Couldn't delete",
-      "loadError": "Couldn't load codes",
-      "empty": "No codes yet. Create one to share with testers.",
-      "usesUnlimited_one": "{{count}} use · unlimited",
-      "usesUnlimited_other": "{{count}} uses · unlimited",
-      "usesLimited": "{{used}}/{{max}} uses",
-      "expires": "Expires on {{date}}",
-      "expired": "Expired",
-      "types": {
-        "pochtron": "Pochtron"
-      },
-      "fields": {
-        "code": "Code (optional)",
-        "codePlaceholder": "POCHTRON-2026-XYZ",
-        "codeHint": "Leave empty for auto-generation.",
-        "maxUses": "Number of uses",
-        "maxUsesPlaceholder": "Empty = unlimited",
-        "maxUsesHint": "How many times this code can be activated (total, not per user).",
-        "expiresAt": "Expiry date",
-        "expiresAtHint": "Leave empty for no expiry."
-      },
-      "dialog": {
-        "title": "New code",
-        "description": "Configure your code in a few clicks",
-        "preview": "Code",
-        "regenerate": "Regenerate",
-        "editHint": "Tap to edit",
-        "maxUsesTitle": "Number of uses",
-        "expiresTitle": "Expiry",
-        "expiresPresets": {
-          "day": "24h",
-          "week": "7 days",
-          "month": "30 days",
-          "never": "Never"
-        },
-        "create": "Create code",
-        "cancel": "Cancel",
-        "successTitle": "Code created!",
-        "successDesc": "Tap the ticket to copy it",
-        "createAnother": "Create another",
-        "done": "Done"
-      }
-    },
-    "users": {
-      "subtitle": "Search a user and adjust their XP.",
-      "searchLabel": "Search by username",
-      "searchPlaceholder": "Type a username (2 chars min.)",
-      "noResults": "No user found",
-      "loadError": "Couldn't load this profile",
-      "grade": "Grade",
-      "adjustLabel": "Adjust XP (delta)",
-      "adjusted": "{{sign}}{{amount}} XP applied (total: {{xp}})",
-      "setLabel": "Set absolute value",
-      "setPlaceholder": "e.g. 500",
-      "setAction": "Set",
-      "setSuccess": "XP set to {{xp}}",
-      "reset": "Reset XP to 0",
-      "resetSuccess": "XP reset",
-      "actionError": "Action failed"
     }
   },
   "public": {
@@ -512,13 +121,7 @@
     "blocked": "User blocked",
     "unblocked": "User unblocked",
     "followForbidden": "You can't follow this user.",
-    "selfAction": "Can't do this on your own account.",
-    "empty": "No public tasting yet."
-  },
-  "tastingDetail": {
-    "loading": "Loading…",
-    "notFound": "This tasting doesn't exist or has been deleted.",
-    "error": "Couldn't load the tasting."
+    "selfAction": "Can't do this on your own account."
   },
   "relations": {
     "empty": "Nobody here yet."
@@ -591,78 +194,8 @@
     "saveError": "Couldn't save",
     "groups": {
       "app": "App",
-      "gamification": "Progress",
       "social": "Social",
-      "account": "Account",
-      "admin": "Administration"
-    },
-    "levels": {
-      "title": "Levels & grades",
-      "subtitle": "Every step of your tasting journey",
-      "shortHint": "From Gulp Virgin to God of Debauchery",
-      "gradeRange": "Level {{min}} to {{max}}",
-      "gradeSingleLevel": "Level {{level}}",
-      "maxLevelNote": "Level {{max}} marks the peak — becoming a Buvard Legend.",
-      "loadError": "Couldn't load the tiers. Try again later.",
-      "gradeActive": "Displayed",
-      "gradeSetAsTitle": "Set as title",
-      "gradeSelected": "Grade updated",
-      "gradeOverrideHint": "You picked this grade as title — it shows everywhere",
-      "gradeResetAuto": "Auto",
-      "grades": {
-        "curious": {
-          "name": "Gulp Virgin",
-          "desc": "You've never really opened your mouth for anything stronger than a Capri-Sun. Your throat is virgin, the glass terrifies you. But trust us: it's about to pop off."
-        },
-        "explorer": {
-          "name": "Cork Sucker",
-          "desc": "You're starting to let loose: a cork here, a bottleneck there. The palate opens, the cravings rise. Soon you'll pounce on the first bottle that walks by."
-        },
-        "amateur": {
-          "name": "Cask Swallower",
-          "desc": "You knock back bottles like other people walk down stairs. Nothing kills your appetite anymore — you could swallow an entire cask without flinching."
-        },
-        "connoisseur": {
-          "name": "Bottle Fucker",
-          "desc": "Zero restraint left: you grab the bottle by the neck and bottoms-up without asking permission. Amateurs watch and regret their sparkling water."
-        },
-        "sommelier": {
-          "name": "Booze Whore",
-          "desc": "You spin bottles around you like a harem. Every bar in town knows you by your performances — you rarely leave alone."
-        },
-        "master": {
-          "name": "Pope of Filth",
-          "desc": "You're the absolute reference of liquid debauchery. They invite you to orgies to bless the bottles and judge the performances. Your verdict is law."
-        },
-        "legend": {
-          "name": "God of Debauchery",
-          "desc": "You've hit the summit: bottles bow when you walk into a bar, angels come down from heaven to pour your apéro. You're above the pantheon, above everything."
-        }
-      }
-    },
-    "codes": {
-      "title": "Access codes",
-      "subtitle": "Activate hidden features with a code",
-      "shortHint": "Beta, VIP, early access",
-      "inputLabel": "Access code",
-      "inputPlaceholder": "POCHTRON-2026-XYZ",
-      "inputHint": "Got a code? Type it in and unlock the related features.",
-      "submit": "Activate",
-      "redeemSuccess": "Code activated, enjoy",
-      "activeTitle": "Features",
-      "activeBadge": "Active",
-      "features": {
-        "pochtron": {
-          "label": "Pochtron",
-          "desc": "Tester bonus: access to experimental features, special badge, early peeks. All in one switch."
-        }
-      },
-      "errors": {
-        "notFound": "This code doesn't exist",
-        "expired": "Code expired or exhausted",
-        "alreadyUsed": "You already used this code",
-        "generic": "Couldn't activate the code"
-      }
+      "account": "Account"
     },
     "profile": {
       "title": "Profile",

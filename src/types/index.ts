@@ -1,3 +1,3 @@
-// Barrel des types Buvard : contrats API (User, Tasting, ...).
+// Barrel des types Buvard : domaine (Tasting...) + contrats API (User, PublicUser...).
+export * from './domain'
 export * from './api'
-export * from './tasting'

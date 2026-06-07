@@ -15,15 +15,10 @@ export function SignUpPage() {
   const { lang } = useParams<{ lang: string }>()
   const navigate = useNavigate()
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE
-  // Path relatif pour react-router navigate() (ne supporte pas les URLs absolues
-  // — il les concatene au path courant et tu finis sur /fr/sign-up/https:/...).
-  const feedPath = `/${locale}/feed`
-  // URL absolue pour callback OAuth : Better Auth a besoin d'une URL complete
-  // pour rediriger depuis le provider externe (Google) vers notre front. En
-  // natif Capacitor, le plugin gere ca via un deep link relatif.
-  const oauthCallbackURL = Capacitor.isNativePlatform()
-    ? feedPath
-    : `${window.location.origin}${feedPath}`
+  // Voir le commentaire equivalent dans SignIn.tsx.
+  const callbackPath = Capacitor.isNativePlatform()
+    ? `/${locale}/feed`
+    : `${window.location.origin}/${locale}/feed`
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -39,14 +34,11 @@ export function SignUpPage() {
     try {
       const { error: err } = await authClient.signUp.email({ email, password, name })
       if (err) {
-        // Log complet du payload Better Auth pour diagnostiquer
-        console.error('[SignUp] better-auth error', err)
         setError(err.message ?? t('auth.errorGeneric'))
         return
       }
-      navigate(feedPath, { replace: true })
-    } catch (err) {
-      console.error('[SignUp] thrown exception', err)
+      navigate(callbackPath, { replace: true })
+    } catch {
       setError(t('auth.errorGeneric'))
     } finally {
       setSubmitting(false)
@@ -59,7 +51,7 @@ export function SignUpPage() {
     try {
       await authClient.signIn.social({
         provider: 'google',
-        callbackURL: oauthCallbackURL,
+        callbackURL: callbackPath,
       })
     } catch {
       setError(t('auth.errorGeneric'))

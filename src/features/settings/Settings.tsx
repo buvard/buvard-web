@@ -12,9 +12,7 @@ import {
   Bell,
   Lock,
   Ban,
-  KeyRound,
   ScrollText,
-  Trophy,
   UserCog,
   LogOut,
 } from 'lucide-react'
@@ -63,21 +61,6 @@ export function SettingsPage() {
           icon={Globe}
           label={t('settings.regional.title')}
           to={p('/settings/regional')}
-        />
-      </SettingsGroup>
-
-      <SettingsGroup title={t('settings.groups.gamification')}>
-        <SettingsRow
-          icon={Trophy}
-          label={t('settings.levels.title')}
-          hint={t('settings.levels.shortHint')}
-          to={p('/settings/levels')}
-        />
-        <SettingsRow
-          icon={KeyRound}
-          label={t('settings.codes.title')}
-          hint={t('settings.codes.shortHint')}
-          to={p('/settings/codes')}
         />
       </SettingsGroup>
 

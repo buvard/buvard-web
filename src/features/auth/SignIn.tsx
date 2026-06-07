@@ -17,20 +17,16 @@ export function SignInPage() {
   const location = useLocation()
   const navigate = useNavigate()
   const locale = isLocale(lang) ? lang : DEFAULT_LOCALE
-  // Path relatif pour react-router navigate() (cf. SignUp.tsx pour le pourquoi).
-  const feedPath = `/${locale}/feed`
-  // URL absolue pour callback OAuth Google : en natif, le plugin capacitorClient
-  // transforme un callbackURL relatif en deep link (`app.buvard[.local|.staging]://...`).
-  // En web, Better Auth resout les relatifs contre son baseURL API → on l'enverrait
-  // sur `api-staging.buvard.app/fr/feed` qui est 404. Du coup en web on passe l'URL
-  // absolue front (origin courant).
-  const oauthCallbackURL = Capacitor.isNativePlatform()
-    ? feedPath
-    : `${window.location.origin}${feedPath}`
+  // En natif, le plugin capacitorClient transforme un callbackURL relatif en
+  // deep link (`app.buvard.staging://fr/feed`). En web, Better Auth resout les
+  // relatifs contre son baseURL API → on l'enverrait sur `api-staging.buvard.app/fr/feed`
+  // qui est 404. Du coup en web on passe l'URL absolue front (origin courant).
+  const callbackPath = Capacitor.isNativePlatform()
+    ? `/${locale}/feed`
+    : `${window.location.origin}/${locale}/feed`
 
-  // Destination apres login : prend l'origine si on a ete redirige par RequireAuth
-  // (path relatif), sinon /feed par defaut.
-  const from = (location.state as { from?: string } | null)?.from ?? feedPath
+  // Destination apres login : prend l'origine si on a ete redirige par RequireAuth.
+  const from = (location.state as { from?: string } | null)?.from ?? callbackPath
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -45,13 +41,11 @@ export function SignInPage() {
     try {
       const { error: err } = await authClient.signIn.email({ email, password })
       if (err) {
-        console.error('[SignIn] better-auth error', err)
         setError(err.message ?? t('auth.errorGeneric'))
         return
       }
       navigate(from, { replace: true })
-    } catch (err) {
-      console.error('[SignIn] thrown exception', err)
+    } catch {
       setError(t('auth.errorGeneric'))
     } finally {
       setSubmitting(false)
@@ -66,7 +60,7 @@ export function SignInPage() {
       // ouverture du navigateur in-app + retour deep link via le plugin Capacitor.
       await authClient.signIn.social({
         provider: 'google',
-        callbackURL: oauthCallbackURL,
+        callbackURL: callbackPath,
       })
     } catch {
       setError(t('auth.errorGeneric'))
