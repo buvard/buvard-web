@@ -5,12 +5,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { CategoryBreakdown } from '@/components/CategoryBreakdown'
+import { TastingCard } from '@/components/TastingCard'
 import { ProfileLayout } from '@/features/profile/components/ProfileLayout'
 import {
   useBlock,
@@ -20,8 +23,9 @@ import {
   useUnblock,
   useUnfollow,
 } from '@/lib/api/user'
+import { useTastingsByUsername } from '@/lib/api/tasting'
 import { ApiError } from '@/lib/api/client'
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import { MoreHorizontal, Ban } from 'lucide-react'
 
@@ -34,6 +38,7 @@ export function PublicProfilePage() {
   const isSignedIn = !!session
   const me = useMe()
   const { data: user, isPending, isError, error } = usePublicUser(username)
+  const tastings = useTastingsByUsername(username, { limit: 20 })
   const follow = useFollow()
   const unfollow = useUnfollow()
   const block = useBlock()
@@ -196,12 +201,13 @@ export function PublicProfilePage() {
       verified={user.verified}
       role={user.role}
       level={user.gamification?.level}
+      gradeKey={user.gamification?.displayGrade ?? user.gamification?.grade ?? null}
       location={user.location}
       joinDate={user.joinDate}
       bio={user.bio}
       stats={user.stats}
     >
-      {/* Catégories préférées */}
+      {/* Catégories préférées (au-dessus des onglets) */}
       {user.favoriteCategories.length > 0 && (
         <div className="space-y-2">
           <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -216,6 +222,48 @@ export function PublicProfilePage() {
           </div>
         </div>
       )}
+
+      {/* Onglets degustations publiques : "Toutes" + "Par categorie" */}
+      <Tabs defaultValue="all" className="space-y-4">
+        <TabsList className="w-full">
+          <TabsTrigger value="all" className="flex-1">
+            {t('profile.tabs.all')}
+          </TabsTrigger>
+          <TabsTrigger value="categories" className="flex-1">
+            {t('profile.tabs.categories')}
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="all">
+          {tastings.isPending ? (
+            <div className="space-y-3" aria-busy="true">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-32 animate-pulse rounded-xl border border-border bg-card/30"
+                />
+              ))}
+            </div>
+          ) : tastings.data?.data.length === 0 ? (
+            <p className="py-8 text-center text-sm text-muted-foreground">
+              {t('public.empty')}
+            </p>
+          ) : (
+            <div className="space-y-3">
+              {tastings.data?.data.map((tasting) => (
+                <TastingCard key={tasting.id} tasting={tasting} />
+              ))}
+            </div>
+          )}
+        </TabsContent>
+
+        <TabsContent value="categories">
+          <CategoryBreakdown
+            data={user.stats.tastingsByCategory}
+            total={user.stats.tastingsCount}
+          />
+        </TabsContent>
+      </Tabs>
     </ProfileLayout>
   )
 }

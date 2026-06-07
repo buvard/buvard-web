@@ -4,13 +4,36 @@
     "tagline": "Sparte i to alcoli preferiti cù i to cumpagni"
   },
   "common": {
-    "moderation": "L'abusu d'alcolu hè periculosu per a salute. Da cunsumà cù muderazione."
+    "loading": "Caricamentu…",
+    "loadMore": "Carcà di più",
+    "moderation": "L'abusu d'alcolu hè periculosu per a salute. Da cunsumà cù muderazione.",
+    "getApp": "App mobile"
+  },
+  "update": {
+    "available": "Nova versione dispunibule",
+    "availableDesc": "Riavvia l'app per applicà la.",
+    "restart": "Riavvia",
+    "native": {
+      "title": "Versione {{version}} dispunibule",
+      "description": "Sì in {{current}}. Scarica l'ultima da Buvard.app.",
+      "cta": "Scaricà"
+    }
   },
   "nav": {
     "feed": "Filu",
     "discover": "Scopre",
     "add": "Aghjunghje",
-    "profile": "Prufilu"
+    "map": "Carta",
+    "profile": "Prufilu",
+    "admin": "Admin",
+    "marketing": {
+      "features": "Funziunalità",
+      "download": "Scaricà",
+      "about": "Quant'è noi",
+      "legal": "Menzioni legali",
+      "openMenu": "Apre u menu",
+      "closeMenu": "Chjode u menu"
+    }
   },
   "auth": {
     "signIn": "Cunnettati",
@@ -36,29 +59,288 @@
   "home": {
     "title": "Ciò chì i to cumpagni bevenu.",
     "subtitle": "Tene una traccia di ciò chì pruvi, vede ciò chì l'altri raccomandanu, sparte i to preferiti.",
-    "cta": "Apre u filu"
+    "cta": "Apre u filu",
+    "ctaPrimary": "Crea un contu",
+    "features": {
+      "eyebrow": "Cumu funziona",
+      "title": "Un'applicazione fatta per a ghjente chì piglia u so tempu.",
+      "seeAll": "Vede tuttu",
+      "capture": {
+        "title": "Piglia e to degustazioni",
+        "desc": "Foto, nota, note di gustu, locu. In qualchì seconde, a to degustazione hè salvata per sempre."
+      },
+      "share": {
+        "title": "Sparte cù i to cumpagni",
+        "desc": "Seguità i to amichi, vede ciò ch'elli aprenu sta sera, scambiate i vostri preferiti."
+      },
+      "discover": {
+        "title": "Scopre a cumunità",
+        "desc": "Esce da a to zona di cunfortu. E buttiglie preferite di l'altri, l'arumi più citati."
+      }
+    },
+    "ctaBottom": {
+      "eyebrow": "Andemu",
+      "title": "Prontu à registrà a to prima buttiglia ?",
+      "subtitle": "Crea u to contu in 30 seconde. Nisuna carta bancaria dumandata."
+    }
+  },
+  "features": {
+    "eyebrow": "Funziunalità",
+    "title": "Tuttu ciò chì ci vole per seguità e to degustazioni",
+    "subtitle": "Un'app simplice, fatta per i dilettanti è i curiosi. Senza fronzoli, solu l'essenziale.",
+    "map": {
+      "title": "Carta di e to degustazioni",
+      "desc": "Ritrova induve hai betu chè. Bar, cantina, sera cù l'amichi — ogni ricordu hà u so postu nantu à a carta."
+    },
+    "taste": {
+      "title": "Note di gustu dettagliate",
+      "desc": "Arumi, equilibriu, intensità. Custruisci u to vucabulariu da buttiglia in buttiglia."
+    },
+    "responsible": {
+      "title": "Bevi cù misura",
+      "desc": "Ùn ti spignimu mai à beie di più : Buvard ti tene i ricordi, micca l'eccessi."
+    }
+  },
+  "download": {
+    "eyebrow": "In mobile",
+    "title": "Buvard in a to stacca",
+    "subtitle": "Scarica l'app direttamente, senza passà da un store. Distribuzione fatta in casa.",
+    "android": {
+      "title": "Android",
+      "desc": "Scarica l'APK è installalu nantu à u to telefonu. Aghjurnamenti automatichi una volta cunnessu.",
+      "cta": "Scarica l'APK",
+      "unavailable": "Nisuna versione dispunibule per avà",
+      "publishedOn": "Publicatu u {{date}}",
+      "hint": "Cumpatibule cù Android 7.0 è più recenti."
+    },
+    "ios": {
+      "title": "iOS",
+      "desc": "Senza App Store ? Senza prublema. Aghjunghji Buvard à u to schermu d'accolta per l'usà cum'è una vera app.",
+      "step1": "Apri sta pagina in Safari (micca in un'altra app).",
+      "step2": "Tocca u buttone Sparte in fondu di u schermu.",
+      "step3": "Sceglie « Nant'à u schermu d'accolta » in a lista.",
+      "hint": "L'icona Buvard apparirà cum'è una app — toccala è ci sì."
+    },
+    "install": {
+      "title": "Cumu installà l'APK Android",
+      "step1": "Scarica u schedariu nantu à u to telefonu.",
+      "step2": "Autoriza l'installazione da sta surgente in i settaghji.",
+      "step3": "Apri u schedariu è seguità l'istruzioni."
+    }
+  },
+  "about": {
+    "eyebrow": "A nostra storia",
+    "title": "Perchè Buvard ?",
+    "subtitle": "Un'app nata da una frustrazione simplice : tuttu ciò chì pruvavamu finia per scurdassi.",
+    "mission": {
+      "title": "A nostra missione",
+      "body": "Aiutà ognunu à tene una traccia di ciò chì beie, senza ghjudiziu è senza gamificazione. E to degustazioni ti appartenenu, noi solu li urganizemu."
+    },
+    "values": {
+      "title": "I nostri valori",
+      "body": "Senza publicità, senza algoritimu chì pinghje à cunsumà di più. Un'app sobria, chì rispetta u to ritmu è a to salute."
+    },
+    "team": {
+      "title": "A squadra",
+      "body": "Un prughjettu indipindente purtatu da amatori di vinu, birra è spiriti. Cudichemu, gustemu, iteremu."
+    }
+  },
+  "legal": {
+    "eyebrow": "Menzioni legali",
+    "title": "Cundizioni & cunfidenzialità",
+    "subtitle": "Tutte l'infurmazioni legali nantu à l'usu di Buvard.",
+    "updated": "Ultimu aghjurnamentu : {{date}}",
+    "terms": {
+      "title": "Cundizioni d'usu",
+      "body": "L'accessu à Buvard hè riservatu à e persone maiore, in età legale di cunsumà alcoolu in u so paese di residenza. L'utilizatore s'ingaghja à publicà cuntenuti rispittosi è cunformi à a lege."
+    },
+    "privacy": {
+      "title": "Pulitica di cunfidenzialità",
+      "body": "Buvard raccoglie solu i dati necessarii à u funziunamentu di u serviziu : email, identificativi, cuntenuti chì tu publichi. Nisun datu hè vindutu à terzi."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Solu i cookies strittamente necessarii (sessione, preferenze) sò utilizati. Nisun cookie di tracciamentu publicitariu."
+    },
+    "contact": {
+      "title": "Cuntattu",
+      "body": "Per qualsiasi quistione nantu à i to dati o nantu à l'usu di u serviziu : contact@buvard.app"
+    }
   },
   "feed": {
-    "title": "Filu",
-    "subtitle": "L'ultime degustazioni di i to cumpagni",
-    "empty": "Nisuna publicazione.",
-    "emptyHint": "Aghjunghji a to prima degustazione per principià u filu."
+    "title": "À u banconu",
+    "subtitle": "Ciò chì u mondu sirote avà",
+    "empty": "U banconu hè viotu.",
+    "emptyHint": "Sì u primu à sturà una buttiglia.",
+    "emptyAction": "Aghjunghje una degustazione",
+    "error": "Impussibile di carcà u filu.",
+    "filterAll": "Tuttu",
+    "noResultsForFilter": "Nunda in sta categuria per avà."
+  },
+  "discover": {
+    "title": "Scopre",
+    "subtitle": "Ciò chì a cumunità prova avà",
+    "empty": "Nunda da scopre per avà.",
+    "error": "Impussibile di carcà a scuperta."
   },
   "add": {
     "title": "Nova degustazione",
     "subtitle": "Ciò chì ai appena pruvatu",
     "fields": {
+      "photo": "Foto di a buttiglia",
+      "photos": "Foti",
       "name": "Nome di a buttiglia",
       "namePlaceholder": "P.e. Talisker 10 anni",
       "type": "Tipu",
+      "producer": "Pruduttore",
+      "producerPlaceholder": "P.e. Talisker",
+      "year": "Annata",
       "rating": "Nota nantu à 5",
+      "price": "Prezzu",
+      "currency": "Munita",
+      "aromas": "Arumi",
+      "aromasPlaceholder": "Scrivi un aroma è strigne Entr",
+      "aromaRemove": "Caccia {{value}}",
       "place": "Induve ?",
       "placePlaceholder": "Bar, restaurante, ind'è un cumpagnu...",
+      "placePrivacy": "Stu locu serà publicamente visibile cù a to degustazione.",
+      "placeFallback": "Suggerimenti micca dispunibili, scrivi u nome à manu.",
+      "placeNoResults": "Nisunu locu trovu.",
+      "placePickCta": "Sceglie un locu",
       "notes": "Note",
-      "notesPlaceholder": "I to impressioni..."
+      "notesPlaceholder": "I to impressioni...",
+      "visibility": "Visibilità"
+    },
+    "visibility": {
+      "public": "Publicu",
+      "private": "Privatu",
+      "publicHint": "Visibile à tutti nantu à u filu è a scuperta.",
+      "privateHint": "Visibile solu à tè."
+    },
+    "photo": {
+      "take": "Piglià una foto",
+      "pick": "Sceglie un'imagine",
+      "add": "Aghjunghje una foto",
+      "edit": "Mudificà",
+      "cover": "Cupertura"
+    },
+    "camera": {
+      "capture": "Piglià",
+      "flip": "Cambià camera",
+      "flash": "Flash",
+      "permissionDenied": "Accessu à a camera refusatu. Attivalu in i regulamenti.",
+      "startFailed": "Impussibile di lancià a camera.",
+      "captureFailed": "Impussibile di piglià a foto.",
+      "webFallback": "A camera schermu sanu hè solu nantu à l'app mobile. Sceglie un'imagine in a to galleria.",
+      "done": "Finisce",
+      "atLeastOne": "Piglia almenu una foto.",
+      "maxReached": "Massimu {{max}} foti per degustazione."
+    },
+    "retake": "Ripiglià",
+    "moreDetails": "Più dettagli",
+    "success": "Degustazione publicata",
+    "xpGained": "+{{xp}} XP guadagnati",
+    "errors": {
+      "nameRequired": "U nome di a buttiglia hè ubligatoriu.",
+      "photoRequired": "Una foto hè ubligatoria.",
+      "ratingRequired": "Nota mancante.",
+      "aromaTooLong": "Un aroma face {{max}} caratteri à u massimu.",
+      "aromaMax": "Massimu {{max}} arumi.",
+      "photoUploadAt": "Fallimentu di l'inviu di a foto {{index}}/{{total}}.",
+      "generic": "Impussibile di publicà a to degustazione."
     },
     "submit": "Publicà",
     "cancel": "Annullà"
+  },
+  "locationDialog": {
+    "close": "Chjode",
+    "openFullMap": "Apre a carta",
+    "noCoords": "Stu locu ùn hà micca cuurdinate geografiche."
+  },
+  "likers": {
+    "title": "Mi piace",
+    "empty": "Nimu hà ancu apprezzatu.",
+    "error": "Impussibile di carcà a lista."
+  },
+  "placePicker": {
+    "title": "Sceglie un locu",
+    "dragHint": "Trascina u marker per affinà",
+    "confirm": "Validà",
+    "cancel": "Annullà",
+    "clear": "Sguassà"
+  },
+  "map": {
+    "title": "Carta di e degustazioni",
+    "tabs": {
+      "mine": "I mo lochi",
+      "friends": "Cumpagni",
+      "discover": "Scopre"
+    },
+    "empty": {
+      "mine": "Ùn ai nisuna degustazione geolocalizata.",
+      "friends": "Nisunu di i to amichi hà postu una degustazione geolocalizata.",
+      "discover": "Nisuna degustazione geolocalizata in u trending."
+    },
+    "emptyHint": "Sceglie un locu via l'autocomplete per ch'ellu appaghi nantu à a carta.",
+    "error": "Impussibile di carcà a carta.",
+    "places": {
+      "title": "I to lochi",
+      "count_one": "{{count}} locu",
+      "count_other": "{{count}} lochi",
+      "tastingsCount_one": "{{count}} degustazione",
+      "tastingsCount_other": "{{count}} degustazioni",
+      "lastVisit": "Ultima visita u {{date}}",
+      "unnamed": "Locu senza nome"
+    },
+    "discover": {
+      "title": "Lochi da scopre",
+      "tastingsCount_one": "{{count}} degustazione",
+      "tastingsCount_other": "{{count}} degustazioni",
+      "lastTasting": "Ultima degustazione u {{date}}"
+    },
+    "historyCount_one": "{{count}} degustazione",
+    "historyCount_other": "{{count}} degustazioni"
+  },
+  "tasting": {
+    "private": "Privatu",
+    "aromas": "Arumi",
+    "carousel": {
+      "prev": "Foto precedente",
+      "next": "Foto seguente"
+    },
+    "actions": {
+      "menu": "Azzioni",
+      "edit": "Mudificà",
+      "delete": "Sguassà",
+      "cancel": "Annullà",
+      "deleted": "Degustazione sguassata",
+      "deleteFailed": "Impussibile di sguassà.",
+      "deleteConfirmTitle": "Sguassà sta degustazione?",
+      "deleteConfirmText": "St'azzione hè definitiva. E foti saranu perse dinù."
+    },
+    "detail": {
+      "notFound": "Degustazione micca trovata.",
+      "notes": "Note"
+    },
+    "like": {
+      "likeAria": "Mi piace",
+      "unlikeAria": "Caccia u mi piace",
+      "count_one": "{{count}} mi piace",
+      "count_other": "{{count}} mi piace"
+    },
+    "edit": {
+      "title": "Mudificà a degustazione",
+      "save": "Salvà",
+      "success": "Degustazione aghjurnata",
+      "failed": "Impussibile di salvà.",
+      "notFound": "Degustazione micca trovata.",
+      "forbidden": "Ùn pò mudificà sta degustazione.",
+      "photoDeleteFailed": "Impussibile di sguassà a foto.",
+      "photoReorderFailed": "Impussibile di riurdinà e foti.",
+      "movePhotoLeft": "Sposta à manca",
+      "movePhotoRight": "Sposta à diritta",
+      "pending": "Da inviare"
+    }
   },
   "types": {
     "whisky": "Whisky",
@@ -85,13 +367,127 @@
     "empty": "Nisuna degustazione per avà.",
     "level": "Livellu {{level}}",
     "xp": "{{xp}} XP",
+    "xpProgressLabel": "Prugressu",
     "streak_one": "{{count}} ghjornu",
     "streak_other": "{{count}} ghjorni",
+    "streakLongest_one": "Record : {{count}} ghjornu",
+    "streakLongest_other": "Record : {{count}} ghjorni",
     "joinedOn": "Membru dapoi {{date}}",
     "tabs": {
       "all": "Tutte",
       "favorites": "Favuriti",
       "categories": "Categurie"
+    },
+    "favoritesComingSoon": "I favuriti ghjunghjenu prestu.",
+    "levelDialog": {
+      "title": "Livellu & XP",
+      "subtitle": "Cumu cresce di livellu è tene u to streak.",
+      "tiers": "Paliere à vene",
+      "toNext": "Ancora {{xp}} XP per ghjunghje à u livellu {{level}}.",
+      "streakHint": "Publica almenu una degustazione à u ghjornu per tene u to streak vivu. Un ghjornu mancatu è u cuntatore torna à 1.",
+      "perUnit": "/ unità",
+      "oneShot": "(unicu)",
+      "section": {
+        "tasting": "À ogni degustazione",
+        "social": "Engagement ricivutu",
+        "milestones": "Tappe uniche"
+      },
+      "rules": {
+        "tasting": "Publicà una degustazione",
+        "place": "Indicà un locu",
+        "longNotes": "Note dettagliate (≥ 50 caratteri)",
+        "aromas": "Almenu 3 arumi",
+        "extraPhoto": "Ogni foto in più",
+        "likeReceived": "Riceve un like",
+        "follower": "Guadagnà un novu follower",
+        "onboarding": "Cumplettà l'iscrizione",
+        "firstTasting": "Prima degustazione",
+        "firstFollower": "Primu follower",
+        "profileComplete": "Prufilu cumplettu (avatar + bio + locu)",
+        "streakMilestone": "Streak di {{days}} ghjorni"
+      }
+    }
+  },
+  "admin": {
+    "title": "Pannellu admin",
+    "subtitle": "Gestione di codici è XP di l'utilizatori",
+    "shortHint": "Codici, XP",
+    "tabs": {
+      "codes": "Codici",
+      "users": "Utilizatori"
+    },
+    "codes": {
+      "subtitle": "Crea è gestisce i codici di redenzione (Pochtron, etc.)",
+      "create": "Crea un codice",
+      "createDesc": "Lascia u campu codice viotu per chì u servitore generi un slug autumaticamente.",
+      "createSuccess": "Codice creatu : {{code}}",
+      "createError": "Impussibule di creà u codice",
+      "copy": "Cupià",
+      "copied": "Cupiatu in lu pressu-papelu",
+      "copyError": "Cupia impussibule",
+      "delete": "Sguassà",
+      "deleteConfirmTitle": "Sguassà stu codice ?",
+      "deleteConfirmDesc": "U codice {{code}} ùn pudarà più esse usatu. L'utilizatori chì l'hanu digià attivatu mantenenu e so features.",
+      "deleteSuccess": "Codice sguassatu",
+      "deleteError": "Sguassatura impussibule",
+      "loadError": "Impussibule di caricà i codici",
+      "empty": "Nisun codice per avà. Crea u to per i testori.",
+      "usesUnlimited_one": "{{count}} usu · senza limitu",
+      "usesUnlimited_other": "{{count}} usi · senza limitu",
+      "usesLimited": "{{used}}/{{max}} usi",
+      "expires": "Spira u {{date}}",
+      "expired": "Spiratu",
+      "types": {
+        "pochtron": "Pochtron"
+      },
+      "fields": {
+        "code": "Codice (opzionale)",
+        "codePlaceholder": "POCHTRON-2026-XYZ",
+        "codeHint": "Lascia viotu per generazione auto.",
+        "maxUses": "Numeru d'usi",
+        "maxUsesPlaceholder": "Viotu = senza limitu",
+        "maxUsesHint": "Quante volte stu codice pò esse attivatu (in tuttu, micca per utilizatore).",
+        "expiresAt": "Data di scadenza",
+        "expiresAtHint": "Lascia viotu per nisuna scadenza."
+      },
+      "dialog": {
+        "title": "Novu codice",
+        "description": "Cunfigura u to codice in pochi clic",
+        "preview": "Codice",
+        "regenerate": "Rigenerà",
+        "editHint": "Tocca per mudificà",
+        "maxUsesTitle": "Numeru d'usi",
+        "expiresTitle": "Scadenza",
+        "expiresPresets": {
+          "day": "24h",
+          "week": "7 ghjorni",
+          "month": "30 ghjorni",
+          "never": "Mai"
+        },
+        "create": "Crea u codice",
+        "cancel": "Annullà",
+        "successTitle": "Codice creatu !",
+        "successDesc": "Tocca u tichet per cupiallu",
+        "createAnother": "Crea un altru",
+        "done": "Compiu"
+      }
+    },
+    "users": {
+      "subtitle": "Cerca un utilizatore è aghjusta u so XP.",
+      "searchLabel": "Cerca per pseudo",
+      "searchPlaceholder": "Scrivi un pseudo (2 caratteri minimu)",
+      "noResults": "Nisun utilizatore truvatu",
+      "loadError": "Impussibule di caricà stu prufilu",
+      "grade": "Gradu",
+      "adjustLabel": "Aghjusta XP (delta)",
+      "adjusted": "{{sign}}{{amount}} XP applicatu (tutale : {{xp}})",
+      "setLabel": "Definisce un valore assolutu",
+      "setPlaceholder": "es. 500",
+      "setAction": "Definisce",
+      "setSuccess": "XP definitu à {{xp}}",
+      "reset": "Reset XP à 0",
+      "resetSuccess": "XP rimessu à 0",
+      "actionError": "Azzione impussibule"
     }
   },
   "public": {
@@ -103,7 +499,13 @@
     "blocked": "Utilizatore bluccatu",
     "unblocked": "Utilizatore sbluccatu",
     "followForbidden": "Ùn pò seguità st'utilizatore.",
-    "selfAction": "Azzione impussibile nantu à u to contu."
+    "selfAction": "Azzione impussibile nantu à u to contu.",
+    "empty": "Nisuna degustazione publica per avà."
+  },
+  "tastingDetail": {
+    "loading": "Caricamentu…",
+    "notFound": "Sta degustazione ùn esiste micca o hè stata cancellata.",
+    "error": "Impussibile di carcà a degustazione."
   },
   "relations": {
     "empty": "Nimu quì per avà."
@@ -176,8 +578,78 @@
     "saveError": "Impussibile di salvà",
     "groups": {
       "app": "Applicazione",
+      "gamification": "Prugressu",
       "social": "Suciale",
-      "account": "Contu"
+      "account": "Contu",
+      "admin": "Amministrazione"
+    },
+    "levels": {
+      "title": "Livelli & gradi",
+      "subtitle": "Tutte e tappe di u to viaghju di degustatore",
+      "shortHint": "Da Zitella di u tappu à Diu di a debauca",
+      "gradeRange": "Livellu {{min}} à {{max}}",
+      "gradeSingleLevel": "Livellu {{level}}",
+      "maxLevelNote": "U livellu {{max}} marca a cima — diventà una Leggenda di Buvard.",
+      "loadError": "Impussibile di carcà i livelli. Riprova più tardi.",
+      "gradeActive": "Affissatu",
+      "gradeSetAsTitle": "Mette in avanti",
+      "gradeSelected": "Gradu aghjurnatu",
+      "gradeOverrideHint": "Hai sceltu stu gradu cum'è titulu — s'affissa in tuttu locu",
+      "gradeResetAuto": "Auto",
+      "grades": {
+        "curious": {
+          "name": "Zitella di u tappu",
+          "desc": "Mai apertu davveru a bocca per qualcosa più forte d'una limunata. A to gola hè zitella, u bichjeru ti spaventa. Ma ti prumettemu : trà pocu va sbuccassi."
+        },
+        "explorer": {
+          "name": "Succhia-tappi",
+          "desc": "Cuminci à lasciatti andà : un tappu quì, un goulottu quà. U palatu si apre, a voglia cresce. Trà pocu salti nantu à a prima buttiglia chì passa."
+        },
+        "amateur": {
+          "name": "Inghjotti-buttiglia",
+          "desc": "Inghjotti e buttiglie cum'è altri scendinu i scali. Nunda ti taglia più l'appetitu — pudiristi inghjotte un fùstu sanu senza ammicà."
+        },
+        "connoisseur": {
+          "name": "Inculli-buttiglia",
+          "desc": "Più nisuna ritinuta : pigli a buttiglia per u tappu è a viuti d'un colpu senza dumandà permessu. L'amatori ti guardanu è si rincrescenu di a so acqua gazata."
+        },
+        "sommelier": {
+          "name": "Puttana di u vinu",
+          "desc": "Fai girà e buttiglie intornu à tè cum'è un harem. Tutti i bar di a cità ti cunnoscenu per e to performance — rare volte te ne vai solu·sola."
+        },
+        "master": {
+          "name": "Papa di a foutritura",
+          "desc": "Sì a riferenza assoluta di a debauca liquida. Ti invitanu in l'orgie per benedice e buttiglie è ghjudicà e performance. U to verdettu face lege."
+        },
+        "legend": {
+          "name": "Diu di a debauca",
+          "desc": "Hai righjuntu a cima : e buttiglie s'inclinanu quandu entri in un bar, l'angeli falanu da u celu per ti versà l'aperitivu. Sì sopra à u panteone, sopra à tuttu."
+        }
+      }
+    },
+    "codes": {
+      "title": "Codici d'accessu",
+      "subtitle": "Attiva funzionalità nascoste cù un codice",
+      "shortHint": "Beta, VIP, accessu anticipatu",
+      "inputLabel": "Codice d'accessu",
+      "inputPlaceholder": "POCHTRON-2026-XYZ",
+      "inputHint": "Hai un codice ? Battilu è sblucca e funzionalità.",
+      "submit": "Attivà",
+      "redeemSuccess": "Codice attivatu, prufitta",
+      "activeTitle": "Funzionalità",
+      "activeBadge": "Attivu",
+      "features": {
+        "pochtron": {
+          "label": "Pochtron",
+          "desc": "Bonus testore : accessu à e funzionalità sperimentali, insegna speciale, anteprime. Tuttu in un solu switch."
+        }
+      },
+      "errors": {
+        "notFound": "Stu codice ùn esiste micca",
+        "expired": "Codice scadutu o esauritu",
+        "alreadyUsed": "Hai dighjà adupratu stu codice",
+        "generic": "Impussibile d'attivà u codice"
+      }
     },
     "profile": {
       "title": "Prufilu",

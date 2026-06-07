@@ -2,8 +2,11 @@ import { RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { router } from '@/router'
 import { AppUrlListener } from '@/components/AppUrlListener'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { NativeUpdatePrompt } from '@/components/NativeUpdatePrompt'
 import { Toaster } from '@/components/ui/sonner'
 import { UpdatePrompt } from '@/components/UpdatePrompt'
+import { SessionProvider } from '@/lib/session'
 import '@/i18n/config'
 
 const queryClient = new QueryClient({
@@ -25,12 +28,22 @@ const queryClient = new QueryClient({
 // automatiquement — pas besoin de <ClerkProvider> ni de <AppUrlListener>.
 export function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <AppUrlListener />
-      <Toaster />
-      <UpdatePrompt />
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        {/* SessionProvider est un seul subscriber au store better-auth :
+            tous les useSession() de l'app lisent la valeur via Context au
+            lieu de re-fetcher /api/auth/get-session a chaque mount. */}
+        <SessionProvider>
+          <RouterProvider router={router} />
+          <AppUrlListener />
+          <Toaster position="top-center" />
+          <UpdatePrompt />
+          {/* Check de version native (APK Android) — affiche un toast quand
+              une nouvelle Github Release est dispo. PWA/web : no-op. */}
+          <NativeUpdatePrompt />
+        </SessionProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   )
 }
 

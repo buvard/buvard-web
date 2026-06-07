@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
-import { getNativeAuthToken, useSession } from '@/lib/auth-client'
+import { getNativeAuthToken } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { apiRequest } from './client'
 
 // Wrapper qui injecte automatiquement l'auth dans chaque requete.

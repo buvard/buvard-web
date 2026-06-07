@@ -29,6 +29,12 @@ coverage
 !.env.release.example
 
 # ====================================================================
+# Notes perso (passwords, URLs privees, procedures internes)
+# Voir docs/NOTES_PERSO.md
+# ====================================================================
+docs/NOTES_PERSO.md
+
+# ====================================================================
 # Bundles OTA générés par scripts/release.mjs
 # ====================================================================
 bundle-*.zip

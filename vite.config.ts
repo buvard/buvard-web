@@ -12,8 +12,14 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ["local.buvard.app"],
+    allowedHosts: ["local.buvard.app", "dev.buvard.app"],
     host: true,
     port: 5173,
+    // HMR via Cloudflare tunnel : websocket en wss sur port 443.
+    hmr: {
+      host: "dev.buvard.app",
+      protocol: "wss",
+      clientPort: 443,
+    },
   },
 });

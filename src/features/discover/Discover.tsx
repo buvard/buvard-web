@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next'
+import { Button } from '@/components/ui/button'
 import { TastingCard } from '@/components/TastingCard'
-import type { Tasting } from '@/types'
+import { flattenPages, useDiscover } from '@/lib/api/tasting'
 
 export function DiscoverPage() {
   const { t } = useTranslation()
-  // TODO: récupérer le trending depuis le backend
-  const trending: Tasting[] = []
+  const { data, isPending, isError, fetchNextPage, hasNextPage, isFetchingNextPage } = useDiscover()
+  const trending = flattenPages(data)
 
   return (
     <section>
@@ -18,15 +19,42 @@ export function DiscoverPage() {
         </p>
       </header>
 
-      {trending.length === 0 ? (
+      {isPending ? (
+        <div className="space-y-3" aria-busy="true">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-32 animate-pulse rounded-xl border border-border bg-card/30"
+            />
+          ))}
+        </div>
+      ) : isError ? (
+        <div className="rounded-lg border border-dashed border-destructive/40 bg-destructive/5 px-6 py-12 text-center">
+          <p className="text-sm font-medium text-destructive">
+            {t('discover.error')}
+          </p>
+        </div>
+      ) : trending.length === 0 ? (
         <div className="rounded-lg border border-dashed border-border px-6 py-12 text-center">
           <p className="text-sm text-muted-foreground">{t('discover.empty')}</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {trending.map((tasting) => (
             <TastingCard key={tasting.id} tasting={tasting} />
           ))}
+          {hasNextPage && (
+            <div className="pt-2 text-center">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => void fetchNextPage()}
+                disabled={isFetchingNextPage}
+              >
+                {isFetchingNextPage ? t('common.loading') : t('common.loadMore')}
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </section>

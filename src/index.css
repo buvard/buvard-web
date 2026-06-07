@@ -9,11 +9,13 @@
    ============================================================ */
 :root {
   --radius: 0.75rem;
-  --background: oklch(1 0 0);
+  /* Off-white legerement chaud — plus chaleureux que le blanc pur */
+  --background: oklch(0.985 0.002 60);
   --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
+  /* Card distincte du background pour que bg-card/40 reste visible */
+  --card: oklch(0.965 0.003 60);
   --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
+  --popover: oklch(0.99 0.002 60);
   --popover-foreground: oklch(0.141 0.005 285.823);
   /* Primary Buvard — bordeaux #8B2635 */
   --primary: oklch(0.42 0.13 18);
@@ -142,11 +144,20 @@
       env(safe-area-inset-left);
   }
 
+  /* Tailwind/preflight laisse le defaut HTML (cursor: default) sur les <button>.
+     On force cursor-pointer sur tous les boutons non desactives — couvre les
+     boutons natifs custom du code app sans devoir ajouter la classe partout.
+     Les utilities cursor-* (layer utilities) gardent leur priorite si surchargees. */
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
   /* ============================================================
      Lueur de fond — radial gradient bordeaux qui s'estompe.
-     Visible uniquement en dark mode, ancré en haut de page.
+     Visible uniquement en dark mode (sur light, le bordeaux semi-transparent
+     sur fond blanc rendrait une grosse tache rose disgracieuse).
      ============================================================ */
-  body::before {
+  .dark body::before {
     content: '';
     position: fixed;
     inset: 0;
@@ -184,4 +195,79 @@
 
 @utility text-glow-primary {
   text-shadow: 0 0 24px rgb(139 38 53 / 0.5);
+}
+
+/* ============================================================
+   Camera natif (plugin camera-preview) — sequence en 2 etapes :
+   1. .camera-loading : body NOIR opaque pendant le demarrage du
+      preview natif (evite tout flash du contenu HTML precedent)
+   2. .camera-ready   : body transparent une fois le preview natif
+      rendu, on voit la cam DERRIERE la WebView
+   ============================================================ */
+body.camera-loading,
+body.camera-loading #root {
+  background: #000 !important;
+}
+body.camera-ready,
+body.camera-ready #root {
+  background: transparent !important;
+}
+body.camera-loading::before,
+body.camera-ready::before {
+  display: none !important;
+}
+
+/* ============================================================
+   Leaflet — overrides pour matcher le theme Buvard (dark by default).
+   Sans ca, popup/controls sont rendus en blanc dur par leaflet.css.
+   ============================================================ */
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--popover) !important;
+  color: var(--popover-foreground) !important;
+  box-shadow: 0 8px 32px -8px rgb(0 0 0 / 0.5) !important;
+}
+.leaflet-popup-content-wrapper {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+}
+.leaflet-popup-content {
+  margin: 12px 14px !important;
+  color: var(--popover-foreground) !important;
+  font-family: inherit !important;
+  line-height: 1.4 !important;
+}
+.leaflet-popup-content a {
+  color: inherit !important;
+}
+.leaflet-popup-close-button {
+  color: var(--muted-foreground) !important;
+  padding: 6px 8px 0 0 !important;
+  font-size: 18px !important;
+}
+.leaflet-popup-close-button:hover {
+  color: var(--foreground) !important;
+  background: transparent !important;
+}
+
+/* Controls zoom (+/-) */
+.leaflet-bar a,
+.leaflet-bar a:hover {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+}
+.leaflet-bar a:hover {
+  background: var(--accent) !important;
+}
+
+/* Attribution OSM en bas */
+.leaflet-control-attribution {
+  background: rgb(0 0 0 / 0.55) !important;
+  color: rgb(255 255 255 / 0.85) !important;
+  backdrop-filter: blur(4px);
+  font-size: 10px !important;
+}
+.leaflet-control-attribution a {
+  color: rgb(255 255 255 / 0.95) !important;
 }

@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { DEFAULT_LOCALE, isLocale } from '@/i18n/config'
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 
 // Garde les routes privees : redirige vers /:lang/sign-in si non connecte.
 export function RequireAuth() {

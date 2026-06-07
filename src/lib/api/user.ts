@@ -4,7 +4,7 @@ import {
   useQueryClient,
   type UseQueryOptions,
 } from '@tanstack/react-query'
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { useApi } from './useApi'
 import type {
   ListQueryParams,
@@ -88,6 +88,59 @@ export function useUpdateMe() {
       qc.setQueryData(userKeys.me, user)
     },
   })
+}
+
+// ============================================================
+// PATCH /me/grade — selection du grade d'affichage (parmi debloque)
+// ============================================================
+export function useSetDisplayGrade() {
+  const api = useApi()
+  const qc = useQueryClient()
+  return useMutation({
+    // `key` = cle du grade a afficher, ou null pour revenir a l'auto.
+    mutationFn: async (key: string | null) => {
+      const { user } = await api<{ user: User }>('/api/v1/users/me/grade', {
+        method: 'PATCH',
+        body: { key },
+      })
+      return user
+    },
+    onSuccess: (user) => {
+      qc.setQueryData(userKeys.me, user)
+      // Stats embarque aussi gamification — invalide pour resync sur la
+      // page Levels (qui lit me.gamification mais aussi via /me/stats).
+      void qc.invalidateQueries({ queryKey: userKeys.stats })
+    },
+  })
+}
+
+// ============================================================
+// POST /me/redeem-code — redeem un code beta/VIP
+// ============================================================
+export function useRedeemCode() {
+  const api = useApi()
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: async (code: string) => {
+      return await api<{ type: string; code: string; user: User }>(
+        '/api/v1/users/me/redeem-code',
+        { method: 'POST', body: { code } },
+      )
+    },
+    onSuccess: ({ user }) => {
+      qc.setQueryData(userKeys.me, user)
+    },
+  })
+}
+
+// Hook qui retourne les features actives du user connecte.
+// Les flags sont positionnes uniquement via les codes (POST /me/redeem-code).
+// L'APK Pochtron n'a aucune feature pre-debloquee : les testeurs doivent
+// entrer un code (cf Settings > Codes d'acces) — c'est ca qui justifie
+// l'existence du systeme de codes.
+export function useMyFeatures() {
+  const { data: me } = useMe()
+  return me?.features ?? { pochtron: false }
 }
 
 // ============================================================
