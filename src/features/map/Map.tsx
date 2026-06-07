@@ -88,7 +88,7 @@ export function MapPage() {
             scope={scope}
             mine={mine.data?.data ?? []}
             friends={flattenPages(friends.data)}
-            discoverPlaces={flattenPages(discover.data) as DiscoveredPlace[]}
+            discoverPlaces={flattenPages<DiscoveredPlace>(discover.data)}
           />
         </div>
       </header>
@@ -108,7 +108,7 @@ export function MapPage() {
 
         {scope === 'discover' ? (
           <DiscoverScopeView
-            places={flattenPages(discover.data) as DiscoveredPlace[]}
+            places={flattenPages<DiscoveredPlace>(discover.data)}
             isPending={discover.isPending}
             isError={discover.isError}
             focus={focus}

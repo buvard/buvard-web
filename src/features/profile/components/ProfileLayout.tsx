@@ -11,7 +11,6 @@ import {
   Flame,
   ArrowLeft,
   CalendarDays,
-  Sparkles,
   Search,
 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'

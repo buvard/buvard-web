@@ -15,7 +15,12 @@ import { RequireActive } from '@/components/RequireActive'
 //
 // On garde une seule fonction utilitaire pour normaliser le `default: ...`
 // attendu par React.lazy (toutes nos pages sont des exports nommes).
-function lazyPage<T extends { [K: string]: React.ComponentType<unknown> }>(
+// Le contrainte sur T (ComponentType<unknown>) etait trop stricte : elle
+// rejetait les composants typed avec props (AddPage, RelationsPage). On
+// accepte n'importe quel record dont la valeur est un FunctionComponent —
+// `unknown` couvre cas avec ou sans props.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function lazyPage<T extends Record<string, React.ComponentType<any>>>(
   loader: () => Promise<T>,
   exportName: keyof T,
 ) {

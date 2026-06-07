@@ -332,10 +332,11 @@ export function useRemoveAllTastingPhotos() {
   })
 }
 
-// Helpers pour les pages qui consomment un infinite query
-export function flattenPages(
-  data: InfiniteData<Paginated<Tasting>> | undefined,
-): Tasting[] {
+// Helpers pour les pages qui consomment un infinite query.
+// Generique : marche pour Paginated<Tasting>, Paginated<DiscoveredPlace>, etc.
+export function flattenPages<T>(
+  data: InfiniteData<Paginated<T>> | undefined,
+): T[] {
   return data?.pages.flatMap((p) => p.data) ?? []
 }
 
