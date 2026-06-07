@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useState, type FormEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import {
@@ -45,11 +45,22 @@ export function AdminCodesPage() {
   const codes = useAdminListCodes()
   const [createOpen, setCreateOpen] = useState(false)
   const [toDelete, setToDelete] = useState<AdminCode | null>(null)
+  // Bump a chaque ouverture du dialog : sert de key pour remount le composant
+  // et avoir un slug frais sans setState dans un useEffect.
+  const [createKey, setCreateKey] = useState(0)
+  // Capture once a mount pour calculer expired sans Date.now() impure dans render.
+  // OK pour un panel admin (refresh manuel suffit a re-evaluer).
+  const [now] = useState(() => Date.now())
 
   const dateFmt = new Intl.DateTimeFormat(i18n.language, {
     dateStyle: 'short',
     timeStyle: 'short',
   })
+
+  function openCreate() {
+    setCreateKey((k) => k + 1)
+    setCreateOpen(true)
+  }
 
   function handleCopy(code: string) {
     void navigator.clipboard.writeText(code).then(
@@ -62,7 +73,7 @@ export function AdminCodesPage() {
     <section className="space-y-4">
       <div className="flex items-center justify-between gap-3">
         <p className="text-sm text-muted-foreground">{t('admin.codes.subtitle')}</p>
-        <Button size="sm" onClick={() => setCreateOpen(true)} className="gap-1.5">
+        <Button size="sm" onClick={openCreate} className="gap-1.5">
           <Plus className="h-4 w-4" strokeWidth={2} />
           {t('admin.codes.create')}
         </Button>
@@ -93,7 +104,7 @@ export function AdminCodesPage() {
                     max: code.maxUses,
                   })
             const expired =
-              code.expiresAt && new Date(code.expiresAt).getTime() < Date.now()
+              code.expiresAt && new Date(code.expiresAt).getTime() < now
             const exhausted =
               code.maxUses !== null && code.usedCount >= code.maxUses
             return (
@@ -146,7 +157,11 @@ export function AdminCodesPage() {
         </ul>
       )}
 
-      <CreateCodeDialog open={createOpen} onOpenChange={setCreateOpen} />
+      <CreateCodeDialog
+        key={createKey}
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+      />
       <DeleteCodeDialog code={toDelete} onClose={() => setToDelete(null)} />
     </section>
   )
@@ -185,20 +200,13 @@ function CreateCodeDialog({
 }) {
   const { t } = useTranslation()
   const create = useCreateCode()
+  // Le parent remount ce composant a chaque ouverture (via key bumped) — les
+  // useState initialisent donc fraichement a chaque session, pas besoin
+  // d'effect de reset.
   const [code, setCode] = useState(() => generateSlug())
   const [maxUses, setMaxUses] = useState<MaxUsesPreset>('unlimited')
   const [expires, setExpires] = useState<ExpiresPreset>('never')
   const [created, setCreated] = useState<AdminCode | null>(null)
-
-  // Reset l'etat a chaque ouverture pour partir d'un slug frais.
-  useEffect(() => {
-    if (open) {
-      setCode(generateSlug())
-      setMaxUses('unlimited')
-      setExpires('never')
-      setCreated(null)
-    }
-  }, [open])
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()

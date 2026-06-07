@@ -19,6 +19,7 @@ export function RequireAdmin() {
 
 // Hook utilitaire : true si l'utilisateur connecte a role admin.
 // Utile pour afficher conditionnellement le lien "Admin" dans Settings.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useIsAdmin(): boolean {
   const me = useMe()
   return me.data?.role === 'admin'

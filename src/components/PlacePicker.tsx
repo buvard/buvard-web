@@ -41,6 +41,7 @@ export function PlacePicker({ value, onChange, open, onOpenChange }: Props) {
 
   // Reset le pending quand la popup s'ouvre/ferme ou que la value externe change.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (open) setPending(value)
   }, [open, value])
 

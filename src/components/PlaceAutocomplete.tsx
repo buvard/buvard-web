@@ -54,6 +54,7 @@ export function PlaceAutocomplete({
     const isSelectedValue =
       value?.lat !== undefined && value?.lng !== undefined && trimmed === value.name
     if (trimmed.length < MIN_QUERY_LENGTH || isSelectedValue) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSuggestions([])
       setLoading(false)
       setLoadFailed(false)

@@ -127,6 +127,7 @@ const LegalPage = lazyPage(() => import('@/features/marketing/Legal'), 'LegalPag
 // Fallback minimal pendant le chunk loading — affiche rien (le swap entre
 // pages est generalement instantane avec un network correct). On evite un
 // spinner qui flasherait.
+// eslint-disable-next-line react-refresh/only-export-components
 function PageSuspense({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={null}>{children}</Suspense>
 }

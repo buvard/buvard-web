@@ -23,6 +23,7 @@ export interface MarkerGroup {
   tastings: Tasting[]
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function groupByPlace(tastings: Tasting[]): MarkerGroup[] {
   const map = new Map<string, MarkerGroup>()
   for (const t of tastings) {

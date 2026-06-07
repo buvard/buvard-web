@@ -37,8 +37,11 @@ export function WebNavbar() {
   const location = useLocation()
 
   // Ferme le panneau mobile a chaque navigation (sinon il reste ouvert apres
-  // qu'on a cliqué sur un lien).
+  // qu'on a cliqué sur un lien). Pattern "reset au changement externe" — la
+  // regle react-hooks/set-state-in-effect veut un derived state ici, mais on
+  // n'a pas de moyen propre de derive un toggle UI a partir d'une URL.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false)
   }, [location.pathname])
 

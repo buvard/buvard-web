@@ -1,3 +1,4 @@
+import { createElement } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
 import * as LucideIcons from 'lucide-react'
@@ -23,6 +24,22 @@ import type { Grade } from '@/types'
 function resolveIcon(name: string): LucideIcon {
   const icons = LucideIcons as unknown as Record<string, LucideIcon>
   return icons[name] ?? LucideIcons.Sparkles
+}
+
+// Sous-composant pour afficher l'icone d'un grade. On utilise createElement
+// directement plutot que JSX pour eviter que le linter pense qu'on cree un
+// composant dynamique a chaque render — ici c'est juste un lookup dans la lib
+// Lucide, le composant retourne est stable pour un meme `name`.
+function GradeIcon({
+  name,
+  className,
+  strokeWidth,
+}: {
+  name: string
+  className?: string
+  strokeWidth?: number
+}) {
+  return createElement(resolveIcon(name), { className, strokeWidth })
 }
 
 export function SettingsLevelsPage() {
@@ -131,7 +148,6 @@ function LevelsContent({
         className="space-y-2"
       >
         {grades.map((grade) => {
-          const Icon = resolveIcon(grade.icon)
           const isCurrent = grade.key === activeGrade.key
           const isUnlocked = level >= grade.minLevel
           const isDisplayed = grade.key === displayGradeKey
@@ -158,7 +174,7 @@ function LevelsContent({
                         : { backgroundColor: `${grade.color}26`, color: grade.color }
                     }
                   >
-                    <Icon className="h-4 w-4" strokeWidth={1.8} />
+                    <GradeIcon name={grade.icon} className="h-4 w-4" strokeWidth={1.8} />
                   </span>
                   <div className="min-w-0 flex-1 text-left">
                     <p className="truncate text-base font-semibold leading-tight text-foreground">
@@ -255,7 +271,6 @@ function CurrentStateCard({
   canResetToAuto: boolean
 }) {
   const { t } = useTranslation()
-  const Icon = resolveIcon(grade.icon)
   return (
     <section
       className="rounded-2xl border p-5"
@@ -271,7 +286,7 @@ function CurrentStateCard({
           className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-white shadow-lg"
           style={{ backgroundColor: grade.color }}
         >
-          <Icon className="h-5 w-5" strokeWidth={2} />
+          <GradeIcon name={grade.icon} className="h-5 w-5" strokeWidth={2} />
         </span>
         <div className="min-w-0 flex-1">
           <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">

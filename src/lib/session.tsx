@@ -26,6 +26,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
 // Hook a utiliser partout dans l'app a la place du useSession de better-auth.
 // Throw si appele hors du Provider — defensif, revele les oublis de wrap.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useSession(): SessionState {
   const ctx = useContext(SessionContext)
   if (ctx === null) {

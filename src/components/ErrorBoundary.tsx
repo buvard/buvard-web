@@ -21,7 +21,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, info: { componentStack?: string | null }): void {
-    // eslint-disable-next-line no-console -- log crash pour Sentry futur
+    // Log crash pour Sentry futur
     console.error('[ErrorBoundary] crash', error, info.componentStack)
   }
 

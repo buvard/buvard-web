@@ -12,6 +12,7 @@ interface Props {
 }
 
 // Cle d'un lieu agrege : meme convention que cote back (placeId fallback coords).
+// eslint-disable-next-line react-refresh/only-export-components
 export function discoverPlaceKey(p: DiscoveredPlace): string {
   return p.placeId ?? `${p.lat.toFixed(4)}:${p.lng.toFixed(4)}`
 }

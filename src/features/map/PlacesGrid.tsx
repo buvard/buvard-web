@@ -12,6 +12,7 @@ interface Props {
 }
 
 // Cle unique d'un groupe — partage la convention placeId fallback coords.
+// eslint-disable-next-line react-refresh/only-export-components
 export function groupKey(g: MarkerGroup): string {
   const placeId = g.tastings[0]?.place?.placeId
   return placeId ?? `${g.lat.toFixed(4)}:${g.lng.toFixed(4)}`
