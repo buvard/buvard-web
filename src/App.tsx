@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { router } from '@/router'
 import { AppUrlListener } from '@/components/AppUrlListener'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { NativeUpdatePrompt } from '@/components/NativeUpdatePrompt'
 import { Toaster } from '@/components/ui/sonner'
 import { UpdatePrompt } from '@/components/UpdatePrompt'
 import { SessionProvider } from '@/lib/session'
@@ -37,6 +38,9 @@ export function App() {
           <AppUrlListener />
           <Toaster position="top-center" />
           <UpdatePrompt />
+          {/* Check de version native (APK Android) — affiche un toast quand
+              une nouvelle Github Release est dispo. PWA/web : no-op. */}
+          <NativeUpdatePrompt />
         </SessionProvider>
       </QueryClientProvider>
     </ErrorBoundary>

@@ -9,6 +9,16 @@
     "moderation": "L'abusu d'alcolu hè periculosu per a salute. Da cunsumà cù muderazione.",
     "getApp": "App mobile"
   },
+  "update": {
+    "available": "Nova versione dispunibule",
+    "availableDesc": "Riavvia l'app per applicà la.",
+    "restart": "Riavvia",
+    "native": {
+      "title": "Versione {{version}} dispunibule",
+      "description": "Sì in {{current}}. Scarica l'ultima da Buvard.app.",
+      "cta": "Scaricà"
+    }
+  },
   "nav": {
     "feed": "Filu",
     "discover": "Scopre",

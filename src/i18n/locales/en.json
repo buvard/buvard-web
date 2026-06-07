@@ -19,7 +19,12 @@
   "update": {
     "available": "New version available",
     "availableDesc": "Restart the app to apply it.",
-    "restart": "Restart"
+    "restart": "Restart",
+    "native": {
+      "title": "Version {{version}} available",
+      "description": "You're on {{current}}. Get the latest from Buvard.app.",
+      "cta": "Download"
+    }
   },
   "nav": {
     "feed": "Feed",
