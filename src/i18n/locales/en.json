@@ -175,11 +175,14 @@
     }
   },
   "feed": {
-    "title": "Feed",
-    "subtitle": "Your friends' latest tastings",
-    "empty": "No posts yet.",
-    "emptyHint": "Add your first tasting to start the feed.",
-    "error": "Could not load the feed."
+    "title": "At the bar",
+    "subtitle": "What the world is sipping right now",
+    "empty": "The bar is empty.",
+    "emptyHint": "Be the first to uncork a bottle.",
+    "emptyAction": "Add a tasting",
+    "error": "Could not load the feed.",
+    "filterAll": "All",
+    "noResultsForFilter": "Nothing in this category yet."
   },
   "discover": {
     "title": "Discover",

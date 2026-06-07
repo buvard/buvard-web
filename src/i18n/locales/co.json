@@ -168,11 +168,14 @@
     }
   },
   "feed": {
-    "title": "Filu",
-    "subtitle": "L'ultime degustazioni di i to cumpagni",
-    "empty": "Nisuna publicazione.",
-    "emptyHint": "Aghjunghji a to prima degustazione per principià u filu.",
-    "error": "Impussibile di carcà u filu."
+    "title": "À u banconu",
+    "subtitle": "Ciò chì u mondu sirote avà",
+    "empty": "U banconu hè viotu.",
+    "emptyHint": "Sì u primu à sturà una buttiglia.",
+    "emptyAction": "Aghjunghje una degustazione",
+    "error": "Impussibile di carcà u filu.",
+    "filterAll": "Tuttu",
+    "noResultsForFilter": "Nunda in sta categuria per avà."
   },
   "discover": {
     "title": "Scopre",

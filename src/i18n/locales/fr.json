@@ -175,11 +175,14 @@
     }
   },
   "feed": {
-    "title": "Fil",
-    "subtitle": "Les dernières dégustations de tes potes",
-    "empty": "Pas encore de publication.",
-    "emptyHint": "Ajoute ta première dégustation pour lancer le fil.",
-    "error": "Impossible de charger le fil."
+    "title": "Au comptoir",
+    "subtitle": "Ce que le monde sirote en ce moment",
+    "empty": "Le bar est vide.",
+    "emptyHint": "Sois le premier à dégoupiller une bouteille.",
+    "emptyAction": "Ajouter une dégustation",
+    "error": "Impossible de charger le fil.",
+    "filterAll": "Tout",
+    "noResultsForFilter": "Rien dans cette catégorie pour l'instant."
   },
   "discover": {
     "title": "Découvrir",
