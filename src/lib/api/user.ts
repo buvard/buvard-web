@@ -4,7 +4,7 @@ import {
   useQueryClient,
   type UseQueryOptions,
 } from '@tanstack/react-query'
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { useApi } from './useApi'
 import type {
   ListQueryParams,
@@ -86,6 +86,30 @@ export function useUpdateMe() {
     },
     onSuccess: (user) => {
       qc.setQueryData(userKeys.me, user)
+    },
+  })
+}
+
+// ============================================================
+// PATCH /me/grade — selection du grade d'affichage (parmi debloque)
+// ============================================================
+export function useSetDisplayGrade() {
+  const api = useApi()
+  const qc = useQueryClient()
+  return useMutation({
+    // `key` = cle du grade a afficher, ou null pour revenir a l'auto.
+    mutationFn: async (key: string | null) => {
+      const { user } = await api<{ user: User }>('/api/v1/users/me/grade', {
+        method: 'PATCH',
+        body: { key },
+      })
+      return user
+    },
+    onSuccess: (user) => {
+      qc.setQueryData(userKeys.me, user)
+      // Stats embarque aussi gamification — invalide pour resync sur la
+      // page Levels (qui lit me.gamification mais aussi via /me/stats).
+      void qc.invalidateQueries({ queryKey: userKeys.stats })
     },
   })
 }

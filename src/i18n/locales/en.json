@@ -8,7 +8,8 @@
     "clear": "Clear",
     "loading": "Loading…",
     "loadMore": "Load more",
-    "moderation": "Alcohol abuse is dangerous for your health. Please drink responsibly."
+    "moderation": "Alcohol abuse is dangerous for your health. Please drink responsibly.",
+    "getApp": "Mobile app"
   },
   "search": {
     "placeholder": "Search",
@@ -25,7 +26,15 @@
     "discover": "Discover",
     "add": "Add",
     "map": "Map",
-    "profile": "Profile"
+    "profile": "Profile",
+    "marketing": {
+      "features": "Features",
+      "download": "Download",
+      "about": "About",
+      "legal": "Legal",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
+    }
   },
   "auth": {
     "signIn": "Sign in",
@@ -56,6 +65,7 @@
     "features": {
       "eyebrow": "How it works",
       "title": "An app built for people who take their time.",
+      "seeAll": "See all",
       "capture": {
         "title": "Capture your tastings",
         "desc": "Photo, rating, taste notes, location. In a few seconds, your tasting is saved forever."
@@ -73,6 +83,89 @@
       "eyebrow": "Let's go",
       "title": "Ready to log your first bottle?",
       "subtitle": "Create your account in 30 seconds. No credit card required."
+    }
+  },
+  "features": {
+    "eyebrow": "Features",
+    "title": "Everything you need to keep track of your tastings",
+    "subtitle": "A simple app for enthusiasts and beginners alike. No fluff, just the essentials.",
+    "map": {
+      "title": "Map of your tastings",
+      "desc": "Find where you drank what. Bar, cellar, dinner at a friend's — every memory has its place on the map."
+    },
+    "taste": {
+      "title": "Detailed tasting notes",
+      "desc": "Aromas, balance, intensity. Build your vocabulary as you go through bottles."
+    },
+    "responsible": {
+      "title": "Drink in moderation",
+      "desc": "We never push you to drink more: Buvard keeps your memories, not your excesses."
+    }
+  },
+  "download": {
+    "eyebrow": "On mobile",
+    "title": "Buvard in your pocket",
+    "subtitle": "Download the app directly, no store required. Self-hosted distribution.",
+    "android": {
+      "title": "Android",
+      "desc": "Download the APK and install it on your phone. Auto-updates once signed in.",
+      "cta": "Download the APK",
+      "unavailable": "No release available yet",
+      "publishedOn": "Published on {{date}}",
+      "hint": "Compatible with Android 7.0 and later."
+    },
+    "ios": {
+      "title": "iOS",
+      "desc": "No App Store? No problem. Add Buvard to your home screen to use it like a real app.",
+      "step1": "Open this page in Safari (not another app).",
+      "step2": "Tap the Share button at the bottom of the screen.",
+      "step3": "Pick \"Add to Home Screen\" in the list.",
+      "hint": "The Buvard icon will appear like an app — tap it and you're in."
+    },
+    "install": {
+      "title": "How to install the Android APK",
+      "step1": "Download the file on your phone.",
+      "step2": "Allow installation from this source in your settings.",
+      "step3": "Open the file and follow the instructions."
+    }
+  },
+  "about": {
+    "eyebrow": "Our story",
+    "title": "Why Buvard?",
+    "subtitle": "An app born from a simple frustration: everything we tasted ended up forgotten.",
+    "mission": {
+      "title": "Our mission",
+      "body": "Help anyone keep track of what they drink, without judgement and without gamification. Your tastings belong to you — we just help you organize them."
+    },
+    "values": {
+      "title": "Our values",
+      "body": "No ads, no algorithm pushing you to drink more. A sober app that respects your pace and your health."
+    },
+    "team": {
+      "title": "The team",
+      "body": "An independent project run by wine, beer and spirits lovers. We code, we taste, we iterate."
+    }
+  },
+  "legal": {
+    "eyebrow": "Legal notice",
+    "title": "Terms & privacy",
+    "subtitle": "All the legal information about using Buvard.",
+    "updated": "Last updated: {{date}}",
+    "terms": {
+      "title": "Terms of use",
+      "body": "Access to Buvard is reserved for adults of legal drinking age in their country of residence. Users agree to publish respectful content that complies with the law."
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "body": "Buvard only collects data necessary for the service to work: email, credentials, content you publish. No data is sold to third parties."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Only strictly necessary cookies (session, preferences) are used. No advertising tracking cookies."
+    },
+    "contact": {
+      "title": "Contact",
+      "body": "For any question about your data or your use of the service: contact@buvard.app"
     }
   },
   "feed": {
@@ -144,6 +237,7 @@
     "retake": "Retake",
     "moreDetails": "More details",
     "success": "Tasting published",
+    "xpGained": "+{{xp}} XP earned",
     "errors": {
       "nameRequired": "Bottle name is required.",
       "photoRequired": "A photo is required.",
@@ -175,10 +269,8 @@
   },
   "map": {
     "title": "Tastings map",
-    "subtitle_one": "{{count}} geolocated tasting",
-    "subtitle_other": "{{count}} geolocated tastings",
     "tabs": {
-      "mine": "Mine",
+      "mine": "My spots",
       "friends": "Friends",
       "discover": "Discover"
     },
@@ -189,7 +281,21 @@
     },
     "emptyHint": "Pick a location through the autocomplete to see it appear on the map.",
     "error": "Could not load the map.",
-    "tastingsHere": "tastings at this place",
+    "places": {
+      "title": "Your places",
+      "count_one": "{{count}} place",
+      "count_other": "{{count}} places",
+      "tastingsCount_one": "{{count}} tasting",
+      "tastingsCount_other": "{{count}} tastings",
+      "lastVisit": "Last visit on {{date}}",
+      "unnamed": "Unnamed place"
+    },
+    "discover": {
+      "title": "Places to discover",
+      "tastingsCount_one": "{{count}} tasting",
+      "tastingsCount_other": "{{count}} tastings",
+      "lastTasting": "Last tasting on {{date}}"
+    },
     "historyCount_one": "{{count}} tasting",
     "historyCount_other": "{{count}} tastings"
   },
@@ -265,15 +371,46 @@
     "empty": "No tasting yet.",
     "level": "Level {{level}}",
     "xp": "{{xp}} XP",
+    "xpProgressLabel": "Progress",
     "streak_one": "{{count}} day",
     "streak_other": "{{count}} days",
+    "streakLongest_one": "Best streak: {{count}} day",
+    "streakLongest_other": "Best streak: {{count}} days",
     "joinedOn": "Member since {{date}}",
     "tabs": {
       "all": "All",
       "favorites": "Favorites",
       "categories": "Categories"
     },
-    "favoritesComingSoon": "Favorites are coming soon."
+    "favoritesComingSoon": "Favorites are coming soon.",
+    "levelDialog": {
+      "title": "Level & XP",
+      "subtitle": "How to level up and keep your streak alive.",
+      "tiers": "Upcoming tiers",
+      "toNext": "{{xp}} XP left to reach level {{level}}.",
+      "streakHint": "Post at least one tasting per day to keep your streak alive. Miss a day and it resets to 1.",
+      "perUnit": "/ unit",
+      "oneShot": "(one-time)",
+      "section": {
+        "tasting": "Per tasting",
+        "social": "Engagement received",
+        "milestones": "One-time milestones"
+      },
+      "rules": {
+        "tasting": "Post a tasting",
+        "place": "Add a location",
+        "longNotes": "Detailed notes (≥ 50 characters)",
+        "aromas": "At least 3 aromas",
+        "extraPhoto": "Each additional photo",
+        "likeReceived": "Receive a like",
+        "follower": "Gain a new follower",
+        "onboarding": "Complete onboarding",
+        "firstTasting": "First tasting",
+        "firstFollower": "First follower",
+        "profileComplete": "Complete profile (avatar + bio + location)",
+        "streakMilestone": "{{days}}-day streak"
+      }
+    }
   },
   "public": {
     "notFound": "This profile doesn't exist or is private.",
@@ -284,7 +421,13 @@
     "blocked": "User blocked",
     "unblocked": "User unblocked",
     "followForbidden": "You can't follow this user.",
-    "selfAction": "Can't do this on your own account."
+    "selfAction": "Can't do this on your own account.",
+    "empty": "No public tasting yet."
+  },
+  "tastingDetail": {
+    "loading": "Loading…",
+    "notFound": "This tasting doesn't exist or has been deleted.",
+    "error": "Couldn't load the tasting."
   },
   "relations": {
     "empty": "Nobody here yet."
@@ -357,8 +500,53 @@
     "saveError": "Couldn't save",
     "groups": {
       "app": "App",
+      "gamification": "Progress",
       "social": "Social",
       "account": "Account"
+    },
+    "levels": {
+      "title": "Levels & grades",
+      "subtitle": "Every step of your tasting journey",
+      "shortHint": "From Gulp Virgin to God of Debauchery",
+      "gradeRange": "Level {{min}} to {{max}}",
+      "gradeSingleLevel": "Level {{level}}",
+      "maxLevelNote": "Level {{max}} marks the peak — becoming a Buvard Legend.",
+      "loadError": "Couldn't load the tiers. Try again later.",
+      "gradeActive": "Displayed",
+      "gradeSetAsTitle": "Set as title",
+      "gradeSelected": "Grade updated",
+      "gradeOverrideHint": "You picked this grade as title — it shows everywhere",
+      "gradeResetAuto": "Auto",
+      "grades": {
+        "curious": {
+          "name": "Gulp Virgin",
+          "desc": "You've never really opened your mouth for anything stronger than a Capri-Sun. Your throat is virgin, the glass terrifies you. But trust us: it's about to pop off."
+        },
+        "explorer": {
+          "name": "Cork Sucker",
+          "desc": "You're starting to let loose: a cork here, a bottleneck there. The palate opens, the cravings rise. Soon you'll pounce on the first bottle that walks by."
+        },
+        "amateur": {
+          "name": "Cask Swallower",
+          "desc": "You knock back bottles like other people walk down stairs. Nothing kills your appetite anymore — you could swallow an entire cask without flinching."
+        },
+        "connoisseur": {
+          "name": "Bottle Fucker",
+          "desc": "Zero restraint left: you grab the bottle by the neck and bottoms-up without asking permission. Amateurs watch and regret their sparkling water."
+        },
+        "sommelier": {
+          "name": "Booze Whore",
+          "desc": "You spin bottles around you like a harem. Every bar in town knows you by your performances — you rarely leave alone."
+        },
+        "master": {
+          "name": "Pope of Filth",
+          "desc": "You're the absolute reference of liquid debauchery. They invite you to orgies to bless the bottles and judge the performances. Your verdict is law."
+        },
+        "legend": {
+          "name": "God of Debauchery",
+          "desc": "You've hit the summit: bottles bow when you walk into a bar, angels come down from heaven to pour your apéro. You're above the pantheon, above everything."
+        }
+      }
     },
     "profile": {
       "title": "Profile",

@@ -71,3 +71,26 @@ export interface ListTastingsParams {
   limit?: number
   type?: TastingType
 }
+
+// Lieu pre-agrege renvoye par GET /v1/tastings/discover/places.
+// Cote back : DiscoveredPlace dans tasting.service.ts.
+export interface DiscoveredPlace {
+  placeId: string | null
+  name: string
+  lat: number
+  lng: number
+  tastingsCount: number
+  averageRating: number
+  lastTastingAt: string
+  coverPhotoUrl: string | null
+  sampleTypes: TastingType[]
+}
+
+export interface ListDiscoverPlacesParams {
+  page?: number
+  limit?: number
+  type?: TastingType
+  // Bounding box "swLat,swLng,neLat,neLng" — coords du viewport. Optionnel :
+  // si absent, on recupere les lieux globalement (paginated).
+  bbox?: string
+}

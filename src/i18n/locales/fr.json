@@ -8,7 +8,8 @@
     "clear": "Effacer",
     "loading": "Chargement…",
     "loadMore": "Charger plus",
-    "moderation": "L'abus d'alcool est dangereux pour la santé. À consommer avec modération."
+    "moderation": "L'abus d'alcool est dangereux pour la santé. À consommer avec modération.",
+    "getApp": "L'app mobile"
   },
   "search": {
     "placeholder": "Rechercher",
@@ -25,7 +26,15 @@
     "discover": "Découvrir",
     "add": "Ajouter",
     "map": "Carte",
-    "profile": "Profil"
+    "profile": "Profil",
+    "marketing": {
+      "features": "Fonctionnalités",
+      "download": "Télécharger",
+      "about": "À propos",
+      "legal": "Mentions légales",
+      "openMenu": "Ouvrir le menu",
+      "closeMenu": "Fermer le menu"
+    }
   },
   "auth": {
     "signIn": "Se connecter",
@@ -56,6 +65,7 @@
     "features": {
       "eyebrow": "Comment ça marche",
       "title": "Une appli pensée pour les gens qui prennent leur temps.",
+      "seeAll": "Voir tout",
       "capture": {
         "title": "Capture tes dégustations",
         "desc": "Photo, note, notes de goût, lieu. En quelques secondes, ta dégustation est gardée pour toujours."
@@ -73,6 +83,89 @@
       "eyebrow": "C'est parti",
       "title": "Prêt à enregistrer ta première bouteille ?",
       "subtitle": "Crée ton compte en 30 secondes. Aucune carte bancaire demandée."
+    }
+  },
+  "features": {
+    "eyebrow": "Fonctionnalités",
+    "title": "Tout ce qu'il faut pour suivre tes dégustations",
+    "subtitle": "Une appli simple, pensée pour les amateurs comme pour les curieux. Pas de chichi, juste l'essentiel.",
+    "map": {
+      "title": "Carte de tes dégustations",
+      "desc": "Retrouve où tu as bu quoi. Bar, cave, soirée chez les potes — chaque souvenir a sa place sur la carte."
+    },
+    "taste": {
+      "title": "Notes de goût détaillées",
+      "desc": "Arômes, équilibre, intensité. Construis ton vocabulaire au fil des bouteilles."
+    },
+    "responsible": {
+      "title": "Boire avec mesure",
+      "desc": "On ne pousse jamais à la conso : Buvard te garde tes souvenirs, pas tes excès."
+    }
+  },
+  "download": {
+    "eyebrow": "Sur mobile",
+    "title": "Buvard dans ta poche",
+    "subtitle": "Télécharge l'app directement, pas besoin de passer par un store. Distribution maison.",
+    "android": {
+      "title": "Android",
+      "desc": "Télécharge l'APK et installe-le sur ton téléphone. Mise à jour auto une fois connecté.",
+      "cta": "Télécharger l'APK",
+      "unavailable": "Aucune version disponible pour l'instant",
+      "publishedOn": "Publié le {{date}}",
+      "hint": "Compatible Android 7.0 et plus récent."
+    },
+    "ios": {
+      "title": "iOS",
+      "desc": "Pas d'App Store ? Pas de souci. Ajoute Buvard à ton écran d'accueil pour l'utiliser comme une vraie app.",
+      "step1": "Ouvre cette page dans Safari (pas dans une autre app).",
+      "step2": "Touche le bouton Partager en bas de l'écran.",
+      "step3": "Choisis « Sur l'écran d'accueil » dans la liste.",
+      "hint": "L'icône Buvard apparaîtra comme une app — appui dessus, et c'est parti."
+    },
+    "install": {
+      "title": "Comment installer l'APK Android",
+      "step1": "Télécharge le fichier sur ton téléphone.",
+      "step2": "Autorise l'installation depuis cette source dans les réglages.",
+      "step3": "Ouvre le fichier et suis les instructions."
+    }
+  },
+  "about": {
+    "eyebrow": "Notre histoire",
+    "title": "Pourquoi Buvard ?",
+    "subtitle": "Une appli née d'une frustration simple : tout ce qu'on goûtait finissait par s'oublier.",
+    "mission": {
+      "title": "Notre mission",
+      "body": "Aider chacun à garder une trace de ce qu'il boit, sans jugement et sans gamification. Tes dégustations t'appartiennent, on ne fait que les organiser."
+    },
+    "values": {
+      "title": "Nos valeurs",
+      "body": "Pas de pubs, pas d'algorithme qui pousse à consommer plus. Une appli sobre, qui respecte ton rythme et ta santé."
+    },
+    "team": {
+      "title": "L'équipe",
+      "body": "Un projet indépendant porté par des amateurs de vin, de bière et de spiritueux. On code, on goûte, on itère."
+    }
+  },
+  "legal": {
+    "eyebrow": "Mentions légales",
+    "title": "Conditions & confidentialité",
+    "subtitle": "Toutes les informations légales relatives à l'utilisation de Buvard.",
+    "updated": "Dernière mise à jour : {{date}}",
+    "terms": {
+      "title": "Conditions d'utilisation",
+      "body": "L'accès à Buvard est réservé aux personnes majeures, en âge légal de consommer de l'alcool dans leur pays de résidence. L'utilisateur s'engage à publier des contenus respectueux et conformes à la loi."
+    },
+    "privacy": {
+      "title": "Politique de confidentialité",
+      "body": "Buvard collecte uniquement les données nécessaires au fonctionnement du service : email, identifiants, contenus que tu publies. Aucune donnée n'est revendue à des tiers."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "body": "Seuls les cookies strictement nécessaires (session, préférences) sont utilisés. Aucun cookie de tracking publicitaire."
+    },
+    "contact": {
+      "title": "Contact",
+      "body": "Pour toute question relative à tes données ou à l'utilisation du service : contact@buvard.app"
     }
   },
   "feed": {
@@ -144,6 +237,7 @@
     "retake": "Reprendre",
     "moreDetails": "Plus de détails",
     "success": "Dégustation publiée",
+    "xpGained": "+{{xp}} XP gagnés",
     "errors": {
       "nameRequired": "Le nom de la bouteille est obligatoire.",
       "photoRequired": "Une photo est obligatoire.",
@@ -175,10 +269,8 @@
   },
   "map": {
     "title": "Carte des dégustations",
-    "subtitle_one": "{{count}} dégustation géolocalisée",
-    "subtitle_other": "{{count}} dégustations géolocalisées",
     "tabs": {
-      "mine": "Mes",
+      "mine": "Mes spots",
       "friends": "Mes potes",
       "discover": "Découvrir"
     },
@@ -189,7 +281,21 @@
     },
     "emptyHint": "Sélectionne un lieu via l'autocomplete pour qu'il apparaisse sur la carte.",
     "error": "Impossible de charger la carte.",
-    "tastingsHere": "dégustations à ce lieu",
+    "places": {
+      "title": "Tes lieux",
+      "count_one": "{{count}} lieu",
+      "count_other": "{{count}} lieux",
+      "tastingsCount_one": "{{count}} dégustation",
+      "tastingsCount_other": "{{count}} dégustations",
+      "lastVisit": "Dernier passage le {{date}}",
+      "unnamed": "Lieu sans nom"
+    },
+    "discover": {
+      "title": "Lieux à découvrir",
+      "tastingsCount_one": "{{count}} dégustation",
+      "tastingsCount_other": "{{count}} dégustations",
+      "lastTasting": "Dernière dégustation le {{date}}"
+    },
     "historyCount_one": "{{count}} dégustation",
     "historyCount_other": "{{count}} dégustations"
   },
@@ -265,15 +371,46 @@
     "empty": "Aucune dégustation pour le moment.",
     "level": "Niveau {{level}}",
     "xp": "{{xp}} XP",
+    "xpProgressLabel": "Progression",
     "streak_one": "{{count}} jour",
     "streak_other": "{{count}} jours",
+    "streakLongest_one": "Record : {{count}} jour",
+    "streakLongest_other": "Record : {{count}} jours",
     "joinedOn": "Membre depuis {{date}}",
     "tabs": {
       "all": "Toutes",
       "favorites": "Favoris",
       "categories": "Catégories"
     },
-    "favoritesComingSoon": "Les favoris arrivent bientôt."
+    "favoritesComingSoon": "Les favoris arrivent bientôt.",
+    "levelDialog": {
+      "title": "Niveau & XP",
+      "subtitle": "Comment monter en niveau et garder ton streak.",
+      "tiers": "Paliers à venir",
+      "toNext": "Encore {{xp}} XP pour atteindre le niveau {{level}}.",
+      "streakHint": "Publie au moins une dégustation par jour pour garder ton streak vivant. Un seul jour manqué remet le compteur à 1.",
+      "perUnit": "/ unité",
+      "oneShot": "(unique)",
+      "section": {
+        "tasting": "À chaque dégustation",
+        "social": "Engagement reçu",
+        "milestones": "Étapes uniques"
+      },
+      "rules": {
+        "tasting": "Publier une dégustation",
+        "place": "Renseigner un lieu",
+        "longNotes": "Notes détaillées (≥ 50 caractères)",
+        "aromas": "Au moins 3 arômes",
+        "extraPhoto": "Chaque photo supplémentaire",
+        "likeReceived": "Recevoir un like",
+        "follower": "Gagner un nouveau follower",
+        "onboarding": "Compléter l'inscription",
+        "firstTasting": "Première dégustation",
+        "firstFollower": "Premier follower",
+        "profileComplete": "Profil complet (avatar + bio + lieu)",
+        "streakMilestone": "Streak de {{days}} jours"
+      }
+    }
   },
   "public": {
     "notFound": "Ce profil n'existe pas ou est privé.",
@@ -284,7 +421,13 @@
     "blocked": "Utilisateur bloqué",
     "unblocked": "Utilisateur débloqué",
     "followForbidden": "Tu ne peux pas suivre cet utilisateur.",
-    "selfAction": "Action impossible sur ton propre compte."
+    "selfAction": "Action impossible sur ton propre compte.",
+    "empty": "Aucune dégustation publique pour le moment."
+  },
+  "tastingDetail": {
+    "loading": "Chargement…",
+    "notFound": "Cette dégustation n'existe pas ou a été supprimée.",
+    "error": "Impossible de charger la dégustation."
   },
   "relations": {
     "empty": "Personne ici pour le moment."
@@ -357,8 +500,53 @@
     "saveError": "Impossible d'enregistrer",
     "groups": {
       "app": "Application",
+      "gamification": "Progression",
       "social": "Social",
       "account": "Compte"
+    },
+    "levels": {
+      "title": "Niveaux & grades",
+      "subtitle": "Toutes les étapes de ton parcours dégustation",
+      "shortHint": "De la Pucelle du goulot au Dieu de la débauche",
+      "gradeRange": "Niveau {{min}} à {{max}}",
+      "gradeSingleLevel": "Niveau {{level}}",
+      "maxLevelNote": "Le niveau {{max}} marque le sommet — devenir une Légende du verre.",
+      "loadError": "Impossible de charger les paliers. Réessaie plus tard.",
+      "gradeActive": "Affiché",
+      "gradeSetAsTitle": "Mettre en avant",
+      "gradeSelected": "Grade mis à jour",
+      "gradeOverrideHint": "Tu as choisi ce grade comme titre — il s'affiche partout",
+      "gradeResetAuto": "Auto",
+      "grades": {
+        "curious": {
+          "name": "Pucelle du goulot",
+          "desc": "T'as jamais vraiment ouvert la bouche pour autre chose qu'un Caprisun. Ton gosier est vierge, le verre te terrifie. Mais on te promet : ça va dégoupiller."
+        },
+        "explorer": {
+          "name": "Suceuse de bouchon",
+          "desc": "Tu commences à te lâcher : un bouchon par-ci, un goulot par-là. Le palais s'ouvre, l'envie monte. Bientôt tu sauteras sur la première bouteille qui passe."
+        },
+        "amateur": {
+          "name": "Avale-fût",
+          "desc": "Tu descends les bouteilles comme d'autres descendent les escaliers. Plus rien ne te coupe l'appétit — tu pourrais avaler un fût entier sans broncher."
+        },
+        "connoisseur": {
+          "name": "Encule-bouteille",
+          "desc": "T'as plus aucune retenue : tu chopes la bouteille par le goulot et tu la vides cul-sec sans demander son avis. Les amateurs te regardent et regrettent leur eau gazeuse."
+        },
+        "sommelier": {
+          "name": "Pute du pinard",
+          "desc": "Tu fais tourner les bouteilles autour de toi comme un harem. Tous les bars du quartier te connaissent par tes performances — t'en repars rarement seul·e."
+        },
+        "master": {
+          "name": "Pape du foutre",
+          "desc": "T'es la référence absolue de la débauche éthylique. On t'invite dans les orgies pour bénir les bouteilles et juger les performances. Ton verdict fait foi."
+        },
+        "legend": {
+          "name": "Dieu de la débauche",
+          "desc": "T'as atteint le summum : les bouteilles s'inclinent quand tu rentres dans un bar, les anges descendent du ciel pour te servir l'apéro. T'es au-dessus du panthéon, t'es au-dessus de tout."
+        }
+      }
     },
     "profile": {
       "title": "Profil",

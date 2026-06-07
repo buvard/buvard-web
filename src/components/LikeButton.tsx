@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Heart } from 'lucide-react'
 import { useLikeTasting, useUnlikeTasting } from '@/lib/api/tasting'
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { cn } from '@/lib/utils'
 
 interface Props {

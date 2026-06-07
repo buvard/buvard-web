@@ -78,6 +78,10 @@ export function ProfilePage() {
     stats.data?.followingCount ?? me.data?.stats.followingCount ?? 0
   const gamification = stats.data?.gamification ?? me.data?.gamification
   const streak = gamification?.streak.current ?? 0
+  const longestStreak = gamification?.streak.longest ?? 0
+  const xp = gamification?.xp ?? 0
+  // Cle effective du grade affiche : override choisi par le user > grade auto.
+  const gradeKey = gamification?.displayGrade ?? gamification?.grade ?? null
   const tastingsByCategory = me.data?.stats.tastingsByCategory ?? {}
 
   const joinDate = stats.data?.joinDate ?? me.data?.createdAt
@@ -258,7 +262,10 @@ export function ProfilePage() {
       verified={me.data?.verified}
       role={role}
       level={gamification?.level}
+      xp={xp}
       streak={streak}
+      longestStreak={longestStreak}
+      gradeKey={gradeKey}
       location={me.data?.location}
       joinDate={joinDate}
       bio={me.data?.bio}

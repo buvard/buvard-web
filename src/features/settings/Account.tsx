@@ -14,7 +14,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog'
-import { authClient, useSession } from '@/lib/auth-client'
+import { authClient } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { useDeleteMe } from '@/lib/api/user'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import { AtSign, LogOut, Trash2 } from 'lucide-react'

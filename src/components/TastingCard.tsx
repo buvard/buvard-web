@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { LikeButton } from '@/components/LikeButton'
@@ -8,6 +9,7 @@ import { MentionText } from '@/components/MentionText'
 import { PhotoCarousel } from '@/components/PhotoCarousel'
 import { UserLink } from '@/components/UserLink'
 import { TastingActions } from '@/components/TastingActions'
+import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import { Lock, MapPin, Star } from 'lucide-react'
 import type { Tasting } from '@/types'
 
@@ -66,6 +68,7 @@ interface Props {
 //   3. CONTENU : titre + meta · lieu · aromes · caption
 export function TastingCard({ tasting }: Props) {
   const { t, i18n } = useTranslation()
+  const localizedPath = useLocalizedPath()
   const displayName = tasting.author.displayName?.trim() || tasting.author.username
   const isPrivate = tasting.visibility === 'private'
   const aromasVisible = tasting.aromas.slice(0, MAX_AROMAS_SHOWN)
@@ -144,7 +147,12 @@ export function TastingCard({ tasting }: Props) {
 
         <div>
           <h3 className="text-lg font-semibold leading-tight tracking-tight text-foreground">
-            {tasting.name}
+            <Link
+              to={localizedPath(`/tasting/${tasting.id}`)}
+              className="hover:underline"
+            >
+              {tasting.name}
+            </Link>
           </h3>
           {productMeta.length > 0 && (
             <p className="mt-1 text-sm text-muted-foreground">

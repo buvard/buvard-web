@@ -5,6 +5,7 @@ import { AppUrlListener } from '@/components/AppUrlListener'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { Toaster } from '@/components/ui/sonner'
 import { UpdatePrompt } from '@/components/UpdatePrompt'
+import { SessionProvider } from '@/lib/session'
 import '@/i18n/config'
 
 const queryClient = new QueryClient({
@@ -28,10 +29,15 @@ export function App() {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <AppUrlListener />
-        <Toaster position="top-center" />
-        <UpdatePrompt />
+        {/* SessionProvider est un seul subscriber au store better-auth :
+            tous les useSession() de l'app lisent la valeur via Context au
+            lieu de re-fetcher /api/auth/get-session a chaque mount. */}
+        <SessionProvider>
+          <RouterProvider router={router} />
+          <AppUrlListener />
+          <Toaster position="top-center" />
+          <UpdatePrompt />
+        </SessionProvider>
       </QueryClientProvider>
     </ErrorBoundary>
   )

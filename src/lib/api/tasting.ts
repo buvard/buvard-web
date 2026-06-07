@@ -6,10 +6,13 @@ import {
   type InfiniteData,
   type UseQueryOptions,
 } from '@tanstack/react-query'
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { useApi } from './useApi'
+import { userKeys } from './user'
 import type {
   CreateTastingPayload,
+  DiscoveredPlace,
+  ListDiscoverPlacesParams,
   ListTastingsParams,
   Paginated,
   Tasting,
@@ -25,6 +28,8 @@ export const tastingKeys = {
     ['tasting', 'feed', params ?? {}] as const,
   discover: (params?: ListTastingsParams) =>
     ['tasting', 'discover', params ?? {}] as const,
+  discoverPlaces: (params?: ListDiscoverPlacesParams) =>
+    ['tasting', 'discover', 'places', params ?? {}] as const,
   mine: (params?: ListTastingsParams) =>
     ['tasting', 'mine', params ?? {}] as const,
   byUsername: (username: string, params?: ListTastingsParams) =>
@@ -78,6 +83,29 @@ export function useDiscover(params: ListTastingsParams = {}) {
     },
     initialPageParam: 1,
     getNextPageParam: (last) => (last.hasMore ? last.page + 1 : undefined),
+    retry: false,
+  })
+}
+
+// ============================================================
+// GET /tastings/discover/places — lieux pre-agreges (auth requise)
+// Onglet "Decouvrir" de la page Map : la grille de cards est rendue a partir
+// de cette reponse, plus besoin de grouper en JS.
+// ============================================================
+export function useDiscoverPlaces(params: ListDiscoverPlacesParams = {}) {
+  const api = useApi()
+  const { data: session, isPending } = useSession()
+  const isSignedIn = !!session
+  return useInfiniteQuery({
+    queryKey: tastingKeys.discoverPlaces(params),
+    queryFn: async ({ pageParam }) => {
+      return await api<Paginated<DiscoveredPlace>>(
+        `/api/v1/tastings/discover/places${qs({ ...params, page: pageParam })}`,
+      )
+    },
+    initialPageParam: 1,
+    getNextPageParam: (last) => (last.hasMore ? last.page + 1 : undefined),
+    enabled: !isPending && isSignedIn,
     retry: false,
   })
 }
@@ -160,6 +188,10 @@ export function useCreateTasting() {
     onSuccess: () => {
       // Invalide tous les listings : mine, feed, discover, by-username (du creator)
       void qc.invalidateQueries({ queryKey: tastingKeys.all })
+      // Le back attribue XP + recalcule level + update streak a la creation —
+      // invalider me + stats pour que le profil reflete immediatement le gain.
+      void qc.invalidateQueries({ queryKey: userKeys.me })
+      void qc.invalidateQueries({ queryKey: userKeys.stats })
     },
   })
 }

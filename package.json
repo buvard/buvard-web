@@ -24,7 +24,10 @@
     "cap:run:ios:staging": "npm run build:staging && cap run ios --scheme \"App Staging\"",
     "cap:run:ios:local": "npm run build:local && cap run ios --scheme \"App Staging\"",
     "release:prod": "npm run build && node scripts/release.mjs --target prod",
-    "release:staging": "npm run build:staging && node scripts/release.mjs --target staging"
+    "release:staging": "npm run build:staging && node scripts/release.mjs --target staging",
+    "version:patch": "node scripts/version.mjs patch",
+    "version:minor": "node scripts/version.mjs minor",
+    "version:major": "node scripts/version.mjs major"
   },
   "dependencies": {
     "@capacitor-community/camera-preview": "^8.0.1",

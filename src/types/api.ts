@@ -52,6 +52,12 @@ export interface UserPrefs {
 export interface Gamification {
   xp: number
   level: number
+  // Cle du grade derivee du level (curious / explorer / amateur /
+  // connoisseur / sommelier / master / legend).
+  grade: string
+  // Cle du grade choisi par le user pour s'afficher. null = on utilise
+  // `grade` auto. Doit correspondre a un grade deja debloque (level >= min).
+  displayGrade: string | null
   streak: {
     current: number
     longest: number
@@ -116,15 +122,36 @@ export interface PublicUser {
     tastingsCount: number
     followersCount: number
     followingCount: number
+    tastingsByCategory: Record<TastingType, number>
   }
   gamification: {
     level: number
     xp: number
+    // Cle du grade derivee du level (curious / explorer / ... / legend).
+    grade: string
+    // Override visuel du user — null si auto.
+    displayGrade: string | null
   }
   joinDate: string
   // Relation du viewer connecté (présents seulement si authentifié & pas soi-même)
   isFollowing?: boolean
   isBlocked?: boolean
+}
+
+// Mirror du document Grade cote back (src/models/Grade.ts). Liste fetchee
+// via GET /v1/grades (auth optionnelle). Le grade actuel d'un user est stocke
+// en cle (User.gamification.grade) — on resout en grade complet avec ce type.
+export interface Grade {
+  id: string
+  key: string
+  minLevel: number
+  maxLevel: number
+  // Nom d'une icone Lucide ("Wine", "Trophy", ...) — le front mappe vers
+  // le composant React via une table.
+  icon: string
+  // Couleur d'accent au format hex "#RRGGBB".
+  color: string
+  order: number
 }
 
 export interface UserMini {

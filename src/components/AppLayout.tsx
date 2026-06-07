@@ -6,11 +6,14 @@ import { Button } from '@/components/ui/button'
 import { UserSearch } from '@/components/UserSearch'
 import { AddDialog } from '@/features/add/AddDialog'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { useSyncPrefs } from '@/lib/api/useSyncPrefs'
 import { useMe } from '@/lib/api/user'
 import { useDesktop } from '@/lib/useDesktop'
+import { isAppShell } from '@/lib/platform'
 import { cn } from '@/lib/utils'
+import { WebNavbar } from '@/components/marketing/WebNavbar'
+import { WebFooter } from '@/components/marketing/WebFooter'
 import { House, Compass, Map, Plus, User, Settings } from 'lucide-react'
 
 // Layout web façon X (3 colonnes) :
@@ -108,7 +111,6 @@ function DesktopSidebar({ onAdd }: { onAdd: () => void }) {
         <span className="text-xl font-bold tracking-tight text-foreground">
           {t('app.name')}
         </span>
-        <span className="h-1.5 w-1.5 rounded-lg bg-primary shadow-[0_0_8px_2px_rgba(139,38,53,0.6)]" />
       </Link>
 
       {/* Nav */}
@@ -225,7 +227,9 @@ function MobileBottomNav() {
 // ============================================================
 // Layout pour utilisateurs déconnectés (signin/signup/home publique)
 // ============================================================
-function GuestLayout({ children }: { children: React.ReactNode }) {
+// Layout shell app non connecte : minimaliste (header simple + zone centree).
+// Pas de navbar marketing ni footer — l'utilisateur est deja dans l'app installee.
+function AppGuestLayout({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
   return (
@@ -236,7 +240,6 @@ function GuestLayout({ children }: { children: React.ReactNode }) {
             <span className="text-lg font-semibold tracking-tight text-foreground">
               {t('app.name')}
             </span>
-            <span className="h-1.5 w-1.5 rounded-lg bg-primary shadow-[0_0_8px_2px_rgba(139,38,53,0.6)]" />
           </Link>
           <Button asChild size="sm" className="glow-primary">
             <Link to={localizedPath('/sign-in')}>{t('auth.signIn')}</Link>
@@ -250,6 +253,26 @@ function GuestLayout({ children }: { children: React.ReactNode }) {
       </main>
     </div>
   )
+}
+
+// Layout shell web non connecte : vraie navbar marketing sticky + outlet pleine
+// largeur (chaque page gere son propre max-width) + footer global.
+function WebGuestLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex min-h-full flex-col">
+      <WebNavbar />
+      {/* Padding horizontal global pour pas coller aux bords sur mobile.
+          Chaque page se centre via son propre max-w-{6xl|sm} mx-auto. */}
+      <main className="flex-1 px-5">{children}</main>
+      <WebFooter />
+    </div>
+  )
+}
+
+// Aiguilleur : shell app → layout minimal, shell web → layout marketing complet.
+function GuestLayout({ children }: { children: React.ReactNode }) {
+  if (isAppShell()) return <AppGuestLayout>{children}</AppGuestLayout>
+  return <WebGuestLayout>{children}</WebGuestLayout>
 }
 
 // ============================================================
@@ -293,10 +316,17 @@ export function AppLayout() {
   }
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-6xl">
+    // h-full + overflow-hidden : le scroll global est desactive, chaque page
+    // gere son propre scroll interne via la zone main ci-dessous. Les sidebars
+    // desktop restent statiques sur toute la hauteur viewport.
+    <div className="mx-auto flex h-full w-full max-w-6xl overflow-hidden">
       <DesktopSidebar onAdd={handleOpenAdd} />
       <main className="flex min-w-0 flex-1 flex-col lg:border-x lg:border-border">
-        <div className="flex-1 px-4 pb-6 pt-4 sm:px-5">
+        {/* Container des pages : flex column + scroll vertical interne.
+            - Pages "longues" (Feed, Discover, etc.) : scrollent ici.
+            - Pages "fullscreen" (Map) : utilisent flex-1 min-h-0 + overflow-hidden
+              pour rester contraintes a la hauteur dispo sans scroll global. */}
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-6 pt-4 sm:px-5">
           {/* Suspense au niveau du layout : couvre tous les chunks lazy-loaded
               des routes enfants (cf router.tsx). Fallback null = pas de flash. */}
           <Suspense fallback={null}>

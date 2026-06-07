@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
 import { useAddTastingPhoto, useCreateTasting } from '@/lib/api/tasting'
 import { usePrefs } from '@/lib/api/user'
+import { XP_PER_TASTING } from '@/lib/gamification'
 import { consumePendingCaptures, setPendingCaptures } from './pendingCaptures'
 import {
   clearStashedAddForm,
@@ -249,7 +250,9 @@ export function AddPage({ onComplete }: AddPageProps = {}) {
           return
         }
       }
-      toast.success(t('add.success'))
+      toast.success(t('add.success'), {
+        description: t('add.xpGained', { xp: XP_PER_TASTING }),
+      })
       exit()
     } catch {
       toast.error(t('add.errors.generic'))

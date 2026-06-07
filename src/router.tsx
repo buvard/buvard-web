@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { LocaleProvider } from '@/i18n/LocaleProvider'
 import { DEFAULT_LOCALE } from '@/i18n/config'
 import { AppLayout } from '@/components/AppLayout'
+import { MarketingLayout } from '@/components/marketing/MarketingLayout'
 import { RequireAuth } from '@/components/RequireAuth'
 import { RequireUsername } from '@/components/RequireUsername'
 import { RequireActive } from '@/components/RequireActive'
@@ -43,6 +44,10 @@ const TastingEditPage = lazyPage(
   () => import('@/features/tasting/TastingEdit'),
   'TastingEditPage',
 )
+const TastingDetailPage = lazyPage(
+  () => import('@/features/tasting/TastingDetail'),
+  'TastingDetailPage',
+)
 const MapPage = lazyPage(() => import('@/features/map/Map'), 'MapPage')
 const ProfilePage = lazyPage(() => import('@/features/profile/Profile'), 'ProfilePage')
 const SettingsPage = lazyPage(() => import('@/features/settings/Settings'), 'SettingsPage')
@@ -78,6 +83,10 @@ const SettingsLegalPage = lazyPage(
   () => import('@/features/settings/Legal'),
   'SettingsLegalPage',
 )
+const SettingsLevelsPage = lazyPage(
+  () => import('@/features/settings/Levels'),
+  'SettingsLevelsPage',
+)
 const BlockedUsersPage = lazyPage(
   () => import('@/features/profile/BlockedUsers'),
   'BlockedUsersPage',
@@ -88,6 +97,10 @@ const PublicProfilePage = lazyPage(
 )
 const RelationsPage = lazyPage(() => import('@/features/profile/Relations'), 'RelationsPage')
 const NotFoundPage = lazyPage(() => import('@/features/misc/NotFound'), 'NotFoundPage')
+const FeaturesPage = lazyPage(() => import('@/features/marketing/Features'), 'FeaturesPage')
+const DownloadPage = lazyPage(() => import('@/features/marketing/Download'), 'DownloadPage')
+const AboutPage = lazyPage(() => import('@/features/marketing/About'), 'AboutPage')
+const LegalPage = lazyPage(() => import('@/features/marketing/Legal'), 'LegalPage')
 
 // Fallback minimal pendant le chunk loading — affiche rien (le swap entre
 // pages est generalement instantane avec un network correct). On evite un
@@ -131,6 +144,18 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      // Pages publiques marketing — layout dedie (navbar marketing + footer)
+      // et redirige sur la home si on est dans le shell app (Capacitor/Electron),
+      // ces pages n'ont de sens qu'en navigation web.
+      {
+        element: <MarketingLayout />,
+        children: [
+          { path: 'features', element: <FeaturesPage /> },
+          { path: 'download', element: <DownloadPage /> },
+          { path: 'about', element: <AboutPage /> },
+          { path: 'legal', element: <LegalPage /> },
+        ],
+      },
       {
         // AppLayout heberge le Suspense pour toutes ses pages enfants via
         // <Outlet /> wrappe en interne (cf AppLayout.tsx).
@@ -165,6 +190,7 @@ export const router = createBrowserRouter([
                       { path: 'feed', element: <FeedPage /> },
                       { path: 'discover', element: <DiscoverPage /> },
                       { path: 'add', element: <AddPage /> },
+                      { path: 'tasting/:id', element: <TastingDetailPage /> },
                       { path: 'tasting/:id/edit', element: <TastingEditPage /> },
                       { path: 'map', element: <MapPage /> },
                       { path: 'profile', element: <ProfilePage /> },
@@ -200,6 +226,10 @@ export const router = createBrowserRouter([
                       {
                         path: 'settings/legal',
                         element: <SettingsLegalPage />,
+                      },
+                      {
+                        path: 'settings/levels',
+                        element: <SettingsLevelsPage />,
                       },
                       {
                         path: 'settings/blocked',
