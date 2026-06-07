@@ -4,6 +4,7 @@ import { LocaleProvider } from '@/i18n/LocaleProvider'
 import { DEFAULT_LOCALE } from '@/i18n/config'
 import { AppLayout } from '@/components/AppLayout'
 import { MarketingLayout } from '@/components/marketing/MarketingLayout'
+import { RequireAdmin } from '@/components/RequireAdmin'
 import { RequireAuth } from '@/components/RequireAuth'
 import { RequireUsername } from '@/components/RequireUsername'
 import { RequireActive } from '@/components/RequireActive'
@@ -91,6 +92,22 @@ const SettingsLegalPage = lazyPage(
 const SettingsLevelsPage = lazyPage(
   () => import('@/features/settings/Levels'),
   'SettingsLevelsPage',
+)
+const SettingsCodesPage = lazyPage(
+  () => import('@/features/settings/Codes'),
+  'SettingsCodesPage',
+)
+const AdminLayoutComponent = lazyPage(
+  () => import('@/features/admin/AdminLayout'),
+  'AdminLayout',
+)
+const AdminCodesPage = lazyPage(
+  () => import('@/features/admin/AdminCodes'),
+  'AdminCodesPage',
+)
+const AdminUsersPage = lazyPage(
+  () => import('@/features/admin/AdminUsers'),
+  'AdminUsersPage',
 )
 const BlockedUsersPage = lazyPage(
   () => import('@/features/profile/BlockedUsers'),
@@ -235,6 +252,27 @@ export const router = createBrowserRouter([
                       {
                         path: 'settings/levels',
                         element: <SettingsLevelsPage />,
+                      },
+                      {
+                        path: 'settings/codes',
+                        element: <SettingsCodesPage />,
+                      },
+                      // Panel admin : encore un guard role-based en plus
+                      // de RequireActive. Layout commun (header + tabs) puis
+                      // 2 sous-pages.
+                      {
+                        element: <RequireAdmin />,
+                        children: [
+                          {
+                            path: 'admin',
+                            element: <AdminLayoutComponent />,
+                            children: [
+                              { index: true, element: <Navigate to="codes" replace /> },
+                              { path: 'codes', element: <AdminCodesPage /> },
+                              { path: 'users', element: <AdminUsersPage /> },
+                            ],
+                          },
+                        ],
                       },
                       {
                         path: 'settings/blocked',

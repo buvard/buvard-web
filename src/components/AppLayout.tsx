@@ -12,9 +12,10 @@ import { useMe } from '@/lib/api/user'
 import { useDesktop } from '@/lib/useDesktop'
 import { isAppShell } from '@/lib/platform'
 import { cn } from '@/lib/utils'
+import { useIsAdmin } from '@/components/RequireAdmin'
 import { WebNavbar } from '@/components/marketing/WebNavbar'
 import { WebFooter } from '@/components/marketing/WebFooter'
-import { House, Compass, Map, Plus, User, Settings } from 'lucide-react'
+import { House, Compass, Map, Plus, Shield, User, Settings } from 'lucide-react'
 
 // Layout web façon X (3 colonnes) :
 //   - Desktop (>=lg) : rail de nav gauche + contenu central bordé + (>=xl) sidebar droite (search)
@@ -25,12 +26,16 @@ interface NavItem {
   label: string
   icon: typeof House
   avatar?: boolean
+  // Si false, NavLink ne fait pas du match exact (utile pour /admin
+  // qui redirige vers /admin/codes — sans ca l'icone reste inactive).
+  end?: boolean
 }
 
 function useNavItems(): NavItem[] {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
-  return [
+  const isAdmin = useIsAdmin()
+  const items: NavItem[] = [
     { to: localizedPath('/feed'), label: t('nav.feed'), icon: House },
     { to: localizedPath('/discover'), label: t('nav.discover'), icon: Compass },
     // Le bouton + lance la camera plein ecran (UX camera-first).
@@ -43,10 +48,19 @@ function useNavItems(): NavItem[] {
       avatar: true,
     },
   ]
+  if (isAdmin) {
+    items.push({
+      to: localizedPath('/admin'),
+      label: t('nav.admin'),
+      icon: Shield,
+      end: false,
+    })
+  }
+  return items
 }
 
 // Avatar utilisateur — utilisé dans la bottom-nav mobile à la place de l'icône Profile.
-function UserAvatar({ active }: { active: boolean }) {
+function UserAvatar({ active, dense = false }: { active: boolean; dense?: boolean }) {
   const me = useMe()
   const fallback = (
     me.data?.displayName?.[0] ?? me.data?.username?.[0] ?? '?'
@@ -54,7 +68,8 @@ function UserAvatar({ active }: { active: boolean }) {
   return (
     <Avatar
       className={cn(
-        'h-6 w-6 ring-2 ring-transparent transition-all',
+        'ring-2 ring-transparent transition-all',
+        dense ? 'h-5 w-5' : 'h-6 w-6',
         active && 'ring-primary',
       )}
     >
@@ -71,6 +86,7 @@ function DesktopSidebar({ onAdd }: { onAdd: () => void }) {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
   const me = useMe()
+  const isAdmin = useIsAdmin()
 
   const items: { to: string; label: string; icon: typeof House; end: boolean }[] =
     [
@@ -93,6 +109,16 @@ function DesktopSidebar({ onAdd }: { onAdd: () => void }) {
         icon: User,
         end: true,
       },
+      ...(isAdmin
+        ? [
+            {
+              to: localizedPath('/admin'),
+              label: t('nav.admin'),
+              icon: Shield,
+              end: false,
+            },
+          ]
+        : []),
       {
         to: localizedPath('/settings'),
         label: t('settings.title'),
@@ -193,24 +219,30 @@ function MobileBottomNav() {
   // bouton Publier sticky. L'utilisateur revient via le bouton back du device
   // ou le bouton Annuler.
   if (/^\/[a-z]{2}\/add(\/|$)/.test(location.pathname)) return null
+  // Grid dynamique selon le nb d'items (5 par defaut, 6 si admin).
+  // Icones reduites a 6 items pour aerer la nav sur petits ecrans.
+  const isDense = items.length === 6
+  const gridCols = isDense ? 'grid-cols-6' : 'grid-cols-5'
+  const iconSize = isDense ? 'h-5 w-5' : 'h-6 w-6'
   return (
     <nav className="sticky bottom-0 z-20 border-t border-border bg-background/80 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden">
-      <div className="grid grid-cols-5">
-        {items.map(({ to, label, icon: Icon, avatar }) => (
+      <div className={cn('grid', gridCols)}>
+        {items.map(({ to, label, icon: Icon, avatar, end = true }) => (
           <NavLink
             key={to}
             to={to}
-            end
+            end={end}
             aria-label={label}
             className="flex flex-col items-center justify-center gap-1 py-2.5"
           >
             {({ isActive }) =>
               avatar ? (
-                <UserAvatar active={isActive} />
+                <UserAvatar active={isActive} dense={isDense} />
               ) : (
                 <Icon
                   className={cn(
-                    'h-6 w-6 transition-colors',
+                    iconSize,
+                    'transition-colors',
                     isActive ? 'text-foreground' : 'text-muted-foreground',
                   )}
                   strokeWidth={isActive ? 2 : 1.6}

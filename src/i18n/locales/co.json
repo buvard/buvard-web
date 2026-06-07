@@ -25,6 +25,7 @@
     "add": "Aghjunghje",
     "map": "Carta",
     "profile": "Prufilu",
+    "admin": "Admin",
     "marketing": {
       "features": "Funziunalità",
       "download": "Scaricà",
@@ -404,6 +405,88 @@
       }
     }
   },
+  "admin": {
+    "title": "Pannellu admin",
+    "subtitle": "Gestione di codici è XP di l'utilizatori",
+    "shortHint": "Codici, XP",
+    "tabs": {
+      "codes": "Codici",
+      "users": "Utilizatori"
+    },
+    "codes": {
+      "subtitle": "Crea è gestisce i codici di redenzione (Pochtron, etc.)",
+      "create": "Crea un codice",
+      "createDesc": "Lascia u campu codice viotu per chì u servitore generi un slug autumaticamente.",
+      "createSuccess": "Codice creatu : {{code}}",
+      "createError": "Impussibule di creà u codice",
+      "copy": "Cupià",
+      "copied": "Cupiatu in lu pressu-papelu",
+      "copyError": "Cupia impussibule",
+      "delete": "Sguassà",
+      "deleteConfirmTitle": "Sguassà stu codice ?",
+      "deleteConfirmDesc": "U codice {{code}} ùn pudarà più esse usatu. L'utilizatori chì l'hanu digià attivatu mantenenu e so features.",
+      "deleteSuccess": "Codice sguassatu",
+      "deleteError": "Sguassatura impussibule",
+      "loadError": "Impussibule di caricà i codici",
+      "empty": "Nisun codice per avà. Crea u to per i testori.",
+      "usesUnlimited_one": "{{count}} usu · senza limitu",
+      "usesUnlimited_other": "{{count}} usi · senza limitu",
+      "usesLimited": "{{used}}/{{max}} usi",
+      "expires": "Spira u {{date}}",
+      "expired": "Spiratu",
+      "types": {
+        "pochtron": "Pochtron"
+      },
+      "fields": {
+        "code": "Codice (opzionale)",
+        "codePlaceholder": "POCHTRON-2026-XYZ",
+        "codeHint": "Lascia viotu per generazione auto.",
+        "maxUses": "Numeru d'usi",
+        "maxUsesPlaceholder": "Viotu = senza limitu",
+        "maxUsesHint": "Quante volte stu codice pò esse attivatu (in tuttu, micca per utilizatore).",
+        "expiresAt": "Data di scadenza",
+        "expiresAtHint": "Lascia viotu per nisuna scadenza."
+      },
+      "dialog": {
+        "title": "Novu codice",
+        "description": "Cunfigura u to codice in pochi clic",
+        "preview": "Codice",
+        "regenerate": "Rigenerà",
+        "editHint": "Tocca per mudificà",
+        "maxUsesTitle": "Numeru d'usi",
+        "expiresTitle": "Scadenza",
+        "expiresPresets": {
+          "day": "24h",
+          "week": "7 ghjorni",
+          "month": "30 ghjorni",
+          "never": "Mai"
+        },
+        "create": "Crea u codice",
+        "cancel": "Annullà",
+        "successTitle": "Codice creatu !",
+        "successDesc": "Tocca u tichet per cupiallu",
+        "createAnother": "Crea un altru",
+        "done": "Compiu"
+      }
+    },
+    "users": {
+      "subtitle": "Cerca un utilizatore è aghjusta u so XP.",
+      "searchLabel": "Cerca per pseudo",
+      "searchPlaceholder": "Scrivi un pseudo (2 caratteri minimu)",
+      "noResults": "Nisun utilizatore truvatu",
+      "loadError": "Impussibule di caricà stu prufilu",
+      "grade": "Gradu",
+      "adjustLabel": "Aghjusta XP (delta)",
+      "adjusted": "{{sign}}{{amount}} XP applicatu (tutale : {{xp}})",
+      "setLabel": "Definisce un valore assolutu",
+      "setPlaceholder": "es. 500",
+      "setAction": "Definisce",
+      "setSuccess": "XP definitu à {{xp}}",
+      "reset": "Reset XP à 0",
+      "resetSuccess": "XP rimessu à 0",
+      "actionError": "Azzione impussibule"
+    }
+  },
   "public": {
     "notFound": "Stu prufilu ùn esiste micca o hè privatu.",
     "follow": "Seguità",
@@ -494,7 +577,8 @@
       "app": "Applicazione",
       "gamification": "Prugressu",
       "social": "Suciale",
-      "account": "Contu"
+      "account": "Contu",
+      "admin": "Amministrazione"
     },
     "levels": {
       "title": "Livelli & gradi",
@@ -538,6 +622,30 @@
           "name": "Diu di a debauca",
           "desc": "Hai righjuntu a cima : e buttiglie s'inclinanu quandu entri in un bar, l'angeli falanu da u celu per ti versà l'aperitivu. Sì sopra à u panteone, sopra à tuttu."
         }
+      }
+    },
+    "codes": {
+      "title": "Codici d'accessu",
+      "subtitle": "Attiva funzionalità nascoste cù un codice",
+      "shortHint": "Beta, VIP, accessu anticipatu",
+      "inputLabel": "Codice d'accessu",
+      "inputPlaceholder": "POCHTRON-2026-XYZ",
+      "inputHint": "Hai un codice ? Battilu è sblucca e funzionalità.",
+      "submit": "Attivà",
+      "redeemSuccess": "Codice attivatu, prufitta",
+      "activeTitle": "Funzionalità",
+      "activeBadge": "Attivu",
+      "features": {
+        "pochtron": {
+          "label": "Pochtron",
+          "desc": "Bonus testore : accessu à e funzionalità sperimentali, insegna speciale, anteprime. Tuttu in un solu switch."
+        }
+      },
+      "errors": {
+        "notFound": "Stu codice ùn esiste micca",
+        "expired": "Codice scadutu o esauritu",
+        "alreadyUsed": "Hai dighjà adupratu stu codice",
+        "generic": "Impussibile d'attivà u codice"
       }
     },
     "profile": {

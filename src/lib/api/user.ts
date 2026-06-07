@@ -115,6 +115,35 @@ export function useSetDisplayGrade() {
 }
 
 // ============================================================
+// POST /me/redeem-code — redeem un code beta/VIP
+// ============================================================
+export function useRedeemCode() {
+  const api = useApi()
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: async (code: string) => {
+      return await api<{ type: string; code: string; user: User }>(
+        '/api/v1/users/me/redeem-code',
+        { method: 'POST', body: { code } },
+      )
+    },
+    onSuccess: ({ user }) => {
+      qc.setQueryData(userKeys.me, user)
+    },
+  })
+}
+
+// Hook qui retourne les features actives du user connecte.
+// Les flags sont positionnes uniquement via les codes (POST /me/redeem-code).
+// L'APK Pochtron n'a aucune feature pre-debloquee : les testeurs doivent
+// entrer un code (cf Settings > Codes d'acces) — c'est ca qui justifie
+// l'existence du systeme de codes.
+export function useMyFeatures() {
+  const { data: me } = useMe()
+  return me?.features ?? { pochtron: false }
+}
+
+// ============================================================
 // DELETE /me
 // ============================================================
 export function useDeleteMe() {

@@ -32,6 +32,7 @@
     "add": "Ajouter",
     "map": "Carte",
     "profile": "Profil",
+    "admin": "Admin",
     "marketing": {
       "features": "Fonctionnalités",
       "download": "Télécharger",
@@ -417,6 +418,88 @@
       }
     }
   },
+  "admin": {
+    "title": "Panel admin",
+    "subtitle": "Gestion des codes et de l'XP des utilisateurs",
+    "shortHint": "Codes, XP",
+    "tabs": {
+      "codes": "Codes",
+      "users": "Utilisateurs"
+    },
+    "codes": {
+      "subtitle": "Crée et gère les codes de redemption (Pochtron, etc.)",
+      "create": "Créer un code",
+      "createDesc": "Laisse le champ code vide pour que le serveur génère un slug automatiquement.",
+      "createSuccess": "Code créé : {{code}}",
+      "createError": "Impossible de créer le code",
+      "copy": "Copier",
+      "copied": "Copié dans le presse-papier",
+      "copyError": "Copie impossible",
+      "delete": "Supprimer",
+      "deleteConfirmTitle": "Supprimer ce code ?",
+      "deleteConfirmDesc": "Le code {{code}} ne pourra plus être utilisé. Les users qui l'ont déjà activé gardent leurs features.",
+      "deleteSuccess": "Code supprimé",
+      "deleteError": "Suppression impossible",
+      "loadError": "Impossible de charger les codes",
+      "empty": "Aucun code pour le moment. Crée-en un pour distribuer aux testeurs.",
+      "usesUnlimited_one": "{{count}} usage · illimité",
+      "usesUnlimited_other": "{{count}} usages · illimité",
+      "usesLimited": "{{used}}/{{max}} usages",
+      "expires": "Expire le {{date}}",
+      "expired": "Expiré",
+      "types": {
+        "pochtron": "Pochtron"
+      },
+      "fields": {
+        "code": "Code (optionnel)",
+        "codePlaceholder": "POCHTRON-2026-XYZ",
+        "codeHint": "Laisse vide pour génération auto.",
+        "maxUses": "Nombre d'usages",
+        "maxUsesPlaceholder": "Vide = illimité",
+        "maxUsesHint": "Combien de fois ce code peut être activé (au total, pas par user).",
+        "expiresAt": "Date d'expiration",
+        "expiresAtHint": "Laisse vide pour pas d'expiration."
+      },
+      "dialog": {
+        "title": "Nouveau code",
+        "description": "Configure ton code en quelques clics",
+        "preview": "Code",
+        "regenerate": "Régénérer",
+        "editHint": "Touche pour modifier",
+        "maxUsesTitle": "Nombre d'utilisations",
+        "expiresTitle": "Expiration",
+        "expiresPresets": {
+          "day": "24h",
+          "week": "7 jours",
+          "month": "30 jours",
+          "never": "Jamais"
+        },
+        "create": "Créer le code",
+        "cancel": "Annuler",
+        "successTitle": "Code créé !",
+        "successDesc": "Touche le ticket pour le copier",
+        "createAnother": "Créer un autre",
+        "done": "Terminé"
+      }
+    },
+    "users": {
+      "subtitle": "Recherche un utilisateur et ajuste son XP.",
+      "searchLabel": "Recherche par pseudo",
+      "searchPlaceholder": "Tape un pseudo (2 caractères min.)",
+      "noResults": "Aucun utilisateur trouvé",
+      "loadError": "Impossible de charger ce profil",
+      "grade": "Grade",
+      "adjustLabel": "Ajuster l'XP (delta)",
+      "adjusted": "{{sign}}{{amount}} XP appliqué (total : {{xp}})",
+      "setLabel": "Définir une valeur absolue",
+      "setPlaceholder": "ex: 500",
+      "setAction": "Définir",
+      "setSuccess": "XP défini à {{xp}}",
+      "reset": "Reset XP à 0",
+      "resetSuccess": "XP remis à 0",
+      "actionError": "Action impossible"
+    }
+  },
   "public": {
     "notFound": "Ce profil n'existe pas ou est privé.",
     "follow": "Suivre",
@@ -507,7 +590,8 @@
       "app": "Application",
       "gamification": "Progression",
       "social": "Social",
-      "account": "Compte"
+      "account": "Compte",
+      "admin": "Administration"
     },
     "levels": {
       "title": "Niveaux & grades",
@@ -551,6 +635,30 @@
           "name": "Dieu de la débauche",
           "desc": "T'as atteint le summum : les bouteilles s'inclinent quand tu rentres dans un bar, les anges descendent du ciel pour te servir l'apéro. T'es au-dessus du panthéon, t'es au-dessus de tout."
         }
+      }
+    },
+    "codes": {
+      "title": "Codes d'accès",
+      "subtitle": "Active des fonctionnalités cachées avec un code",
+      "shortHint": "Beta, VIP, accès anticipé",
+      "inputLabel": "Code d'accès",
+      "inputPlaceholder": "POCHTRON-2026-XYZ",
+      "inputHint": "Tu as un code ? Tape-le et tu débloques les features liées.",
+      "submit": "Activer",
+      "redeemSuccess": "Code activé, profite",
+      "activeTitle": "Fonctionnalités",
+      "activeBadge": "Actif",
+      "features": {
+        "pochtron": {
+          "label": "Pochtron",
+          "desc": "Bonus testeur : accès aux features expérimentales, badge spécial, avant-premières. Tout dans un seul switch."
+        }
+      },
+      "errors": {
+        "notFound": "Ce code n'existe pas",
+        "expired": "Code expiré ou épuisé",
+        "alreadyUsed": "Tu as déjà utilisé ce code",
+        "generic": "Impossible d'activer le code"
       }
     },
     "profile": {

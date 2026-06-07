@@ -67,17 +67,47 @@ L'APK signe sera dans `android/app/build/outputs/apk/prod/release/`.
 
 ## Workflow normal (a chaque release)
 
-### Bump version + push
+Quatre environnements coexistent :
+
+| Env | App ID | Nom | API | Distribution |
+|---|---|---|---|---|
+| **Prod** | `app.buvard` | Buvard | api.buvard.app | Github Releases (latest) → page `/download` |
+| **Pochtron** | `app.buvard.pochtron` | Buvard Pochtron | api-pochtron.buvard.app | Github Pre-Releases → testeurs |
+| **Staging** | `app.buvard.staging` | Buvard Staging | api-staging.buvard.app | Dev-only (build local) |
+| **Local** | `app.buvard.local` | Buvard Local | local | Dev-only (build local) |
+
+Les 4 versions peuvent coexister sur le meme telephone.
+
+### Recommande : Pochtron d'abord (testeurs), puis Prod
 
 ```bash
-# Bump le patch (1.3.0 → 1.3.1)
-npm run version:patch -- --push
+# 1. Bump + push pochtron
+npm run version:patch:pochtron -- --push
+# → tag pochtron-v1.3.2 → workflow pochtron → APK "Buvard Pochtron v1.3.2"
 
-# Ou minor (1.3.0 → 1.4.0)
-npm run version:minor -- --push
+# 2. Installe l'APK pochtron sur ton telephone (et celui des testeurs) et teste
 
-# Ou explicite
-node scripts/version.mjs 1.5.0 --push
+# 3. Quand tu es content, tag aussi en prod (sans rebump)
+git tag v1.3.2
+git push origin v1.3.2
+# → workflow prod → APK "Buvard v1.3.2"
+```
+
+### Prod direct (skip pochtron)
+
+```bash
+npm run version:patch -- --push          # patch
+npm run version:minor -- --push          # minor
+node scripts/version.mjs 1.5.0 --push    # explicite
+```
+
+### Staging (dev-only)
+
+Pas de release Github. Pour build localement :
+
+```bash
+npm run cap:android:staging              # ouvre Android Studio en flavor staging
+npm run cap:run:android:staging          # build + run staging sur device branche
 ```
 
 Le script :

@@ -2,21 +2,31 @@
 // Bump de version coherent pour l'app Buvard.
 //
 // Usage :
-//   node scripts/version.mjs patch          1.3.0 -> 1.3.1
-//   node scripts/version.mjs minor          1.3.0 -> 1.4.0
-//   node scripts/version.mjs major          1.3.0 -> 2.0.0
-//   node scripts/version.mjs 1.5.2          set explicit
-//   node scripts/version.mjs patch --push   bump + commit + tag + push
+//   node scripts/version.mjs patch                    1.3.0 -> 1.3.1, tag vX.Y.Z (prod)
+//   node scripts/version.mjs patch --pochtron         tag pochtron-vX.Y.Z (testeurs)
+//   node scripts/version.mjs minor --push             bump minor + push prod
+//   node scripts/version.mjs 1.5.2                    set explicit
 //
 // Effet :
 //   1. Bump version dans package.json (+ package-lock.json si present)
 //   2. Sync versionName et incremente versionCode dans
 //      android/app/build.gradle (+1 a chaque bump, sequentiel)
-//   3. Cree un commit "chore(release): vX.Y.Z" + tag vX.Y.Z
+//   3. Cree un commit "chore(release): TAG" + tag git
 //   4. (avec --push) git push origin <branch> --follow-tags
 //
-// Le tag vX.Y.Z declenche le workflow .github/workflows/release-android.yml
-// qui build et publie l'APK signe en Github Release.
+// Workflows declenches :
+//   - tag vX.Y.Z           -> .github/workflows/release-android.yml (APK prod)
+//   - tag pochtron-vX.Y.Z  -> .github/workflows/release-android-pochtron.yml (APK testeurs)
+//
+// Note : staging (app.buvard.staging) reste un env *dev-only* (pas de
+// distribution Github auto). Les devs peuvent build en local avec
+// `npm run cap:android:staging`.
+//
+// Workflow recommande : push pochtron d'abord pour tester sur ton telephone,
+// puis ajouter le tag prod manuellement quand valide :
+//   npm run version:patch:pochtron -- --push   # tag pochtron-vX.Y.Z (bump)
+//   # ... tu testes ...
+//   git tag vX.Y.Z && git push origin vX.Y.Z   # tag prod (pas de rebump)
 
 import { execSync } from 'node:child_process'
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
@@ -34,17 +44,20 @@ function parseArgs() {
   const argv = process.argv.slice(2)
   if (argv.length === 0 || argv.includes('--help') || argv.includes('-h')) {
     console.log(`Usage:
-  node scripts/version.mjs <patch|minor|major|X.Y.Z> [--push]
+  node scripts/version.mjs <patch|minor|major|X.Y.Z> [--push] [--pochtron]
 
 Options:
-  --push    Pousser le commit + tag vers origin a la fin
-  --help    Affiche cette aide
+  --push       Pousser le commit + tag vers origin a la fin
+  --pochtron   Creer un tag pochtron-vX.Y.Z (au lieu de vX.Y.Z) qui declenche
+               le workflow release-android-pochtron.yml (APK testeurs)
+  --help       Affiche cette aide
 `)
     process.exit(0)
   }
   const bump = argv[0]
   const push = argv.includes('--push')
-  return { bump, push }
+  const pochtron = argv.includes('--pochtron')
+  return { bump, push, pochtron }
 }
 
 function semverNext(current, bump) {
@@ -119,7 +132,7 @@ function assertCleanWorkdir() {
 }
 
 function main() {
-  const { bump, push } = parseArgs()
+  const { bump, push, pochtron } = parseArgs()
 
   assertCleanWorkdir()
 
@@ -131,7 +144,12 @@ function main() {
     process.exit(1)
   }
 
-  console.log(`→ ${current} → ${next}`)
+  // Tag preview different selon env : pochtron-vX.Y.Z (test) ou vX.Y.Z (prod).
+  const tagName = pochtron ? `pochtron-v${next}` : `v${next}`
+  const envLabel = pochtron ? 'POCHTRON' : 'PROD'
+  const workflowName = pochtron ? 'release-android-pochtron.yml' : 'release-android.yml'
+
+  console.log(`→ [${envLabel}] ${current} → ${next}  (tag: ${tagName})`)
 
   bumpPackageJson(next)
   const { currentCode, nextCode } = bumpGradle(next)
@@ -139,9 +157,9 @@ function main() {
   console.log(`  build.gradle     versionName "${next}", versionCode ${currentCode} → ${nextCode}`)
 
   exec(`git add ${PKG_PATH} ${GRADLE_PATH}` + (existsSync(LOCK_PATH) ? ` ${LOCK_PATH}` : ''))
-  exec(`git commit -m "chore(release): v${next}"`)
-  exec(`git tag -a v${next} -m "Release v${next}"`)
-  console.log(`✓ Commit + tag v${next} crees`)
+  exec(`git commit -m "chore(release): ${tagName}"`)
+  exec(`git tag -a ${tagName} -m "Release ${tagName}"`)
+  console.log(`✓ Commit + tag ${tagName} crees`)
 
   if (push) {
     const branch = exec('git rev-parse --abbrev-ref HEAD')
@@ -150,11 +168,15 @@ function main() {
       cwd: ROOT,
       stdio: 'inherit',
     })
-    console.log(`✓ Push complete. Le workflow Github va build l'APK.`)
+    console.log(`✓ Push complete. Le workflow .github/workflows/${workflowName} va declencher.`)
+    if (pochtron) {
+      console.log(`\nQuand la pochtron est validee, tag aussi en prod (sans rebump) :`)
+      console.log(`  git tag v${next} && git push origin v${next}`)
+    }
   } else {
     console.log(`\n→ Prochain step :`)
     console.log(`  git push origin <branch> --follow-tags`)
-    console.log(`  Le workflow .github/workflows/release-android.yml va declencher.`)
+    console.log(`  Le workflow .github/workflows/${workflowName} va declencher.`)
   }
 }
 

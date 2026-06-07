@@ -63,15 +63,23 @@ android {
             signingConfig signingConfigs.release
         }
     }
-    // Trois environnements coexistant sur l'appareil :
-    //   prod    -> app.buvard         ("Buvard")
-    //   staging -> app.buvard.staging ("Buvard Staging")
-    //   local   -> app.buvard.local   ("Buvard Local")
+    // Quatre environnements coexistant sur l'appareil :
+    //   prod     -> app.buvard          ("Buvard")          API api.buvard.app
+    //   pochtron -> app.buvard.pochtron ("Buvard Pochtron") API api-pochtron.buvard.app
+    //                Distribue aux testeurs via Github Releases (prerelease).
+    //   staging  -> app.buvard.staging  ("Buvard Staging")  API api-staging.buvard.app
+    //                Privacy dev-only — pas de distribution Github auto.
+    //   local    -> app.buvard.local    ("Buvard Local")    API local
     flavorDimensions "env"
     productFlavors {
         prod {
             dimension "env"
             resValue "string", "app_name", "Buvard"
+        }
+        pochtron {
+            dimension "env"
+            applicationIdSuffix ".pochtron"
+            resValue "string", "app_name", "Buvard Pochtron"
         }
         staging {
             dimension "env"

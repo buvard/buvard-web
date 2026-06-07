@@ -49,6 +49,13 @@ export interface UserPrefs {
   }
 }
 
+// Mirror back : User.features (cf src/models/User.ts).
+// Un seul flag pour l'instant : pochtron = bonus testeur global (acces aux
+// features experimentales, badge, etc. — tout dans un seul switch).
+export interface UserFeatures {
+  pochtron: boolean
+}
+
 export interface Gamification {
   xp: number
   level: number
@@ -97,6 +104,10 @@ export interface User {
   lastSeenAt: string
   onboardingCompletedAt: string | null
   gamification: Gamification
+  // Flags debloques via codes (RedemptionCode). Persistes en BDD apres
+  // `POST /me/redeem-code`. Le hook useMyFeatures les expose en combinant
+  // avec d'eventuels flags forces par env (VITE_FORCE_FEATURE_*).
+  features: UserFeatures
   stats: UserStatsFull
   prefs: UserPrefs
   acceptedTermsAt: string | null

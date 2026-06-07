@@ -32,6 +32,7 @@
     "add": "Add",
     "map": "Map",
     "profile": "Profile",
+    "admin": "Admin",
     "marketing": {
       "features": "Features",
       "download": "Download",
@@ -417,6 +418,88 @@
       }
     }
   },
+  "admin": {
+    "title": "Admin panel",
+    "subtitle": "Manage codes and user XP",
+    "shortHint": "Codes, XP",
+    "tabs": {
+      "codes": "Codes",
+      "users": "Users"
+    },
+    "codes": {
+      "subtitle": "Create and manage redemption codes (Pochtron, etc.)",
+      "create": "Create code",
+      "createDesc": "Leave the code field empty for the server to generate a slug automatically.",
+      "createSuccess": "Code created: {{code}}",
+      "createError": "Couldn't create the code",
+      "copy": "Copy",
+      "copied": "Copied to clipboard",
+      "copyError": "Couldn't copy",
+      "delete": "Delete",
+      "deleteConfirmTitle": "Delete this code?",
+      "deleteConfirmDesc": "The code {{code}} won't be usable anymore. Users who already activated it keep their features.",
+      "deleteSuccess": "Code deleted",
+      "deleteError": "Couldn't delete",
+      "loadError": "Couldn't load codes",
+      "empty": "No codes yet. Create one to share with testers.",
+      "usesUnlimited_one": "{{count}} use · unlimited",
+      "usesUnlimited_other": "{{count}} uses · unlimited",
+      "usesLimited": "{{used}}/{{max}} uses",
+      "expires": "Expires on {{date}}",
+      "expired": "Expired",
+      "types": {
+        "pochtron": "Pochtron"
+      },
+      "fields": {
+        "code": "Code (optional)",
+        "codePlaceholder": "POCHTRON-2026-XYZ",
+        "codeHint": "Leave empty for auto-generation.",
+        "maxUses": "Number of uses",
+        "maxUsesPlaceholder": "Empty = unlimited",
+        "maxUsesHint": "How many times this code can be activated (total, not per user).",
+        "expiresAt": "Expiry date",
+        "expiresAtHint": "Leave empty for no expiry."
+      },
+      "dialog": {
+        "title": "New code",
+        "description": "Configure your code in a few clicks",
+        "preview": "Code",
+        "regenerate": "Regenerate",
+        "editHint": "Tap to edit",
+        "maxUsesTitle": "Number of uses",
+        "expiresTitle": "Expiry",
+        "expiresPresets": {
+          "day": "24h",
+          "week": "7 days",
+          "month": "30 days",
+          "never": "Never"
+        },
+        "create": "Create code",
+        "cancel": "Cancel",
+        "successTitle": "Code created!",
+        "successDesc": "Tap the ticket to copy it",
+        "createAnother": "Create another",
+        "done": "Done"
+      }
+    },
+    "users": {
+      "subtitle": "Search a user and adjust their XP.",
+      "searchLabel": "Search by username",
+      "searchPlaceholder": "Type a username (2 chars min.)",
+      "noResults": "No user found",
+      "loadError": "Couldn't load this profile",
+      "grade": "Grade",
+      "adjustLabel": "Adjust XP (delta)",
+      "adjusted": "{{sign}}{{amount}} XP applied (total: {{xp}})",
+      "setLabel": "Set absolute value",
+      "setPlaceholder": "e.g. 500",
+      "setAction": "Set",
+      "setSuccess": "XP set to {{xp}}",
+      "reset": "Reset XP to 0",
+      "resetSuccess": "XP reset",
+      "actionError": "Action failed"
+    }
+  },
   "public": {
     "notFound": "This profile doesn't exist or is private.",
     "follow": "Follow",
@@ -507,7 +590,8 @@
       "app": "App",
       "gamification": "Progress",
       "social": "Social",
-      "account": "Account"
+      "account": "Account",
+      "admin": "Administration"
     },
     "levels": {
       "title": "Levels & grades",
@@ -551,6 +635,30 @@
           "name": "God of Debauchery",
           "desc": "You've hit the summit: bottles bow when you walk into a bar, angels come down from heaven to pour your apéro. You're above the pantheon, above everything."
         }
+      }
+    },
+    "codes": {
+      "title": "Access codes",
+      "subtitle": "Activate hidden features with a code",
+      "shortHint": "Beta, VIP, early access",
+      "inputLabel": "Access code",
+      "inputPlaceholder": "POCHTRON-2026-XYZ",
+      "inputHint": "Got a code? Type it in and unlock the related features.",
+      "submit": "Activate",
+      "redeemSuccess": "Code activated, enjoy",
+      "activeTitle": "Features",
+      "activeBadge": "Active",
+      "features": {
+        "pochtron": {
+          "label": "Pochtron",
+          "desc": "Tester bonus: access to experimental features, special badge, early peeks. All in one switch."
+        }
+      },
+      "errors": {
+        "notFound": "This code doesn't exist",
+        "expired": "Code expired or exhausted",
+        "alreadyUsed": "You already used this code",
+        "generic": "Couldn't activate the code"
       }
     },
     "profile": {
