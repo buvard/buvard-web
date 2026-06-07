@@ -1,14 +1,21 @@
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Suspense, useState } from 'react'
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { UserSearch } from '@/components/UserSearch'
+import { AddDialog } from '@/features/add/AddDialog'
 import { useLocalizedPath } from '@/i18n/useLocalizedPath'
-import { useSession } from '@/lib/auth-client'
+import { useSession } from '@/lib/session'
 import { useSyncPrefs } from '@/lib/api/useSyncPrefs'
 import { useMe } from '@/lib/api/user'
+import { useDesktop } from '@/lib/useDesktop'
+import { isAppShell } from '@/lib/platform'
 import { cn } from '@/lib/utils'
-import { House, Compass, Plus, User, Settings } from 'lucide-react'
+import { useIsAdmin } from '@/components/RequireAdmin'
+import { WebNavbar } from '@/components/marketing/WebNavbar'
+import { WebFooter } from '@/components/marketing/WebFooter'
+import { House, Compass, Map, Plus, Shield, User, Settings } from 'lucide-react'
 
 // Layout web façon X (3 colonnes) :
 //   - Desktop (>=lg) : rail de nav gauche + contenu central bordé + (>=xl) sidebar droite (search)
@@ -19,15 +26,21 @@ interface NavItem {
   label: string
   icon: typeof House
   avatar?: boolean
+  // Si false, NavLink ne fait pas du match exact (utile pour /admin
+  // qui redirige vers /admin/codes — sans ca l'icone reste inactive).
+  end?: boolean
 }
 
 function useNavItems(): NavItem[] {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
-  return [
+  const isAdmin = useIsAdmin()
+  const items: NavItem[] = [
     { to: localizedPath('/feed'), label: t('nav.feed'), icon: House },
     { to: localizedPath('/discover'), label: t('nav.discover'), icon: Compass },
-    { to: localizedPath('/add'), label: t('nav.add'), icon: Plus },
+    // Le bouton + lance la camera plein ecran (UX camera-first).
+    { to: localizedPath('/add/capture'), label: t('nav.add'), icon: Plus },
+    { to: localizedPath('/map'), label: t('nav.map'), icon: Map },
     {
       to: localizedPath('/profile'),
       label: t('nav.profile'),
@@ -35,10 +48,19 @@ function useNavItems(): NavItem[] {
       avatar: true,
     },
   ]
+  if (isAdmin) {
+    items.push({
+      to: localizedPath('/admin'),
+      label: t('nav.admin'),
+      icon: Shield,
+      end: false,
+    })
+  }
+  return items
 }
 
 // Avatar utilisateur — utilisé dans la bottom-nav mobile à la place de l'icône Profile.
-function UserAvatar({ active }: { active: boolean }) {
+function UserAvatar({ active, dense = false }: { active: boolean; dense?: boolean }) {
   const me = useMe()
   const fallback = (
     me.data?.displayName?.[0] ?? me.data?.username?.[0] ?? '?'
@@ -46,7 +68,8 @@ function UserAvatar({ active }: { active: boolean }) {
   return (
     <Avatar
       className={cn(
-        'h-6 w-6 ring-2 ring-transparent transition-all',
+        'ring-2 ring-transparent transition-all',
+        dense ? 'h-5 w-5' : 'h-6 w-6',
         active && 'ring-primary',
       )}
     >
@@ -59,10 +82,11 @@ function UserAvatar({ active }: { active: boolean }) {
 // ============================================================
 // Rail de nav gauche desktop (>=lg) — style X
 // ============================================================
-function DesktopSidebar() {
+function DesktopSidebar({ onAdd }: { onAdd: () => void }) {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
   const me = useMe()
+  const isAdmin = useIsAdmin()
 
   const items: { to: string; label: string; icon: typeof House; end: boolean }[] =
     [
@@ -74,11 +98,27 @@ function DesktopSidebar() {
         end: true,
       },
       {
+        to: localizedPath('/map'),
+        label: t('nav.map'),
+        icon: Map,
+        end: false,
+      },
+      {
         to: localizedPath('/profile'),
         label: t('nav.profile'),
         icon: User,
         end: true,
       },
+      ...(isAdmin
+        ? [
+            {
+              to: localizedPath('/admin'),
+              label: t('nav.admin'),
+              icon: Shield,
+              end: false,
+            },
+          ]
+        : []),
       {
         to: localizedPath('/settings'),
         label: t('settings.title'),
@@ -97,7 +137,6 @@ function DesktopSidebar() {
         <span className="text-xl font-bold tracking-tight text-foreground">
           {t('app.name')}
         </span>
-        <span className="h-1.5 w-1.5 rounded-lg bg-primary shadow-[0_0_8px_2px_rgba(139,38,53,0.6)]" />
       </Link>
 
       {/* Nav */}
@@ -124,12 +163,13 @@ function DesktopSidebar() {
         ))}
       </nav>
 
-      {/* Bouton Post (Ajouter) proéminent */}
+      {/* Bouton Post (Ajouter) proéminent — ouvre la popup AddDialog sur
+          desktop (l'utilisateur reste sur sa page, modal centré). */}
       <Button
-        asChild
+        onClick={onAdd}
         className="mt-4 h-12 rounded-lg text-base font-bold glow-primary"
       >
-        <Link to={localizedPath('/add')}>{t('nav.add')}</Link>
+        {t('nav.add')}
       </Button>
 
       {/* Chip compte en bas */}
@@ -174,24 +214,35 @@ function RightSidebar() {
 // ============================================================
 function MobileBottomNav() {
   const items = useNavItems()
+  const location = useLocation()
+  // Sur /add (creation focused), on cache la nav pour liberer la zone du
+  // bouton Publier sticky. L'utilisateur revient via le bouton back du device
+  // ou le bouton Annuler.
+  if (/^\/[a-z]{2}\/add(\/|$)/.test(location.pathname)) return null
+  // Grid dynamique selon le nb d'items (5 par defaut, 6 si admin).
+  // Icones reduites a 6 items pour aerer la nav sur petits ecrans.
+  const isDense = items.length === 6
+  const gridCols = isDense ? 'grid-cols-6' : 'grid-cols-5'
+  const iconSize = isDense ? 'h-5 w-5' : 'h-6 w-6'
   return (
     <nav className="sticky bottom-0 z-20 border-t border-border bg-background/80 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden">
-      <div className="grid grid-cols-4">
-        {items.map(({ to, label, icon: Icon, avatar }) => (
+      <div className={cn('grid', gridCols)}>
+        {items.map(({ to, label, icon: Icon, avatar, end = true }) => (
           <NavLink
             key={to}
             to={to}
-            end
+            end={end}
             aria-label={label}
             className="flex flex-col items-center justify-center gap-1 py-2.5"
           >
             {({ isActive }) =>
               avatar ? (
-                <UserAvatar active={isActive} />
+                <UserAvatar active={isActive} dense={isDense} />
               ) : (
                 <Icon
                   className={cn(
-                    'h-6 w-6 transition-colors',
+                    iconSize,
+                    'transition-colors',
                     isActive ? 'text-foreground' : 'text-muted-foreground',
                   )}
                   strokeWidth={isActive ? 2 : 1.6}
@@ -208,7 +259,9 @@ function MobileBottomNav() {
 // ============================================================
 // Layout pour utilisateurs déconnectés (signin/signup/home publique)
 // ============================================================
-function GuestLayout({ children }: { children: React.ReactNode }) {
+// Layout shell app non connecte : minimaliste (header simple + zone centree).
+// Pas de navbar marketing ni footer — l'utilisateur est deja dans l'app installee.
+function AppGuestLayout({ children }: { children: React.ReactNode }) {
   const { t } = useTranslation()
   const localizedPath = useLocalizedPath()
   return (
@@ -219,7 +272,6 @@ function GuestLayout({ children }: { children: React.ReactNode }) {
             <span className="text-lg font-semibold tracking-tight text-foreground">
               {t('app.name')}
             </span>
-            <span className="h-1.5 w-1.5 rounded-lg bg-primary shadow-[0_0_8px_2px_rgba(139,38,53,0.6)]" />
           </Link>
           <Button asChild size="sm" className="glow-primary">
             <Link to={localizedPath('/sign-in')}>{t('auth.signIn')}</Link>
@@ -235,6 +287,26 @@ function GuestLayout({ children }: { children: React.ReactNode }) {
   )
 }
 
+// Layout shell web non connecte : vraie navbar marketing sticky + outlet pleine
+// largeur (chaque page gere son propre max-width) + footer global.
+function WebGuestLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex min-h-full flex-col">
+      <WebNavbar />
+      {/* Padding horizontal global pour pas coller aux bords sur mobile.
+          Chaque page se centre via son propre max-w-{6xl|sm} mx-auto. */}
+      <main className="flex-1 px-5">{children}</main>
+      <WebFooter />
+    </div>
+  )
+}
+
+// Aiguilleur : shell app → layout minimal, shell web → layout marketing complet.
+function GuestLayout({ children }: { children: React.ReactNode }) {
+  if (isAppShell()) return <AppGuestLayout>{children}</AppGuestLayout>
+  return <WebGuestLayout>{children}</WebGuestLayout>
+}
+
 // ============================================================
 // Layout principal
 // ============================================================
@@ -242,6 +314,20 @@ export function AppLayout() {
   // Sync prefs backend → local (best-effort, no-op si pas auth)
   useSyncPrefs()
   const { data: session, isPending } = useSession()
+  const navigate = useNavigate()
+  const localizedPath = useLocalizedPath()
+  const isDesktop = useDesktop()
+  const [addOpen, setAddOpen] = useState(false)
+
+  // Click sur le bouton "Ajouter" depuis le rail desktop :
+  // - desktop : popup modal sur la page courante
+  // - mobile  : route fullscreen vers la camera (geste natif)
+  // En pratique le DesktopSidebar n'est rendu qu'en >= lg, donc on est presque
+  // toujours en desktop ici — mais on garde le fallback pour les cas tordus.
+  function handleOpenAdd() {
+    if (isDesktop) setAddOpen(true)
+    else navigate(localizedPath('/add/capture'))
+  }
 
   // Pendant le chargement initial de la session, on rend rien pour eviter
   // le flash GuestLayout -> AppLayout au refresh d'une page authentifiee.
@@ -254,21 +340,35 @@ export function AppLayout() {
   if (!session) {
     return (
       <GuestLayout>
-        <Outlet />
+        <Suspense fallback={null}>
+          <Outlet />
+        </Suspense>
       </GuestLayout>
     )
   }
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-6xl">
-      <DesktopSidebar />
+    // h-full + overflow-hidden : le scroll global est desactive, chaque page
+    // gere son propre scroll interne via la zone main ci-dessous. Les sidebars
+    // desktop restent statiques sur toute la hauteur viewport.
+    <div className="mx-auto flex h-full w-full max-w-6xl overflow-hidden">
+      <DesktopSidebar onAdd={handleOpenAdd} />
       <main className="flex min-w-0 flex-1 flex-col lg:border-x lg:border-border">
-        <div className="flex-1 px-4 pb-6 pt-4 sm:px-5">
-          <Outlet />
+        {/* Container des pages : flex column + scroll vertical interne.
+            - Pages "longues" (Feed, Discover, etc.) : scrollent ici.
+            - Pages "fullscreen" (Map) : utilisent flex-1 min-h-0 + overflow-hidden
+              pour rester contraintes a la hauteur dispo sans scroll global. */}
+        <div className="flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-6 pt-4 sm:px-5">
+          {/* Suspense au niveau du layout : couvre tous les chunks lazy-loaded
+              des routes enfants (cf router.tsx). Fallback null = pas de flash. */}
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
         </div>
         <MobileBottomNav />
       </main>
       <RightSidebar />
+      <AddDialog open={addOpen} onOpenChange={setAddOpen} />
     </div>
   )
 }

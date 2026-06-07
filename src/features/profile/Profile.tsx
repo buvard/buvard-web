@@ -25,8 +25,8 @@ import {
   useUploadAvatar,
   useUploadCover,
 } from '@/lib/api/user'
-import type { Tasting } from '@/types'
-import { Settings, Camera, Trash2, ImageIcon, Loader2 } from 'lucide-react'
+import { useMyTastings } from '@/lib/api/tasting'
+import { Map, Settings, Camera, Trash2, ImageIcon, Loader2 } from 'lucide-react'
 
 export function ProfilePage() {
   const { t } = useTranslation()
@@ -39,9 +39,10 @@ export function ProfilePage() {
   const uploadCover = useUploadCover()
   const deleteCover = useDeleteCover()
 
-  // TODO: récupérer les dégustations depuis le backend
-  const tastings: Tasting[] = []
-  const favorites: Tasting[] = []
+  // Liste paginee — V1 affiche la 1ere page (20 elements). La pagination viendra
+  // avec l'ecran detail / scroll infini sur profil (post-V1).
+  const myTastings = useMyTastings({ limit: 20 })
+  const tastings = myTastings.data?.data ?? []
 
   // Loading state
   if (me.isPending) {
@@ -77,6 +78,10 @@ export function ProfilePage() {
     stats.data?.followingCount ?? me.data?.stats.followingCount ?? 0
   const gamification = stats.data?.gamification ?? me.data?.gamification
   const streak = gamification?.streak.current ?? 0
+  const longestStreak = gamification?.streak.longest ?? 0
+  const xp = gamification?.xp ?? 0
+  // Cle effective du grade affiche : override choisi par le user > grade auto.
+  const gradeKey = gamification?.displayGrade ?? gamification?.grade ?? null
   const tastingsByCategory = me.data?.stats.tastingsByCategory ?? {}
 
   const joinDate = stats.data?.joinDate ?? me.data?.createdAt
@@ -126,6 +131,17 @@ export function ProfilePage() {
   // Boutons posés sur la cover : réglages + menu d'upload cover
   const coverOverlay = (
     <>
+      <Button
+        asChild
+        variant="secondary"
+        size="icon"
+        aria-label={t('map.title')}
+        className="absolute right-16 top-4 h-9 w-9 rounded-full bg-background/70 backdrop-blur-md hover:bg-background/90"
+      >
+        <Link to={localizedPath('/map')}>
+          <Map className="h-4 w-4 text-foreground" strokeWidth={1.8} />
+        </Link>
+      </Button>
       <Button
         asChild
         variant="secondary"
@@ -246,7 +262,10 @@ export function ProfilePage() {
       verified={me.data?.verified}
       role={role}
       level={gamification?.level}
+      xp={xp}
       streak={streak}
+      longestStreak={longestStreak}
+      gradeKey={gradeKey}
       location={me.data?.location}
       joinDate={joinDate}
       bio={me.data?.bio}
@@ -266,7 +285,16 @@ export function ProfilePage() {
         </TabsList>
 
         <TabsContent value="all">
-          {tastings.length === 0 ? (
+          {myTastings.isPending ? (
+            <div className="space-y-3" aria-busy="true">
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-32 animate-pulse rounded-xl border border-border bg-card/30"
+                />
+              ))}
+            </div>
+          ) : tastings.length === 0 ? (
             <p className="py-8 text-center text-sm text-muted-foreground">
               {t('profile.empty')}
             </p>
@@ -280,17 +308,9 @@ export function ProfilePage() {
         </TabsContent>
 
         <TabsContent value="favorites">
-          {favorites.length === 0 ? (
-            <p className="py-8 text-center text-sm text-muted-foreground">
-              {t('profile.empty')}
-            </p>
-          ) : (
-            <div className="space-y-3">
-              {favorites.map((tasting) => (
-                <TastingCard key={tasting.id} tasting={tasting} />
-              ))}
-            </div>
-          )}
+          <p className="py-8 text-center text-sm text-muted-foreground">
+            {t('profile.favoritesComingSoon')}
+          </p>
         </TabsContent>
 
         <TabsContent value="categories">
